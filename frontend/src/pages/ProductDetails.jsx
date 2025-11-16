@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../components/Navbar/Navbar';
 import { productAPI } from '../api/productAPI';
@@ -424,7 +424,7 @@ const ProductDetail = () => {
       {/* Breadcrumb */}
       <div className="breadcrumb">
         <div className="container">
-          <a href="#/">Home</a> / <a href="#/">Products</a> / <span>{product.name}</span>
+          <Link to="/">Home</Link> / <Link to="/productList">Products</Link> / <span>{product.name}</span>
         </div>
       </div>
 
@@ -464,11 +464,24 @@ const ProductDetail = () => {
                           </button>
                         </div>
                       ) : personImage ? (
-                        <img
-                          src={URL.createObjectURL(personImage)}
-                          alt="Uploaded photo"
-                          style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain' }}
-                        />
+                        <div className="result-container">
+                          <img
+                            src={URL.createObjectURL(personImage)}
+                            alt="Uploaded photo"
+                            style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain' }}
+                          />
+                          <button
+                            className="close-result-btn"
+                            onClick={() => {
+                              setPersonImage(null);
+                              if (fileInputRef.current) {
+                                fileInputRef.current.value = '';
+                              }
+                            }}
+                          >
+                            ✕
+                          </button>
+                        </div>
                       ) : (
                         <div className="placeholder clickable" onClick={() => fileInputRef.current.click()}>
                           {virtualTryOnLoading ? (
@@ -591,7 +604,7 @@ const ProductDetail = () => {
                     >
                       {isWishlisted ? '❤️' : '♡'}
                     </button>
-                    {product.sale_price && (
+                    {product.sale_price && !isCurrentMediaGenerated() && (
                       <span className="sale-badge">SALE</span>
                     )}
                   </>
