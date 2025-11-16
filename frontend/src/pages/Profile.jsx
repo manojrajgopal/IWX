@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateUser } from '../redux/slices/authSlice';
@@ -17,6 +18,7 @@ import ErrorPage from './ErrorPage';
 import { ChangePassword, TwoFactorAuth, LoginActivity, ConnectedDevices } from '../components/Profile/SecurityComponents';
 
 const Profile = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
   const [activeTab, setActiveTab] = useState('profile');
@@ -512,7 +514,7 @@ const Profile = () => {
   return (
     <div className="profile-container">
       {/* Header */}
-      <div className="profile-header">
+      <div className="profile-header" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         <h1>My Account</h1>
         <p>Manage your profile, orders, and preferences</p>
       </div>
