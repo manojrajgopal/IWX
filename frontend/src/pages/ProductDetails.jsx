@@ -415,7 +415,9 @@ const ProductDetail = () => {
                         <img
                           src={`data:image/jpeg;base64,${resultImage}`}
                           alt="Virtual Try On Result"
-                          style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain' }}
+                          className={isZoomed ? 'zoomed' : ''}
+                          onClick={() => setIsZoomed(!isZoomed)}
+                          style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain', cursor: 'zoom-in' }}
                         />
                       ) : personImage ? (
                         <img
@@ -548,7 +550,11 @@ const ProductDetail = () => {
                     <div
                       key={`product-${index}`}
                       className={`thumbnail ${currentMedia === index ? 'active' : ''}`}
-                      onClick={() => setCurrentMedia(index)}
+                      onClick={() => {
+                        setCurrentMedia(index);
+                        setShowVirtualTryOn(false);
+                        setShowGeneratedImages(false);
+                      }}
                     >
                       {isVideo ? (
                         <video
@@ -585,7 +591,11 @@ const ProductDetail = () => {
                     <div
                       key={`generated-${genImg.id || index}`}
                       className={`thumbnail ${currentMedia === mediaIndex ? 'active' : ''}`}
-                      onClick={() => setCurrentMedia(mediaIndex)}
+                      onClick={() => {
+                        setCurrentMedia(mediaIndex);
+                        setShowVirtualTryOn(false);
+                        setShowGeneratedImages(false);
+                      }}
                     >
                       <img
                         src={`data:image/jpeg;base64,${genImg.image_base64}`}
