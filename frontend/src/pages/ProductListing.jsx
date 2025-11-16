@@ -171,15 +171,6 @@ const ProductListing = () => {
     { label: 'Rating', value: 'rating' }
   ];
 
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <p>Loading products...</p>
-      </div>
-    );
-  }
-
   return (
     <div className="product-listing-page">
       <Navbar />
@@ -377,7 +368,12 @@ const ProductListing = () => {
 
           {/* Products Grid */}
           <div className="products-grid-container">
-            {currentProducts.length > 0 ? (
+            {loading ? (
+              <div className="loading-container">
+                <div className="loading-spinner"></div>
+                <p>Loading products...</p>
+              </div>
+            ) : currentProducts.length > 0 ? (
               <>
                 <div className="products-grid">
                   {currentProducts.map(product => (
@@ -386,7 +382,7 @@ const ProductListing = () => {
                       className="product-card"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.3, delay: currentProducts.indexOf(product) * 0.1 }}
                       whileHover={{ y: -5 }}
                       onClick={() => handleProductClick(product.id)}
                       style={{ cursor: 'pointer' }}
@@ -400,7 +396,7 @@ const ProductListing = () => {
                           }}
                         />
                         <button className="wishlist-btn">♥</button>
-                        
+
                         {product.sale_price && (
                           <span className="sale-badge">SALE</span>
                         )}
@@ -410,13 +406,13 @@ const ProductListing = () => {
                         {product.is_sustainable && (
                           <span className="eco-badge">ECO</span>
                         )}
-                        
+
                         <div className="product-actions">
                           <button className="quick-view">Quick View</button>
                           <button className="add-to-bag">Add to Bag</button>
                         </div>
                       </div>
-                      
+
                       <div className="product-info">
                         <div className="product-meta">
                           {product.is_trending && (
@@ -424,7 +420,7 @@ const ProductListing = () => {
                           )}
                           <span className="product-name">{product.name}</span>
                         </div>
-                        
+
                         <div className="product-price">
                           {product.sale_price ? (
                             <>
@@ -435,12 +431,12 @@ const ProductListing = () => {
                             <span>${product.price}</span>
                           )}
                         </div>
-                        
+
                         <div className="product-colors">
                           <span className="color-dot" style={{ backgroundColor: product.colors && product.colors.length > 0 ? product.colors[0].toLowerCase() : '#000' }}></span>
                           <span>+{product.colors ? product.colors.length : 0} colors</span>
                         </div>
-                        
+
                         <div className="product-rating">
                           {renderStars(product.rating || 0)}
                           <span>({product.review_count || 0})</span>
@@ -460,7 +456,7 @@ const ProductListing = () => {
                     >
                       Previous
                     </button>
-                    
+
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                       <button
                         key={page}
@@ -470,7 +466,7 @@ const ProductListing = () => {
                         {page}
                       </button>
                     ))}
-                    
+
                     <button
                       className={`pagination-btn ${!hasNext ? 'disabled' : ''}`}
                       onClick={() => hasNext && paginate(currentPage + 1)}
