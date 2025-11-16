@@ -31,10 +31,13 @@ const ProductDetail = () => {
   const [error, setError] = useState(null);
   const [isInCart, setIsInCart] = useState(false);
   const [showVirtualTryOn, setShowVirtualTryOn] = useState(false);
+  const [showGeneratedImages, setShowGeneratedImages] = useState(false);
   const [selectedGarmentImage, setSelectedGarmentImage] = useState(null);
   const [personImage, setPersonImage] = useState(null);
   const [resultImage, setResultImage] = useState(null);
   const [virtualTryOnLoading, setVirtualTryOnLoading] = useState(false);
+  const [generatedImages, setGeneratedImages] = useState([]);
+  const [generatedImagesLoading, setGeneratedImagesLoading] = useState(false);
   const fileInputRef = useRef(null);
 
 
@@ -188,8 +191,24 @@ const ProductDetail = () => {
       }
     };
 
+    const fetchGeneratedImages = async () => {
+      if (product && product.id) {
+        setGeneratedImagesLoading(true);
+        try {
+          const result = await virtualTryOnAPI.getImages(product.id);
+          setGeneratedImages(result.images || []);
+        } catch (error) {
+          console.error('Failed to fetch generated images:', error);
+          setGeneratedImages([]);
+        } finally {
+          setGeneratedImagesLoading(false);
+        }
+      }
+    };
+
     checkWishlistStatus();
     checkCartStatus();
+    fetchGeneratedImages();
   }, [user, product, selectedSize, selectedColor]);
 
   const handleAddToCart = async () => {
@@ -270,7 +289,7 @@ const ProductDetail = () => {
     setVirtualTryOnLoading(true);
     setResultImage(null);
     try {
-      const response = await virtualTryOnAPI.tryOn(personImage, selectedGarmentImage);
+      const response = await virtualTryOnAPI.tryOn(personImage, selectedGarmentImage, id);
       if (response.status === 'ok' && response.image_base64) {
         setResultImage(response.image_base64);
       } else {
@@ -362,7 +381,7 @@ const ProductDetail = () => {
           <div className="product-main">
             {/* Product Media */}
             <div className="product-images">
-              <div className="main-image" style={showVirtualTryOn ? { cursor: 'default' } : {}}>
+              <div className="main-image" style={(showVirtualTryOn || showGeneratedImages) ? { cursor: 'default' } : {}}>
                 {showVirtualTryOn ? (
                   <div className="virtual-try-on-interface">
                     <div className="virtual-try-on-header">
@@ -435,6 +454,45 @@ const ProductDetail = () => {
                       {virtualTryOnLoading ? 'Processing...' : 'Try On'}
                     </button>
                   </div>
+                ) : showGeneratedImages ? (
+                  <div className="generated-images-interface">
+                    <div className="generated-images-header">
+                      <h3>Generated Virtual Try-On Images</h3>
+                      <button
+                        className="close-btn"
+                        onClick={() => setShowGeneratedImages(false)}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <div className="generated-images-gallery">
+                      {generatedImagesLoading ? (
+                        <div className="loading-container">
+                          <div className="loading-spinner"></div>
+                          <p>Loading generated images...</p>
+                        </div>
+                      ) : generatedImages.length > 0 ? (
+                        <div className="images-grid">
+                          {generatedImages.map((image, index) => (
+                            <div key={image.id || index} className="generated-image-item">
+                              <img
+                                src={`data:image/jpeg;base64,${image.image_base64}`}
+                                alt={`Generated try-on ${index + 1}`}
+                                style={{ width: '100%', height: 'auto', maxHeight: '300px', objectFit: 'contain' }}
+                              />
+                              <div className="image-info">
+                                <small>{new Date(image.created_at).toLocaleDateString()}</small>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="no-images">
+                          <p>No generated images yet. Try the virtual try-on feature!</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 ) : isCurrentMediaVideo() ? (
                   <video
                     src={getCurrentMediaUrl()}
@@ -457,7 +515,7 @@ const ProductDetail = () => {
                     }}
                   />
                 )}
-                {!showVirtualTryOn && (
+                {!showVirtualTryOn && !showGeneratedImages && (
                   <>
                     <button
                       className="wishlist-btn"
@@ -502,6 +560,15 @@ const ProductDetail = () => {
                   <div className="virtual-try-on-icon">👕</div>
                   <span>Virtual Try On</span>
                 </div>
+                {generatedImages.length > 0 && (
+                  <div
+                    className={`thumbnail generated-images ${showGeneratedImages ? 'active' : ''}`}
+                    onClick={() => setShowGeneratedImages(true)}
+                  >
+                    <div className="generated-images-icon">🖼️</div>
+                    <span>Generated ({generatedImages.length})</span>
+                  </div>
+                )}
               </div>
             </div>
 

@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axiosClient from './axiosClient';
 
 const virtualTryOnAPI = {
-  tryOn: async (personImage, garmentImageUrl) => {
+  tryOn: async (personImage, garmentImageUrl, productId) => {
     const formData = new FormData();
     formData.append('vton_image', personImage);
 
@@ -15,13 +15,26 @@ const virtualTryOnAPI = {
       throw new Error('Failed to fetch garment image');
     }
 
+    if (productId) {
+      formData.append('product_id', productId);
+    }
+
     try {
-      const response = await axios.post('http://localhost:8011/api/virtual-try-on', formData, {
+      const response = await axiosClient.post('/api/virtual-try-on', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
         timeout: 30000, // 30 seconds for processing
       });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getImages: async (productId) => {
+    try {
+      const response = await axiosClient.get(`/api/virtual-try-on/images/${productId}`);
       return response.data;
     } catch (error) {
       throw error;

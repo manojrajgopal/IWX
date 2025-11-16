@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from alembic.config import Config
 from alembic import command
 
-from routers import auth, products, orders, admin, websocket, ai, addresses, payments, wishlist, notifications, security
+from routers import auth, products, orders, admin, websocket, ai, addresses, payments, wishlist, notifications, security, virtual_try_on
 from middleware.logging import RequestLoggingMiddleware
 from middleware.security import SecurityMiddleware
 from services.user_service import UserService
@@ -106,6 +106,7 @@ app.include_router(payments.router)
 app.include_router(wishlist.router)
 app.include_router(notifications.router)
 app.include_router(security.router)
+app.include_router(virtual_try_on.router)
 
 
 
