@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import { productAPI } from '../api/productAPI';
 import { cartAPI } from '../api/cartAPI';
 import { wishlistAPI } from '../api/wishlistAPI';
 import { addItemToCart } from '../redux/slices/cartSlice';
+import virtualTryOnAPI from '../api/virtualTryOnAPI';
 import './ProductDetails.css';
 
 const ProductDetail = () => {
@@ -29,6 +30,12 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isInCart, setIsInCart] = useState(false);
+  const [showVirtualTryOn, setShowVirtualTryOn] = useState(false);
+  const [selectedGarmentImage, setSelectedGarmentImage] = useState(null);
+  const [personImage, setPersonImage] = useState(null);
+  const [resultImage, setResultImage] = useState(null);
+  const [virtualTryOnLoading, setVirtualTryOnLoading] = useState(false);
+  const fileInputRef = useRef(null);
 
 
   const relatedProducts = [
@@ -257,6 +264,26 @@ const ProductDetail = () => {
     }
   };
 
+  const handleVirtualTryOn = async () => {
+    if (!selectedGarmentImage || !personImage) return;
+
+    setVirtualTryOnLoading(true);
+    setResultImage(null);
+    try {
+      const response = await virtualTryOnAPI.tryOn(personImage, selectedGarmentImage);
+      if (response.status === 'ok' && response.image_base64) {
+        setResultImage(response.image_base64);
+      } else {
+        alert('Failed to generate virtual try on image. Please try again.');
+      }
+    } catch (error) {
+      console.error('Virtual try on error:', error);
+      alert('An error occurred during virtual try on. Please try again.');
+    } finally {
+      setVirtualTryOnLoading(false);
+    }
+  };
+
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
       <span key={i} className={i < Math.floor(rating) ? "star filled" : "star"}>★</span>
@@ -335,8 +362,80 @@ const ProductDetail = () => {
           <div className="product-main">
             {/* Product Media */}
             <div className="product-images">
-              <div className="main-image">
-                {isCurrentMediaVideo() ? (
+              <div className="main-image" style={showVirtualTryOn ? { cursor: 'default' } : {}}>
+                {showVirtualTryOn ? (
+                  <div className="virtual-try-on-interface">
+                    <div className="virtual-try-on-header">
+                      <h3>Virtual Try On</h3>
+                      <button
+                        className="close-btn"
+                        onClick={() => setShowVirtualTryOn(false)}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      accept="image/*"
+                      onChange={(e) => setPersonImage(e.target.files[0])}
+                      style={{ display: 'none' }}
+                    />
+                    <div className="result-image">
+                      {resultImage ? (
+                        <img
+                          src={`data:image/jpeg;base64,${resultImage}`}
+                          alt="Virtual Try On Result"
+                          style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain' }}
+                        />
+                      ) : personImage ? (
+                        <img
+                          src={URL.createObjectURL(personImage)}
+                          alt="Uploaded photo"
+                          style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain' }}
+                        />
+                      ) : (
+                        <div className="placeholder clickable" onClick={() => fileInputRef.current.click()}>
+                          {virtualTryOnLoading ? (
+                            <div className="loading-spinner"></div>
+                          ) : (
+                            <>
+                              <p>Select a garment and upload your photo to see the result</p>
+                              <button className="upload-photo-btn">Upload Photo</button>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    <div className="garment-selection">
+                      <h4>Select Garment</h4>
+                      <div className="garment-thumbnails">
+                        {product.images?.map((image, index) => (
+                          <div
+                            key={index}
+                            className={`garment-thumbnail ${selectedGarmentImage === image ? 'active' : ''}`}
+                            onClick={() => setSelectedGarmentImage(image)}
+                          >
+                            <img
+                              src={image}
+                              alt={`Garment ${index + 1}`}
+                              onError={(e) => {
+                                e.target.src = '/placeholder.png';
+                              }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <button
+                      className="try-on-btn"
+                      onClick={handleVirtualTryOn}
+                      disabled={!selectedGarmentImage || !personImage || virtualTryOnLoading}
+                    >
+                      {virtualTryOnLoading ? 'Processing...' : 'Try On'}
+                    </button>
+                  </div>
+                ) : isCurrentMediaVideo() ? (
                   <video
                     src={getCurrentMediaUrl()}
                     controls
@@ -358,14 +457,18 @@ const ProductDetail = () => {
                     }}
                   />
                 )}
-                <button
-                  className="wishlist-btn"
-                  onClick={handleWishlist}
-                >
-                  {isWishlisted ? '❤️' : '♡'}
-                </button>
-                {product.sale_price && (
-                  <span className="sale-badge">SALE</span>
+                {!showVirtualTryOn && (
+                  <>
+                    <button
+                      className="wishlist-btn"
+                      onClick={handleWishlist}
+                    >
+                      {isWishlisted ? '❤️' : '♡'}
+                    </button>
+                    {product.sale_price && (
+                      <span className="sale-badge">SALE</span>
+                    )}
+                  </>
                 )}
               </div>
               <div className="image-thumbnails">
@@ -392,6 +495,13 @@ const ProductDetail = () => {
                     )}
                   </div>
                 ))}
+                <div
+                  className={`thumbnail virtual-try-on ${showVirtualTryOn ? 'active' : ''}`}
+                  onClick={() => setShowVirtualTryOn(true)}
+                >
+                  <div className="virtual-try-on-icon">👕</div>
+                  <span>Virtual Try On</span>
+                </div>
               </div>
             </div>
 
