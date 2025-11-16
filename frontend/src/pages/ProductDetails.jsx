@@ -292,6 +292,13 @@ const ProductDetail = () => {
       const response = await virtualTryOnAPI.tryOn(personImage, selectedGarmentImage, id);
       if (response.status === 'ok' && response.image_base64) {
         setResultImage(response.image_base64);
+        // Add to generated images immediately
+        const newGeneratedImage = {
+          id: Date.now(), // temp id
+          image_base64: response.image_base64,
+          created_at: new Date().toISOString()
+        };
+        setGeneratedImages(prev => [newGeneratedImage, ...prev]);
       } else {
         alert('Failed to generate virtual try on image. Please try again.');
       }
@@ -348,6 +355,16 @@ const ProductDetail = () => {
     { name: 'Copy Link', icon: '🔗' }
   ];
 
+  const goToPrevMedia = () => {
+    const allMedia = getAllMedia();
+    setCurrentMedia(prev => prev > 0 ? prev - 1 : allMedia.length - 1);
+  };
+
+  const goToNextMedia = () => {
+    const allMedia = getAllMedia();
+    setCurrentMedia(prev => prev < allMedia.length - 1 ? prev + 1 : 0);
+  };
+
   if (loading) {
     return (
       <div className="product-detail-container">
@@ -396,12 +413,6 @@ const ProductDetail = () => {
                   <div className="virtual-try-on-interface">
                     <div className="virtual-try-on-header">
                       <h3>Virtual Try On</h3>
-                      <button
-                        className="close-btn"
-                        onClick={() => setShowVirtualTryOn(false)}
-                      >
-                        ✕
-                      </button>
                     </div>
                     <input
                       type="file"
@@ -412,13 +423,21 @@ const ProductDetail = () => {
                     />
                     <div className="result-image">
                       {resultImage ? (
-                        <img
-                          src={`data:image/jpeg;base64,${resultImage}`}
-                          alt="Virtual Try On Result"
-                          className={isZoomed ? 'zoomed' : ''}
-                          onClick={() => setIsZoomed(!isZoomed)}
-                          style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain', cursor: 'zoom-in' }}
-                        />
+                        <div className="result-container">
+                          <img
+                            src={`data:image/jpeg;base64,${resultImage}`}
+                            alt="Virtual Try On Result"
+                            className={isZoomed ? 'zoomed' : ''}
+                            onClick={() => setIsZoomed(!isZoomed)}
+                            style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'contain', cursor: 'zoom-in' }}
+                          />
+                          <button
+                            className="close-result-btn"
+                            onClick={() => setResultImage(null)}
+                          >
+                            ✕
+                          </button>
+                        </div>
                       ) : personImage ? (
                         <img
                           src={URL.createObjectURL(personImage)}
@@ -529,6 +548,18 @@ const ProductDetail = () => {
                 )}
                 {!showVirtualTryOn && !showGeneratedImages && (
                   <>
+                    <button
+                      className="nav-btn prev-btn"
+                      onClick={goToPrevMedia}
+                    >
+                      ‹
+                    </button>
+                    <button
+                      className="nav-btn next-btn"
+                      onClick={goToNextMedia}
+                    >
+                      ›
+                    </button>
                     <button
                       className="wishlist-btn"
                       onClick={handleWishlist}
