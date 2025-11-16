@@ -102,13 +102,13 @@ const Cart = () => {
         dispatch(setWSConnected(false));
       };
 
-      const ws = websocketService.connectCart(user.id, handleWSMessage, handleWSError, handleWSClose);
+      const ws = websocketService.connect(`cart/${user.id}`, handleWSMessage, handleWSError, handleWSClose);
       if (ws) {
         dispatch(setWSConnected(true));
       }
 
       return () => {
-        websocketService.disconnectCart(user.id);
+        websocketService.disconnect(`cart/${user.id}`);
       };
     }
   }, [dispatch, user]);

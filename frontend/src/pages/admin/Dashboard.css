@@ -1,5 +1,7 @@
 /* AdminDashboard.css - Advanced Future UI */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* Order Management Styles */
 .orders-section {
   padding: 20px;
@@ -642,7 +644,6 @@
     width: 100%;
   }
 }
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* Advanced Color Palette - Modern & Professional */
