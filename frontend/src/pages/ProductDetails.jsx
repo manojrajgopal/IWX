@@ -309,19 +309,29 @@ const ProductDetail = () => {
     ));
   };
 
-  // Combine images and videos for media gallery
+  // Combine images, videos, and generated images for media gallery
   const getAllMedia = () => {
     if (!product) return [];
     const images = product.images || [];
     const videos = product.videos || [];
-    return [...images, ...videos];
+    const generated = generatedImages.map(img => img.image_base64) || [];
+    return [...images, ...videos, ...generated];
   };
 
   // Check if current media is a video
   const isCurrentMediaVideo = () => {
     if (!product) return false;
-    const images = product.images || [];
-    return currentMedia >= images.length;
+    const imagesLen = product.images?.length || 0;
+    const videosLen = product.videos?.length || 0;
+    return currentMedia >= imagesLen && currentMedia < imagesLen + videosLen;
+  };
+
+  // Check if current media is a generated image
+  const isCurrentMediaGenerated = () => {
+    if (!product) return false;
+    const imagesLen = product.images?.length || 0;
+    const videosLen = product.videos?.length || 0;
+    return currentMedia >= imagesLen + videosLen;
   };
 
   // Get current media URL
@@ -506,7 +516,7 @@ const ProductDetail = () => {
                   />
                 ) : (
                   <img
-                    src={getCurrentMediaUrl() || '/placeholder.png'}
+                    src={isCurrentMediaGenerated() ? `data:image/jpeg;base64,${getCurrentMediaUrl()}` : (getCurrentMediaUrl() || '/placeholder.png')}
                     alt={product.name}
                     className={isZoomed ? 'zoomed' : ''}
                     onClick={() => setIsZoomed(!isZoomed)}
@@ -530,29 +540,35 @@ const ProductDetail = () => {
                 )}
               </div>
               <div className="image-thumbnails">
-                {getAllMedia().map((media, index) => (
-                  <div
-                    key={index}
-                    className={`thumbnail ${currentMedia === index ? 'active' : ''}`}
-                    onClick={() => setCurrentMedia(index)}
-                  >
-                    {index >= (product.images?.length || 0) ? (
-                      <video
-                        src={media}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        muted
-                      />
-                    ) : (
-                      <img
-                        src={media}
-                        alt={`${product.name} view ${index + 1}`}
-                        onError={(e) => {
-                          e.target.src = '/placeholder.png';
-                        }}
-                      />
-                    )}
-                  </div>
-                ))}
+                {/* Product images and videos thumbnails */}
+                {(product.images || []).concat(product.videos || []).map((media, index) => {
+                  const imagesLen = product.images?.length || 0;
+                  const isVideo = index >= imagesLen;
+                  return (
+                    <div
+                      key={`product-${index}`}
+                      className={`thumbnail ${currentMedia === index ? 'active' : ''}`}
+                      onClick={() => setCurrentMedia(index)}
+                    >
+                      {isVideo ? (
+                        <video
+                          src={media}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          muted
+                        />
+                      ) : (
+                        <img
+                          src={media}
+                          alt={`${product.name} view ${index + 1}`}
+                          onError={(e) => {
+                            e.target.src = '/placeholder.png';
+                          }}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+                {/* Virtual Try On button */}
                 <div
                   className={`thumbnail virtual-try-on ${showVirtualTryOn ? 'active' : ''}`}
                   onClick={() => setShowVirtualTryOn(true)}
@@ -560,15 +576,27 @@ const ProductDetail = () => {
                   <div className="virtual-try-on-icon">👕</div>
                   <span>Virtual Try On</span>
                 </div>
-                {generatedImages.length > 0 && (
-                  <div
-                    className={`thumbnail generated-images ${showGeneratedImages ? 'active' : ''}`}
-                    onClick={() => setShowGeneratedImages(true)}
-                  >
-                    <div className="generated-images-icon">🖼️</div>
-                    <span>Generated ({generatedImages.length})</span>
-                  </div>
-                )}
+                {/* Generated images thumbnails */}
+                {generatedImages.map((genImg, index) => {
+                  const imagesLen = product.images?.length || 0;
+                  const videosLen = product.videos?.length || 0;
+                  const mediaIndex = imagesLen + videosLen + index;
+                  return (
+                    <div
+                      key={`generated-${genImg.id || index}`}
+                      className={`thumbnail ${currentMedia === mediaIndex ? 'active' : ''}`}
+                      onClick={() => setCurrentMedia(mediaIndex)}
+                    >
+                      <img
+                        src={`data:image/jpeg;base64,${genImg.image_base64}`}
+                        alt={`Generated try-on ${index + 1}`}
+                        onError={(e) => {
+                          e.target.src = '/placeholder.png';
+                        }}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
