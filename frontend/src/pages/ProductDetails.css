@@ -78,9 +78,10 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  background: rgba(0, 0, 0, 0);
+  color: #525151;
   border: none;
+  outline: none;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -93,7 +94,13 @@
 }
 
 .nav-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0);
+}
+
+.nav-btn:focus,
+.nav-btn:active {
+  outline: none;
+  border: none;
 }
 
 .prev-btn {
@@ -1014,6 +1021,101 @@
 
 .close-result-btn:hover {
   background: rgba(0, 0, 0, 0.9);
+}
+
+/* Generated Images Delete */
+.generated-thumbnail {
+  position: relative;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  border: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.generated-thumbnail:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 0, 0, 1);
+}
+
+/* Delete Confirmation Dialog */
+.delete-confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.delete-confirm-dialog {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.delete-confirm-dialog h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.delete-confirm-dialog p {
+  margin: 0 0 20px 0;
+  color: #666;
+}
+
+.delete-confirm-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cancel-btn, .delete-confirm-btn {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.cancel-btn:hover {
+  background: #f5f5f5;
+}
+
+.delete-confirm-btn {
+  background: #ff3b30;
+  color: white;
+  border-color: #ff3b30;
+}
+
+.delete-confirm-btn:hover {
+  background: #e02828;
 }
 
 .result-image img {

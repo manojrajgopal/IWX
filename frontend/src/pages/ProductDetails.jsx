@@ -38,6 +38,7 @@ const ProductDetail = () => {
   const [virtualTryOnLoading, setVirtualTryOnLoading] = useState(false);
   const [generatedImages, setGeneratedImages] = useState([]);
   const [generatedImagesLoading, setGeneratedImagesLoading] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState({ show: false, imageId: null, imageIndex: null });
   const fileInputRef = useRef(null);
 
 
@@ -365,6 +366,30 @@ const ProductDetail = () => {
     setCurrentMedia(prev => prev < allMedia.length - 1 ? prev + 1 : 0);
   };
 
+  const handleDeleteGeneratedImage = async () => {
+    if (!deleteConfirm.imageId) return;
+
+    try {
+      await virtualTryOnAPI.deleteImage(deleteConfirm.imageId);
+      setGeneratedImages(prev => prev.filter(img => img.id !== deleteConfirm.imageId));
+
+      // If the deleted image was currently displayed, reset to first image
+      const imagesLen = product.images?.length || 0;
+      const videosLen = product.videos?.length || 0;
+      const deletedIndex = imagesLen + videosLen + deleteConfirm.imageIndex;
+      if (currentMedia === deletedIndex) {
+        setCurrentMedia(0);
+      } else if (currentMedia > deletedIndex) {
+        setCurrentMedia(prev => prev - 1);
+      }
+
+      setDeleteConfirm({ show: false, imageId: null, imageIndex: null });
+    } catch (error) {
+      console.error('Failed to delete image:', error);
+      alert('Failed to delete image. Please try again.');
+    }
+  };
+
   if (loading) {
     return (
       <div className="product-detail-container">
@@ -621,7 +646,7 @@ const ProductDetail = () => {
                   return (
                     <div
                       key={`generated-${genImg.id || index}`}
-                      className={`thumbnail ${currentMedia === mediaIndex ? 'active' : ''}`}
+                      className={`thumbnail generated-thumbnail ${currentMedia === mediaIndex ? 'active' : ''}`}
                       onClick={() => {
                         setCurrentMedia(mediaIndex);
                         setShowVirtualTryOn(false);
@@ -635,6 +660,16 @@ const ProductDetail = () => {
                           e.target.src = '/placeholder.png';
                         }}
                       />
+                      <button
+                        className="delete-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setDeleteConfirm({ show: true, imageId: genImg.id, imageIndex: index });
+                        }}
+                        title="Delete image"
+                      >
+                        🗑️
+                      </button>
                     </div>
                   );
                 })}
@@ -996,6 +1031,44 @@ const ProductDetail = () => {
               ))}
             </div>
           </div>
+
+          {/* Delete Confirmation Dialog */}
+          <AnimatePresence>
+            {deleteConfirm.show && (
+              <motion.div
+                className="delete-confirm-overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setDeleteConfirm({ show: false, imageId: null, imageIndex: null })}
+              >
+                <motion.div
+                  className="delete-confirm-dialog"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <h3>Delete Image</h3>
+                  <p>Are you sure you want to delete this generated image? This action cannot be undone.</p>
+                  <div className="delete-confirm-buttons">
+                    <button
+                      className="cancel-btn"
+                      onClick={() => setDeleteConfirm({ show: false, imageId: null, imageIndex: null })}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="delete-confirm-btn"
+                      onClick={handleDeleteGeneratedImage}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Brand Story */}
           <div className="brand-story">

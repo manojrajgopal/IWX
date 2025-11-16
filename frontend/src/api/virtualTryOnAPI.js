@@ -40,6 +40,15 @@ const virtualTryOnAPI = {
       throw error;
     }
   },
+
+  deleteImage: async (imageId) => {
+    try {
+      const response = await axiosClient.delete(`/api/virtual-try-on/images/${imageId}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default virtualTryOnAPI;
