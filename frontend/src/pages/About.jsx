@@ -1,7 +1,14 @@
 // About.jsx
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar/Navbar';
+import HeroSection from '../components/HeroSection';
+import BrandStory from '../components/BrandStory';
+import SustainabilitySection from '../components/SustainabilitySection';
+import { TeamCard, ValueCard, StoreCard } from '../components/Card';
+import TabSystem from '../components/TabSystem';
+import StatsDisplay from '../components/StatsDisplay';
+import CTASection from '../components/CTASection';
+import Container from '../layouts/Container';
 import './About.css';
 
 const About = () => {
@@ -72,284 +79,137 @@ const About = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="about-hero">
-        <div className="about-hero-content">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            Our Story
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            Designing Tomorrow, Today – Since 2005
-          </motion.p>
-        </div>
-      </section>
+      <HeroSection
+        title="Our Story"
+        subtitle="Designing Tomorrow, Today – Since 2005"
+      />
 
       {/* Brand Intro */}
-      <section className="brand-intro">
-        <div className="container">
-          <div className="brand-intro-content">
-            <motion.div 
-              className="brand-text"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true }}
-            >
-              <h2>InfiniteWaveX</h2>
-              <h3>Shaping Dreams with Timeless Waves</h3>
-              <p>
-                Founded in 2005, IWX emerged from a simple vision: to create clothing that transcends 
-                trends and becomes part of your life's story. Our designs blend innovative techniques 
-                with timeless aesthetics, creating pieces that feel both contemporary and eternal.
-              </p>
-              <p>
-                Today, we're a global community of designers, artisans, and visionaries committed to 
-                redefining fashion through sustainable practices, inclusive design, and technological 
-                innovation.
-              </p>
-            </motion.div>
-            <motion.div 
-              className="brand-image"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true }}
-            >
-              <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="IWX Studio" />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <BrandStory
+        description={
+          <>
+            <p>
+              Founded in 2005, IWX emerged from a simple vision: to create clothing that transcends
+              trends and becomes part of your life's story. Our designs blend innovative techniques
+              with timeless aesthetics, creating pieces that feel both contemporary and eternal.
+            </p>
+            <p>
+              Today, we're a global community of designers, artisans, and visionaries committed to
+              redefining fashion through sustainable practices, inclusive design, and technological
+              innovation.
+            </p>
+          </>
+        }
+        image="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
+      />
 
       {/* Tabs Section */}
-      <section className="about-tabs">
-        <div className="container">
-          <div className="tabs-header">
-            <button 
-              className={activeTab === 'story' ? 'tab-active' : ''}
-              onClick={() => setActiveTab('story')}
-            >
-              Our Story
-            </button>
-            <button 
-              className={activeTab === 'values' ? 'tab-active' : ''}
-              onClick={() => setActiveTab('values')}
-            >
-              Our Values
-            </button>
-            <button 
-              className={activeTab === 'team' ? 'tab-active' : ''}
-              onClick={() => setActiveTab('team')}
-            >
-              Our Team
-            </button>
-            <button 
-              className={activeTab === 'journey' ? 'tab-active' : ''}
-              onClick={() => setActiveTab('journey')}
-            >
-              Our Journey
-            </button>
-          </div>
-
-          <div className="tab-content">
-            {activeTab === 'story' && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="tab-panel"
-              >
+      <TabSystem
+        title="Learn More About IWX"
+        tabs={[
+          {
+            id: 'story',
+            label: 'Our Story',
+            content: (
+              <div>
                 <h3>Crafting the Future of Fashion</h3>
                 <p>
-                  IWX began as a small atelier in Milan with just three designers and a shared vision. 
-                  Today, we've grown into an international fashion house without losing our commitment 
+                  IWX began as a small atelier in Milan with just three designers and a shared vision.
+                  Today, we've grown into an international fashion house without losing our commitment
                   to artistry, innovation, and personal connection.
                 </p>
                 <p>
-                  Our design philosophy centers on "timeless waves" – the idea that great design 
-                  moves through time like waves, with each collection building on the last while 
+                  Our design philosophy centers on "timeless waves" – the idea that great design
+                  moves through time like waves, with each collection building on the last while
                   introducing new innovations in form, function, and sustainability.
                 </p>
-                <div className="story-stats">
-                  <div className="stat">
-                    <h4>20</h4>
-                    <p>Years of Excellence</p>
-                  </div>
-                  <div className="stat">
-                    <h4>50+</h4>
-                    <p>Countries Served</p>
-                  </div>
-                  <div className="stat">
-                    <h4>200+</h4>
-                    <p>Team Members</p>
-                  </div>
-                  <div className="stat">
-                    <h4>100%</h4>
-                    <p>Carbon Neutral</p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {activeTab === 'values' && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="tab-panel"
-              >
+                <StatsDisplay
+                  stats={[
+                    { value: '20', label: 'Years of Excellence' },
+                    { value: '50+', label: 'Countries Served' },
+                    { value: '200+', label: 'Team Members' },
+                    { value: '100%', label: 'Carbon Neutral' }
+                  ]}
+                />
+              </div>
+            )
+          },
+          {
+            id: 'values',
+            label: 'Our Values',
+            content: (
+              <div>
                 <h3>Our Guiding Principles</h3>
                 <div className="values-grid">
                   {values.map((value, index) => (
-                    <motion.div 
-                      key={index}
-                      className="value-card"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                    >
-                      <div className="value-icon">{value.icon}</div>
-                      <h4>{value.title}</h4>
-                      <p>{value.description}</p>
-                    </motion.div>
+                    <ValueCard key={index} value={value} animationDelay={index * 0.1} />
                   ))}
                 </div>
-              </motion.div>
-            )}
-
-            {activeTab === 'team' && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="tab-panel"
-              >
+              </div>
+            )
+          },
+          {
+            id: 'team',
+            label: 'Our Team',
+            content: (
+              <div>
                 <h3>Meet Our Leadership</h3>
                 <div className="team-grid">
                   {teamMembers.map((member, index) => (
-                    <motion.div 
-                      key={index}
-                      className="team-card"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      whileHover={{ y: -5 }}
-                    >
-                      <div className="team-image">
-                        <img src={member.image} alt={member.name} />
-                        <div className="team-overlay">
-                          <p>{member.bio}</p>
-                        </div>
-                      </div>
-                      <div className="team-info">
-                        <h4>{member.name}</h4>
-                        <p>{member.role}</p>
-                      </div>
-                    </motion.div>
+                    <TeamCard key={index} member={member} animationDelay={index * 0.1} />
                   ))}
                 </div>
-              </motion.div>
-            )}
-
-            {activeTab === 'journey' && (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="tab-panel"
-              >
+              </div>
+            )
+          },
+          {
+            id: 'journey',
+            label: 'Our Journey',
+            content: (
+              <div>
                 <h3>Our Journey Through Time</h3>
                 <div className="timeline">
                   {milestones.map((milestone, index) => (
-                    <motion.div 
+                    <div
                       key={index}
                       className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}
-                      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      viewport={{ once: true }}
                     >
                       <div className="timeline-content">
                         <h4>{milestone.year}</h4>
                         <p>{milestone.event}</p>
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
-              </motion.div>
-            )}
-          </div>
-        </div>
-      </section>
+              </div>
+            )
+          }
+        ]}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
 
       {/* Sustainability Section */}
-      <section className="sustainability">
-        <div className="container">
-          <motion.div 
-            className="sustainability-content"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <h2>Sustainability at Our Core</h2>
-            <p>
-              We believe fashion should respect both people and planet. That's why we've implemented 
-              comprehensive sustainability initiatives across our entire supply chain.
-            </p>
-            <div className="sustainability-stats">
-              <div className="sust-stat">
-                <h4>85%</h4>
-                <p>of materials from sustainable sources</p>
-              </div>
-              <div className="sust-stat">
-                <h4>100%</h4>
-                <p>carbon neutral operations</p>
-              </div>
-              <div className="sust-stat">
-                <h4>0</h4>
-                <p>waste to landfill from our facilities</p>
-              </div>
-              <div className="sust-stat">
-                <h4>2025</h4>
-                <p>target for 100% circular production</p>
-              </div>
-            </div>
-            <button className="cta-button">Learn About Our Initiatives</button>
-          </motion.div>
-        </div>
-      </section>
+      <SustainabilitySection
+        description="We believe fashion should respect both people and planet. That's why we've implemented comprehensive sustainability initiatives across our entire supply chain."
+        stats={[
+          { value: '85%', label: 'of materials from sustainable sources' },
+          { value: '100%', label: 'carbon neutral operations' },
+          { value: '0', label: 'waste to landfill from our facilities' },
+          { value: '2025', label: 'target for 100% circular production' }
+        ]}
+        ctaText="Learn About Our Initiatives"
+        onCtaClick={() => console.log('Learn more clicked')}
+      />
 
       {/* Global Presence */}
       <section className="global-presence">
-        <div className="container">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            Global Presence, Local Impact
-          </motion.h2>
-          <motion.p 
-            className="section-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+        <Container>
+          <h2>Global Presence, Local Impact</h2>
+          <p className="section-subtitle">
             With flagship stores in fashion capitals worldwide and online shipping to over 50 countries
-          </motion.p>
-          
+          </p>
+
           <div className="stores-grid">
             {[
               { city: "Mumbi", image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" },
@@ -359,43 +219,29 @@ const About = () => {
               { city: "Chenni", image: "https://images.pexels.com/photos/34366231/pexels-photo-34366231.jpeg" },
               { city: "Goa", image: "https://images.pexels.com/photos/34322143/pexels-photo-34322143.jpeg" }
             ].map((store, index) => (
-              <motion.div 
+              <StoreCard
                 key={index}
-                className="store-card"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <img src={store.image} alt={store.city} />
-                <div className="store-overlay">
-                  <h4>{store.city}</h4>
-                  <button>Visit Store</button>
-                </div>
-              </motion.div>
+                store={store}
+                animationDelay={index * 0.1}
+              />
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* CTA Section */}
-      <section className="about-cta">
-        <motion.div 
-          className="cta-content"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-        >
-          <h2>Join Our Journey</h2>
-          <p>Be part of our story as we continue to shape the future of fashion</p>
-          <div className="cta-buttons">
-            <button className="cta-primary">Explore Careers</button>
-            <button className="cta-secondary">View Collections</button>
-          </div>
-        </motion.div>
-      </section>
+      <CTASection
+        title="Join Our Journey"
+        subtitle="Be part of our story as we continue to shape the future of fashion"
+        primaryButton={{
+          text: "Explore Careers",
+          onClick: () => console.log('Explore careers clicked')
+        }}
+        secondaryButton={{
+          text: "View Collections",
+          onClick: () => console.log('View collections clicked')
+        }}
+      />
     </div>
   );
 };

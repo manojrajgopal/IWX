@@ -125,9 +125,15 @@ const renderModel = () => {
 
   return (
     <div className="model-placeholder">
-      <div className="model-icon-large">
-        {currentModel === 'male' ? '👨' : '👩'}
-      </div>
+      <model-viewer
+        src={`/models/${currentModel}.glb`}
+        alt={`${currentModel} model`}
+        camera-controls
+        auto-rotate
+        ar
+        style={{ width: '100%', height: '400px' }}
+      >
+      </model-viewer>
       <p className="model-placeholder-text">
         {currentModel === 'male' ? 'Male Model' : 'Female Model'}
       </p>

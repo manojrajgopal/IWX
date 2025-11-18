@@ -1,0 +1,24 @@
+.section {
+  padding: 60px 0;
+}
+
+.section.gray {
+  background: #f8f8f8;
+}
+
+.section.dark {
+  background: #000;
+  color: white;
+}
+
+.section.small {
+  padding: 30px 0;
+}
+
+.section.large {
+  padding: 100px 0;
+}
+
+.section.none {
+  padding: 0;
+}

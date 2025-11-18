@@ -4,6 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import { productAPI } from '../api/productAPI';
+import Breadcrumb from '../components/Breadcrumb';
+import LoadingSpinner from '../components/LoadingSpinner';
+import Rating from '../components/Rating';
+import ProductCard from '../components/ProductCard';
+import Container from '../layouts/Container';
 import './ProductListing.css';
 
 const ProductListing = () => {
@@ -125,12 +130,6 @@ const ProductListing = () => {
     navigate(`/productDetails/${productId}`);
   };
 
-  // Render star ratings
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span key={i} className={i < Math.floor(rating) ? "star filled" : "star"}>★</span>
-    ));
-  };
 
   // Filter options
   const filterOptions = {
@@ -176,11 +175,11 @@ const ProductListing = () => {
       <Navbar />
 
       {/* Breadcrumb */}
-      <div className="breadcrumb">
-        <div className="container">
-          <a href="#/">Home</a> / <a href="#/">Women</a> / <span>All Clothing</span>
-        </div>
-      </div>
+      <Breadcrumb items={[
+        { label: 'Home', link: '/' },
+        { label: 'Women', link: '/women' },
+        { label: 'All Clothing' }
+      ]} />
 
       {/* Banner */}
       <section className="plp-banner">
@@ -369,10 +368,7 @@ const ProductListing = () => {
           {/* Products Grid */}
           <div className="products-grid-container">
             {loading ? (
-              <div className="loading-container">
-                <div className="loading-spinner"></div>
-                <p>Loading products...</p>
-              </div>
+              <LoadingSpinner message="Loading products..." />
             ) : currentProducts.length > 0 ? (
               <>
                 <div className="products-grid">
@@ -438,7 +434,7 @@ const ProductListing = () => {
                         </div>
 
                         <div className="product-rating">
-                          {renderStars(product.rating || 0)}
+                          <Rating rating={product.rating || 0} />
                           <span>({product.review_count || 0})</span>
                         </div>
                       </div>

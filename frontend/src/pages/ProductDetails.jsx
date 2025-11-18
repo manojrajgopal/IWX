@@ -8,6 +8,18 @@ import { cartAPI } from '../api/cartAPI';
 import { wishlistAPI } from '../api/wishlistAPI';
 import { addItemToCart } from '../redux/slices/cartSlice';
 import virtualTryOnAPI from '../api/virtualTryOnAPI';
+import LoadingSpinner from '../components/LoadingSpinner';
+import Breadcrumb from '../components/Breadcrumb';
+import Notification from '../components/Notification';
+import QuantitySelector from '../components/QuantitySelector';
+import Rating from '../components/Rating';
+import ProductCard from '../components/ProductCard';
+import Review from '../components/Review';
+import BrandStory from '../components/BrandStory';
+import SustainabilitySection from '../components/SustainabilitySection';
+import TabSystem from '../components/TabSystem';
+import Table from '../components/Table';
+import Container from '../layouts/Container';
 import './ProductDetails.css';
 
 const ProductDetail = () => {
@@ -311,11 +323,6 @@ const ProductDetail = () => {
     }
   };
 
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span key={i} className={i < Math.floor(rating) ? "star filled" : "star"}>★</span>
-    ));
-  };
 
   // Combine images, videos, and generated images for media gallery
   const getAllMedia = () => {
@@ -394,10 +401,7 @@ const ProductDetail = () => {
     return (
       <div className="product-detail-container">
         <Navbar />
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Loading product details...</p>
-        </div>
+        <LoadingSpinner message="Loading product details..." />
       </div>
     );
   }
@@ -408,28 +412,23 @@ const ProductDetail = () => {
       <Navbar />
 
       {/* Notification */}
-      <AnimatePresence>
-        {showNotification && (
-          <motion.div
-            className="notification"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-          >
-            <p>Item added to your bag!</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {showNotification && (
+        <Notification
+          message="Item added to your bag!"
+          type="success"
+          onClose={() => setShowNotification(false)}
+        />
+      )}
 
       {/* Breadcrumb */}
-      <div className="breadcrumb">
-        <div className="container">
-          <Link to="/">Home</Link> / <Link to="/productList">Products</Link> / <span>{product.name}</span>
-        </div>
-      </div>
+      <Breadcrumb items={[
+        { label: 'Home', link: '/' },
+        { label: 'Products', link: '/productList' },
+        { label: product.name }
+      ]} />
 
       <div className="product-detail-content">
-        <div className="container">
+        <Container>
           <div className="product-main">
             {/* Product Media */}
             <div className="product-images">
@@ -711,10 +710,8 @@ const ProductDetail = () => {
               </div>
 
               <div className="rating-section">
-                <div className="stars">
-                  {renderStars(product.rating || 0)}
-                  <span>({product.review_count || 0})</span>
-                </div>
+                <Rating rating={product.rating || 0} />
+                <span className="rating-count">({product.review_count || 0})</span>
                 <span className="sku">SKU: {product.sku || 'N/A'}</span>
               </div>
 
@@ -800,11 +797,11 @@ const ProductDetail = () => {
 
               <div className="quantity-section">
                 <h3>Quantity</h3>
-                <div className="quantity-selector">
-                  <button onClick={decrementQuantity}>-</button>
-                  <span>{quantity}</span>
-                  <button onClick={incrementQuantity}>+</button>
-                </div>
+                <QuantitySelector
+                  quantity={quantity}
+                  onIncrement={incrementQuantity}
+                  onDecrement={decrementQuantity}
+                />
               </div>
 
               <div className="action-buttons">
@@ -942,7 +939,7 @@ const ProductDetail = () => {
                   <div className="review-summary">
                     <div className="average-rating">
                       <span className="rating-number">{product.rating || 0}</span>
-                      <div className="stars">{renderStars(product.rating || 0)}</div>
+                      <Rating rating={product.rating || 0} />
                       <span>{product.review_count || 0} reviews</span>
                     </div>
                     
@@ -964,19 +961,7 @@ const ProductDetail = () => {
                   
                   <div className="reviews-list">
                     {reviews.map(review => (
-                      <div key={review.id} className="review">
-                        <div className="review-header">
-                          <div className="user-info">
-                            <img src={review.avatar} alt={review.user} />
-                            <div>
-                              <h4>{review.user}</h4>
-                              <div className="stars">{renderStars(review.rating)}</div>
-                            </div>
-                          </div>
-                          <span className="review-date">{new Date(review.date).toLocaleDateString()}</span>
-                        </div>
-                        <p>{review.comment}</p>
-                      </div>
+                      <Review key={review.id} review={review} />
                     ))}
                   </div>
                   
@@ -1030,17 +1015,11 @@ const ProductDetail = () => {
             <h2>You Might Also Like</h2>
             <div className="products-grid">
               {relatedProducts.map(product => (
-                <div key={product.id} className="product-card">
-                  <div className="product-image">
-                    <img src={product.image} alt={product.name} />
-                    <button className="quick-view">Quick View</button>
-                  </div>
-                  <div className="product-info">
-                    <span className="product-category">{product.category}</span>
-                    <h3>{product.name}</h3>
-                    <p>${product.price.toFixed(2)}</p>
-                  </div>
-                </div>
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  showCategory={true}
+                />
               ))}
             </div>
           </div>
@@ -1130,7 +1109,7 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
     </div>
   );

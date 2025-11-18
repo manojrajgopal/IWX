@@ -1,0 +1,57 @@
+.select-group {
+  margin-bottom: 16px;
+}
+
+.select-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.select-field {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.select-field:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.select-field.error {
+  border-color: #ff3b30;
+}
+
+.select-field.error:focus {
+  border-color: #ff3b30;
+  box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.1);
+}
+
+.select-field:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+  background-image: none;
+}
+
+.select-error {
+  display: block;
+  margin-top: 4px;
+  color: #ff3b30;
+  font-size: 12px;
+}

@@ -1,6 +1,7 @@
 // AdminDashboard.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { adminAPI } from '../../api/adminAPI';
 import websocketService from '../../services/websocket';
 import './Dashboard.css';
@@ -12,6 +13,7 @@ import AddProductForm from '../../components/AddProductForm';
 
 const AdminDashboard = () => {
   const { user } = useSelector(state => state.auth);
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
@@ -1438,9 +1440,17 @@ const AdminDashboard = () => {
               <span>{websocketConnected ? 'Live' : 'Offline'}</span>
             </div>
           </div>
-          <div className="admin-profile">
-            <div className="profile-avatar">AJ</div>
-            <span>Admin Johnson</span>
+          <div className="admin-profile" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
+            <div className="profile-avatar">
+              {user?.first_name && user?.last_name
+                ? `${user.first_name.charAt(0)}${user.last_name.charAt(0)}`.toUpperCase()
+                : user?.email?.charAt(0).toUpperCase() || 'A'}
+            </div>
+            <span>
+              {user?.first_name && user?.last_name
+                ? `${capitalizeName(user.first_name)} ${capitalizeName(user.last_name)}`
+                : user?.email || 'Admin User'}
+            </span>
           </div>
         </div>
       </header>

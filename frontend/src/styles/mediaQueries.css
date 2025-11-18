@@ -1,0 +1,72 @@
+/* Media Queries */
+@media (max-width: 576px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .hide-tablet {
+    display: none !important;
+  }
+
+  .show-tablet {
+    display: block !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hide-desktop {
+    display: none !important;
+  }
+
+  .show-desktop {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hide-large {
+    display: none !important;
+  }
+
+  .show-large {
+    display: block !important;
+  }
+}
+
+/* Responsive grid */
+.grid-responsive {
+  display: grid;
+  gap: 20px;
+}
+
+@media (max-width: 576px) {
+  .grid-responsive {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 769px) {
+  .grid-responsive {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import AlertBox from '../components/AlertBox';
+import QuantitySelector from '../components/QuantitySelector';
+import Rating from '../components/Rating';
 import websocketService from '../services/websocket';
 import {
   fetchCart,
@@ -258,16 +260,12 @@ const Cart = () => {
                       </div>
 
                       <div className="item-controls">
-                        <div className="quantity-selector">
-                          <button
-                            onClick={() => updateQuantity(item.product_id, item.quantity - 1, item.size, item.color)}
-                            disabled={item.quantity <= 1}
-                          >
-                            -
-                          </button>
-                          <span>{item.quantity}</span>
-                          <button onClick={() => updateQuantity(item.product_id, item.quantity + 1, item.size, item.color)}>+</button>
-                        </div>
+                        <QuantitySelector
+                          quantity={item.quantity}
+                          onIncrement={() => updateQuantity(item.product_id, item.quantity + 1, item.size, item.color)}
+                          onDecrement={() => updateQuantity(item.product_id, item.quantity - 1, item.size, item.color)}
+                          min={1}
+                        />
 
                         <button className="remove-item" onClick={() => removeItem(item.product_id, item.size, item.color)}>
                           Remove
@@ -448,10 +446,7 @@ const Cart = () => {
                   <div className="suggested-item-info">
                     <h3>{item.name}</h3>
                     <div className="item-rating">
-                      <div className="stars">
-                        {'★'.repeat(Math.floor(item.rating))}
-                        {'☆'.repeat(5 - Math.floor(item.rating))}
-                      </div>
+                      <Rating rating={item.rating} />
                       <span>{item.rating}</span>
                     </div>
                     <p>${item.price.toFixed(2)}</p>

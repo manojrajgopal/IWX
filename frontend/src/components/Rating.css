@@ -1,0 +1,33 @@
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.star {
+  color: #ddd;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.star.small {
+  font-size: 12px;
+}
+
+.star.large {
+  font-size: 18px;
+}
+
+.star:hover {
+  color: #ffc107;
+}
+
+.rating-value {
+  margin-left: 5px;
+  font-size: 14px;
+  color: #666;
+}

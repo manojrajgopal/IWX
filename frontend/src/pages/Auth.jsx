@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux';
 import { authAPI } from '../api/authAPI';
 import { loginSuccess } from '../redux/slices/authSlice';
 import apiService from '../services/api';
+import Input from '../components/ui/Input';
+import PasswordInput from '../components/ui/PasswordInput';
+import LoadingSpinner from '../components/LoadingSpinner';
 import './Auth.css';
 
 const Auth = () => {
@@ -24,32 +27,6 @@ const Auth = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // Add this effect for eye icon animation
-React.useEffect(() => {
-  const updateEyeIcons = () => {
-    document.querySelectorAll('.password-toggle').forEach(button => {
-      const input = button.closest('.password-input-wrapper').querySelector('input');
-      const closedEye = button.querySelector('.eye-icon.closed');
-      const openEye = button.querySelector('.eye-icon.open');
-      
-      if (input.type === 'password') {
-        closedEye.style.display = 'block';
-        openEye.style.display = 'none';
-      } else {
-        closedEye.style.display = 'none';
-        openEye.style.display = 'block';
-      }
-    });
-  };
-
-  // Update eye icons initially and on any click
-  updateEyeIcons();
-  document.addEventListener('click', updateEyeIcons);
-  
-  return () => {
-    document.removeEventListener('click', updateEyeIcons);
-  };
-}, []);
 
 
 
@@ -282,114 +259,56 @@ React.useEffect(() => {
               <form onSubmit={handleSubmit} className="auth-form">
                 {!isLogin && (
                   <div className="form-row">
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        name="firstName"
-                        placeholder="First Name"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        className={errors.firstName ? 'error' : ''}
-                      />
-                      {errors.firstName && <span className="error-text">{errors.firstName}</span>}
-                    </div>
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        name="lastName"
-                        placeholder="Last Name"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        className={errors.lastName ? 'error' : ''}
-                      />
-                      {errors.lastName && <span className="error-text">{errors.lastName}</span>}
-                    </div>
+                    <Input
+                      type="text"
+                      name="firstName"
+                      placeholder="First Name"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      error={errors.firstName}
+                      required
+                    />
+                    <Input
+                      type="text"
+                      name="lastName"
+                      placeholder="Last Name"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      error={errors.lastName}
+                      required
+                    />
                   </div>
                 )}
 
-                <div className="input-group">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className={errors.email ? 'error' : ''}
-                  />
-                  {errors.email && <span className="error-text">{errors.email}</span>}
-                </div>
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  error={errors.email}
+                  required
+                />
 
-                <div className="input-group">
-                  <div className="password-input-wrapper">
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      className={errors.password ? 'error' : ''}
-                    />
-                    <button 
-                      type="button" 
-                      className="password-toggle"
-                      onClick={() => {
-                        const input = document.querySelector('input[name="password"]');
-                        if (input.type === 'password') {
-                          input.type = 'text';
-                        } else {
-                          input.type = 'password';
-                        }
-                      }}
-                    >
-                      <svg className="eye-icon closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                      <svg className="eye-icon open" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{display: 'none'}}>
-                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                        <line x1="1" y1="1" x2="23" y2="23"/>
-                      </svg>
-                    </button>
-                  </div>
-                  {errors.password && <span className="error-text">{errors.password}</span>}
-                </div>
+                <PasswordInput
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  error={errors.password}
+                  required
+                />
 
                 {!isLogin && (
                   <>
-                  <div className="input-group">
-                    <div className="password-input-wrapper">
-                      <input
-                        type="password"
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        value={formData.confirmPassword}
-                        onChange={handleInputChange}
-                        className={errors.confirmPassword ? 'error' : ''}
-                      />
-                      <button 
-                        type="button" 
-                        className="password-toggle"
-                        onClick={() => {
-                          const input = document.querySelector('input[name="confirmPassword"]');
-                          if (input.type === 'password') {
-                            input.type = 'text';
-                          } else {
-                            input.type = 'password';
-                          }
-                        }}
-                      >
-                        <svg className="eye-icon closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                          <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                        <svg className="eye-icon open" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{display: 'none'}}>
-                          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                          <line x1="1" y1="1" x2="23" y2="23"/>
-                        </svg>
-                      </button>
-                    </div>
-                    {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
-                  </div>
+                  <PasswordInput
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    error={errors.confirmPassword}
+                    required
+                  />
 
                     <div className="checkbox-group">
                       <label className="checkbox-label">

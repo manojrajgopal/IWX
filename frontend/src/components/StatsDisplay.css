@@ -1,0 +1,41 @@
+.stats-horizontal {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin: 30px 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin: 30px 0;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item h4 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.stat-item p {
+  font-size: 14px;
+  margin: 0;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .stats-horizontal {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .stat-item h4 {
+    font-size: 28px;
+  }
+}

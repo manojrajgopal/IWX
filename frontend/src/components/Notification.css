@@ -1,0 +1,60 @@
+.notification {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  padding: 15px 25px;
+  border-radius: 4px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.notification.success {
+  background: #4caf50;
+  color: white;
+}
+
+.notification.error {
+  background: #f44336;
+  color: white;
+}
+
+.notification.warning {
+  background: #ff9800;
+  color: white;
+}
+
+.notification.info {
+  background: #2196f3;
+  color: white;
+}
+
+.notification p {
+  margin: 0;
+  flex: 1;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.notification-close:hover {
+  opacity: 1;
+}

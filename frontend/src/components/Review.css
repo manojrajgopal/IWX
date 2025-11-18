@@ -1,0 +1,40 @@
+.review {
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.review-date {
+  color: #666;
+  font-size: 14px;
+}
+
+.review p {
+  margin: 0;
+  line-height: 1.5;
+  color: #555;
+}

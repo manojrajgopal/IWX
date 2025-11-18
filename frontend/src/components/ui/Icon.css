@@ -1,0 +1,35 @@
+.icon {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1;
+  color: inherit;
+}
+
+.icon.small {
+  font-size: 12px;
+}
+
+.icon.medium {
+  font-size: 16px;
+}
+
+.icon.large {
+  font-size: 20px;
+}
+
+.icon.xlarge {
+  font-size: 24px;
+}
+
+.icon.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icon.clickable:hover {
+  transform: scale(1.1);
+}
+
+.icon.clickable:active {
+  transform: scale(0.95);
+}

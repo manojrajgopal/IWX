@@ -2,6 +2,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar/Navbar';
+import HeroSection from '../components/HeroSection';
+import { SupportCard } from '../components/Card';
+import FAQAccordion from '../components/FAQAccordion';
+import Table from '../components/Table';
+import CTASection from '../components/CTASection';
+import Container from '../layouts/Container';
 import './FAQ.css';
 
 const FAQ = () => {
@@ -110,33 +116,12 @@ const FAQ = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="faq-hero">
-        <div className="faq-hero-content">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            Help Center
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            Find answers to our most frequently asked questions
-          </motion.p>
-          <motion.div
-            className="search-faq"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-          >
-            <input type="text" placeholder="Search questions..." />
-            <button>Search</button>
-          </motion.div>
-        </div>
-      </section>
+      <HeroSection
+        title="Help Center"
+        subtitle="Find answers to our most frequently asked questions"
+        showSearch={true}
+        searchPlaceholder="Search questions..."
+      />
 
       {/* FAQ Categories */}
       <section className="faq-categories">
@@ -165,103 +150,56 @@ const FAQ = () => {
 
       {/* FAQ List */}
       <section className="faq-list-section">
-        <div className="container">
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            {activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)} Questions
-          </motion.h3>
-          <div className="faq-accordion">
-            {faqCategories[activeCategory].map((faq, index) => (
-              <motion.div 
-                key={index}
-                className="faq-item"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <button 
-                  className={`faq-question ${openQuestion === index ? 'active' : ''}`}
-                  onClick={() => toggleQuestion(index)}
-                >
-                  {faq.question}
-                  <span>{openQuestion === index ? '−' : '+'}</span>
-                </button>
-                <div className={`faq-answer ${openQuestion === index ? 'open' : ''}`}>
-                  <p>{faq.answer}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <Container>
+          <h3>{activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)} Questions</h3>
+          <FAQAccordion
+            faqs={faqCategories[activeCategory]}
+            allowMultiple={false}
+          />
+        </Container>
       </section>
 
       {/* Support Options */}
       <section className="support-options">
-        <div className="container">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            Still Need Help?
-          </motion.h2>
-          <motion.p 
-            className="section-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+        <Container>
+          <h2>Still Need Help?</h2>
+          <p className="section-subtitle">
             Our customer care team is here to assist you
-          </motion.p>
+          </p>
 
           <div className="support-cards">
-            <motion.div 
-              className="support-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <div className="support-icon">📧</div>
-              <h3>Email Support</h3>
-              <p>Send us an email and we'll respond within 24 hours</p>
-              <a href="mailto:support@infinitewavex.com" className="support-link">support@infinitewavex.com</a>
-            </motion.div>
-
-            <motion.div 
-              className="support-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="support-icon">💬</div>
-              <h3>Live Chat</h3>
-              <p>Chat with our support team in real-time</p>
-              <button className="support-link">Start Chat</button>
-            </motion.div>
-
-            <motion.div 
-              className="support-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <div className="support-icon">📞</div>
-              <h3>Phone Support</h3>
-              <p>Call us during business hours for immediate assistance</p>
-              <a href="tel:+15551234567" className="support-link">+1 (555) 123-IWX</a>
-            </motion.div>
+            {[
+              {
+                icon: "📧",
+                title: "Email Support",
+                description: "Send us an email and we'll respond within 24 hours",
+                link: "mailto:support@infinitewavex.com",
+                linkText: "support@infinitewavex.com"
+              },
+              {
+                icon: "💬",
+                title: "Live Chat",
+                description: "Chat with our support team in real-time",
+                button: true,
+                buttonText: "Start Chat",
+                onClick: () => console.log('Start chat clicked')
+              },
+              {
+                icon: "📞",
+                title: "Phone Support",
+                description: "Call us during business hours for immediate assistance",
+                link: "tel:+15551234567",
+                linkText: "+1 (555) 123-IWX"
+              }
+            ].map((support, index) => (
+              <SupportCard
+                key={index}
+                support={support}
+                animationDelay={index * 0.1}
+              />
+            ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Order Tracking */}
@@ -307,59 +245,33 @@ const FAQ = () => {
           </motion.p>
 
           <div className="size-tables">
-            <motion.div 
-              className="size-table"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true }}
-            >
+            <div className="size-table">
               <h3>Women's Sizes</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Size</th>
-                    <th>Bust</th>
-                    <th>Waist</th>
-                    <th>Hips</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>XS</td><td>32"</td><td>25"</td><td>35"</td></tr>
-                  <tr><td>S</td><td>34"</td><td>27"</td><td>37"</td></tr>
-                  <tr><td>M</td><td>36"</td><td>29"</td><td>39"</td></tr>
-                  <tr><td>L</td><td>38"</td><td>31"</td><td>41"</td></tr>
-                  <tr><td>XL</td><td>40"</td><td>33"</td><td>43"</td></tr>
-                </tbody>
-              </table>
-            </motion.div>
+              <Table
+                headers={['Size', 'Bust', 'Waist', 'Hips']}
+                rows={[
+                  ['XS', '32"', '25"', '35"'],
+                  ['S', '34"', '27"', '37"'],
+                  ['M', '36"', '29"', '39"'],
+                  ['L', '38"', '31"', '41"'],
+                  ['XL', '40"', '33"', '43"']
+                ]}
+              />
+            </div>
 
-            <motion.div 
-              className="size-table"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true }}
-            >
+            <div className="size-table">
               <h3>Men's Sizes</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Size</th>
-                    <th>Chest</th>
-                    <th>Waist</th>
-                    <th>Hips</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>S</td><td>35"</td><td>30"</td><td>36"</td></tr>
-                  <tr><td>M</td><td>38"</td><td>32"</td><td>38"</td></tr>
-                  <tr><td>L</td><td>41"</td><td>34"</td><td>40"</td></tr>
-                  <tr><td>XL</td><td>44"</td><td>36"</td><td>42"</td></tr>
-                  <tr><td>XXL</td><td>47"</td><td>39"</td><td>44"</td></tr>
-                </tbody>
-              </table>
-            </motion.div>
+              <Table
+                headers={['Size', 'Chest', 'Waist', 'Hips']}
+                rows={[
+                  ['S', '35"', '30"', '36"'],
+                  ['M', '38"', '32"', '38"'],
+                  ['L', '41"', '34"', '40"'],
+                  ['XL', '44"', '36"', '42"'],
+                  ['XXL', '47"', '39"', '44"']
+                ]}
+              />
+            </div>
           </div>
 
           <motion.div 
@@ -384,24 +296,18 @@ const FAQ = () => {
       </section>
 
       {/* Contact Prompt */}
-      <section className="contact-prompt">
-        <div className="container">
-          <motion.div 
-            className="prompt-content"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <h2>Can't Find What You're Looking For?</h2>
-            <p>Our customer care team is ready to help you with any questions</p>
-            <div className="prompt-buttons">
-              <button className="cta-button">Contact Us</button>
-              <button className="secondary-button">View Shipping Info</button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CTASection
+        title="Can't Find What You're Looking For?"
+        subtitle="Our customer care team is ready to help you with any questions"
+        primaryButton={{
+          text: "Contact Us",
+          onClick: () => console.log('Contact us clicked')
+        }}
+        secondaryButton={{
+          text: "View Shipping Info",
+          onClick: () => console.log('View shipping info clicked')
+        }}
+      />
     </div>
   );
 };

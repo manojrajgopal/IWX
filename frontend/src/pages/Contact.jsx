@@ -2,6 +2,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar/Navbar';
+import HeroSection from '../components/HeroSection';
+import { MethodCard, StoreCard } from '../components/Card';
+import TabSystem from '../components/TabSystem';
+import FAQAccordion from '../components/FAQAccordion';
+import Container from '../layouts/Container';
 import AlertBox from '../components/AlertBox';
 import './Contact.css';
 
@@ -92,55 +97,25 @@ const Contact = () => {
       )}
 
       {/* Hero Section */}
-      <section className="contact-hero">
-        <div className="contact-hero-content">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            Get In Touch
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            We'd love to hear from you. Reach out to us through any of these channels.
-          </motion.p>
-        </div>
-      </section>
+      <HeroSection
+        title="Get In Touch"
+        subtitle="We'd love to hear from you. Reach out to us through any of these channels."
+      />
 
       {/* Contact Methods */}
       <section className="contact-methods">
-        <div className="container">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            How Can We Help You?
-          </motion.h2>
+        <Container>
+          <h2>How Can We Help You?</h2>
           <div className="methods-grid">
             {contactMethods.map((method, index) => (
-              <motion.div 
+              <MethodCard
                 key={index}
-                className="method-card"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="method-icon">{method.icon}</div>
-                <h3>{method.title}</h3>
-                <p className="method-details">{method.details}</p>
-                <p className="method-description">{method.description}</p>
-              </motion.div>
+                method={method}
+                animationDelay={index * 0.1}
+              />
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Contact Form Section */}
@@ -246,55 +221,20 @@ const Contact = () => {
 
       {/* FAQ Preview Section */}
       <section className="faq-preview">
-        <div className="container">
-          <motion.div 
-            className="faq-preview-content"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <h2>Common Questions</h2>
-            <div className="faq-list">
-              {faqs.map((faq, index) => (
-                <motion.div 
-                  key={index}
-                  className="faq-item"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <h4>{faq.question}</h4>
-                  <p>{faq.answer}</p>
-                </motion.div>
-              ))}
-            </div>
-            <a href="#faq" className="view-all-faq">View All FAQs →</a>
-          </motion.div>
-        </div>
+        <Container>
+          <h2>Common Questions</h2>
+          <FAQAccordion faqs={faqs} />
+          <a href="#faq" className="view-all-faq">View All FAQs →</a>
+        </Container>
       </section>
 
       {/* Store Locations */}
       <section className="store-locations">
-        <div className="container">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            Visit Our Stores
-          </motion.h2>
-          <motion.p 
-            className="section-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+        <Container>
+          <h2>Visit Our Stores</h2>
+          <p className="section-subtitle">
             Experience IWX in person at our flagship locations
-          </motion.p>
+          </p>
 
           <div className="stores-list">
             {[
@@ -320,28 +260,14 @@ const Contact = () => {
                 image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1794&q=80"
               }
             ].map((store, index) => (
-              <motion.div 
+              <StoreCard
                 key={index}
-                className="store-detail-card"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="store-image">
-                  <img src={store.image} alt={store.city} />
-                </div>
-                <div className="store-info">
-                  <h3>{store.city}</h3>
-                  <p className="store-address">{store.address}</p>
-                  <p className="store-hours">{store.hours}</p>
-                  <p className="store-phone">{store.phone}</p>
-                  <button className="store-direction">Get Directions</button>
-                </div>
-              </motion.div>
+                store={store}
+                animationDelay={index * 0.1}
+              />
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Social Media Connect */}
