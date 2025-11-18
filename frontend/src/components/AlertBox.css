@@ -1,13 +1,15 @@
 /* AlertBox.css */
+@import '../styles/colors.css';
+
 .alert-box {
   position: fixed;
   top: 100px;
   right: 30px;
   min-width: 350px;
   max-width: 450px;
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--color-shadow-dark);
   z-index: 1000;
   overflow: hidden;
   border-left: 4px solid;

@@ -1,4 +1,38 @@
 /* Global Styles */
+@import './colors.css';
+
+:root {
+  /* Light mode colors - using our centralized variables */
+  --bg-color: var(--color-bg-primary);
+  --text-color: var(--color-text-dark);
+  --border-color: var(--color-border-primary);
+  --input-bg: var(--color-bg-input);
+  --input-border: var(--color-input-border);
+  --button-bg: var(--color-button-bg);
+  --button-hover: var(--color-button-hover);
+  --primary-color: var(--color-primary);
+  --secondary-color: var(--color-secondary);
+  --success-color: var(--color-success);
+  --error-color: var(--color-error);
+  --warning-color: var(--color-warning);
+}
+
+body.dark-mode {
+  /* Dark mode colors - inverted */
+  --bg-color: var(--color-black);
+  --text-color: var(--color-white);
+  --border-color: var(--color-border-dark);
+  --input-bg: var(--color-gray-800);
+  --input-border: var(--color-gray-600);
+  --button-bg: var(--color-gray-800);
+  --button-hover: var(--color-gray-700);
+  --primary-color: var(--color-primary);
+  --secondary-color: var(--color-gray-400);
+  --success-color: var(--color-success-text);
+  --error-color: var(--color-error-text);
+  --warning-color: var(--color-warning-text);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,8 +42,9 @@
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
-  color: #333;
-  background-color: #fff;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html {
@@ -74,8 +109,8 @@ input, textarea, select {
 
 /* Loading Spinner */
 .spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--primary-color);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -89,14 +124,14 @@ input, textarea, select {
 
 /* Error Message */
 .error-message {
-  color: #e74c3c;
+  color: var(--error-color);
   font-size: 14px;
   margin-top: 5px;
 }
 
 /* Success Message */
 .success-message {
-  color: #27ae60;
+  color: var(--success-color);
   font-size: 14px;
   margin-top: 5px;
 }

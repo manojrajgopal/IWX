@@ -2327,7 +2327,7 @@ body {
 }
 
 input:checked + .toggle-slider {
-  background-color: var(--success-color);
+  background-color: #000;
 }
 
 input:checked + .toggle-slider:before {

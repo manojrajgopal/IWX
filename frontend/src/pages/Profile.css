@@ -1,4 +1,6 @@
 /* Profile.css */
+@import '../styles/colors.css';
+
 .profile-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -7,7 +9,7 @@
 
 .profile-header {
   padding: 30px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: 30px;
 }
 
@@ -18,7 +20,7 @@
 }
 
 .profile-header p {
-  color: #666;
+  color: var(--color-text-muted);
   font-size: 16px;
 }
 
@@ -33,7 +35,7 @@
 }
 
 .user-summary {
-  background: #f8f8f8;
+  background: var(--color-bg-button);
   padding: 25px;
   border-radius: 8px;
   text-align: center;
@@ -44,8 +46,8 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #000;
-  color: white;
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,7 +62,7 @@
 }
 
 .user-summary p {
-  color: #666;
+  color: var(--color-text-muted);
   margin-bottom: 5px;
   font-size: 14px;
 }
@@ -84,18 +86,18 @@
   border-radius: 6px;
   transition: background 0.2s ease;
   font-size: 15px;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 
 
 .profile-nav button:hover {
-  background: #f5f5f5;
+  background: var(--color-bg-secondary);
 }
 
 .profile-nav button.active {
-  background: #000;
-  color: white;
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
 }
 
 .profile-nav button span {
@@ -103,7 +105,7 @@
 }
 
 .account-stats {
-  background: #f8f8f8;
+  background: var(--button-bg);
   padding: 20px;
   border-radius: 8px;
 }
@@ -141,7 +143,7 @@
 }
 
 .tab-content {
-  background: white;
+  background: var(--bg-color);
   border-radius: 8px;
   padding: 30px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -163,9 +165,9 @@
 
 .edit-btn, .save-btn, .cancel-btn, .add-address-btn, .add-payment-btn {
   padding: 10px 20px;
-  border: 1px solid #000;
-  background: #000;
-  color: white;
+  border: 1px solid var(--text-color);
+  background: var(--text-color);
+  color: var(--bg-color);
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
@@ -173,8 +175,8 @@
 }
 
 .cancel-btn {
-  background: white;
-  color: #000;
+  background: var(--bg-color);
+  color: var(--text-color);
   margin-right: 10px;
 }
 
@@ -189,11 +191,11 @@
 }
 
 .edit-btn:hover, .save-btn:hover, .add-address-btn:hover, .add-payment-btn:hover {
-  background: #333;
+  background: var(--button-hover);
 }
 
 .cancel-btn:hover {
-  background: #f5f5f5;
+  background: var(--button-hover);
 }
 
 .form-section {
@@ -220,14 +222,16 @@
 .form-group input, .form-group select {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--input-border);
   border-radius: 4px;
   font-size: 15px;
+  background: var(--input-bg);
+  color: var(--text-color);
 }
 
 .form-group input:disabled, .form-group select:disabled {
-  background: #f9f9f9;
-  color: #666;
+  background: var(--button-bg);
+  color: var(--secondary-color);
 }
 
 .preferences-section {
@@ -781,7 +785,7 @@ input:checked + .slider:before {
 }
 
 .notification-category {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 20px;
 }
 

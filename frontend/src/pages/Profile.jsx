@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateUser } from '../redux/slices/authSlice';
+import { toggleTheme } from '../redux/slices/themeSlice';
 import { authAPI } from '../api/authAPI';
 import { orderAPI } from '../api/orderAPI';
 import { addressAPI } from '../api/addressAPI';
@@ -21,6 +22,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
+  const { isDarkMode } = useSelector(state => state.theme);
   const [activeTab, setActiveTab] = useState('profile');
   const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -264,18 +266,39 @@ const Profile = () => {
   };
 
   const handlePreferenceChange = async (preference) => {
-    const newPreferences = {
-      ...preferences,
-      [preference]: !preferences[preference]
-    };
-    setPreferences(newPreferences);
+    if (preference === 'darkMode') {
+      // Handle dark mode toggle separately
+      dispatch(toggleTheme());
+      const newDarkMode = !isDarkMode;
+      const newPreferences = {
+        ...preferences,
+        darkMode: newDarkMode
+      };
+      setPreferences(newPreferences);
 
-    try {
-      const updatedUser = await authAPI.updateCurrentUser({ preferences: newPreferences });
-      dispatch(updateUser(updatedUser));
-    } catch (err) {
-      console.error('Error updating preferences:', err);
-      setPreferences(preferences);
+      try {
+        const updatedUser = await authAPI.updateCurrentUser({ preferences: newPreferences });
+        dispatch(updateUser(updatedUser));
+      } catch (err) {
+        console.error('Error updating dark mode preference:', err);
+        // Revert on error
+        dispatch(toggleTheme());
+        setPreferences(preferences);
+      }
+    } else {
+      const newPreferences = {
+        ...preferences,
+        [preference]: !preferences[preference]
+      };
+      setPreferences(newPreferences);
+
+      try {
+        const updatedUser = await authAPI.updateCurrentUser({ preferences: newPreferences });
+        dispatch(updateUser(updatedUser));
+      } catch (err) {
+        console.error('Error updating preferences:', err);
+        setPreferences(preferences);
+      }
     }
   };
 
@@ -788,7 +811,7 @@ const Profile = () => {
                       <label className="switch">
                         <input
                           type="checkbox"
-                          checked={preferences.darkMode}
+                          checked={isDarkMode}
                           onChange={() => handlePreferenceChange('darkMode')}
                         />
                         <span className="slider"></span>

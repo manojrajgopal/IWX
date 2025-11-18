@@ -1,0 +1,243 @@
+/* Centralized Color Variables */
+/* This file contains all color definitions used throughout the application */
+/* All colors maintain their exact original values for consistency */
+
+/* ===== BASIC COLORS ===== */
+:root {
+  /* Pure Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  
+  /* Gray Scale */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Legacy Gray Values (keeping exact originals) */
+  --color-light-gray: #f8f8f8;
+  --color-medium-gray: #6b7280;
+  --color-dark-gray: #1a1a1a;
+  --color-border-gray: #ddd;
+  --color-divider-gray: #eee;
+  --color-placeholder-gray: #ccc;
+}
+
+/* ===== TEXT COLORS ===== */
+:root {
+  /* Primary Text */
+  --color-text-primary: #000000;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #555555;
+  --color-text-quaternary: #999999;
+  --color-text-light: #ffffff;
+  
+  /* Legacy Text Colors */
+  --color-text-muted: #666666;
+  --color-text-dark: #333333;
+  --color-text-light-gray: #888888;
+}
+
+/* ===== BACKGROUND COLORS ===== */
+:root {
+  /* Primary Backgrounds */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f8f8;
+  --color-bg-tertiary: #f5f5f5;
+  --color-bg-dark: #000000;
+  
+  /* Component Backgrounds */
+  --color-bg-card: #ffffff;
+  --color-bg-input: #ffffff;
+  --color-bg-button: #f8f9fa;
+  --color-bg-button-hover: #e9ecef;
+  
+  /* Legacy Background Colors */
+  --color-bg-light: #f8f8f8;
+  --color-bg-dark: #000000;
+  --color-bg-overlay: rgba(0, 0, 0, 0.5);
+  --color-bg-modal: rgba(0, 0, 0, 0.6);
+}
+
+/* ===== BORDER COLORS ===== */
+:root {
+  /* Primary Borders */
+  --color-border-primary: #ddd;
+  --color-border-secondary: #eee;
+  --color-border-tertiary: #e0e0e0;
+  --color-border-light: #ccc;
+  
+  /* Legacy Border Colors */
+  --color-border-light-gray: #ddd;
+  --color-border-medium: #e0e0e0;
+  --color-border-dark: #000000;
+}
+
+/* ===== BUTTON COLORS ===== */
+:root {
+  /* Primary Buttons */
+  --color-btn-primary: #000000;
+  --color-btn-primary-hover: #333333;
+  --color-btn-secondary: #ffffff;
+  --color-btn-secondary-hover: #f8f8f8;
+  
+  /* Button Text */
+  --color-btn-text-primary: #ffffff;
+  --color-btn-text-secondary: #000000;
+  
+  /* Legacy Button Colors */
+  --color-button-bg: #f8f9fa;
+  --color-button-hover: #e9ecef;
+}
+
+/* ===== STATUS & FEEDBACK COLORS ===== */
+:root {
+  /* Success Colors */
+  --color-success: #10b981;
+  --color-success-light: #34d399;
+  --color-success-bg: #e8f5e9;
+  --color-success-text: #2e7d32;
+  --color-success-bg-light: #f0fff0;
+  --color-success-border: #4caf50;
+  
+  /* Error Colors */
+  --color-error: #ef4444;
+  --color-error-light: #f87171;
+  --color-error-bg: #ffebee;
+  --color-error-text: #c62828;
+  --color-error-bg-light: #fef2f2;
+  --color-error-border: #f44336;
+  --color-error-alt: #ff4444;
+  
+  /* Warning Colors */
+  --color-warning: #f59e0b;
+  --color-warning-light: #fbbf24;
+  --color-warning-bg: #fff3e0;
+  --color-warning-text: #f57c00;
+  --color-warning-bg-light: #fff8e1;
+  --color-warning-border: #ffc107;
+  
+  /* Info Colors */
+  --color-info: #3b82f6;
+  --color-info-light: #60a5fa;
+  --color-info-bg: #e3f2fd;
+  --color-info-text: #1e40af;
+  
+  /* Legacy Status Colors */
+  --color-success-legacy: #4caf50;
+  --color-error-legacy: #f44336;
+  --color-warning-legacy: #ff9800;
+  --color-info-legacy: #2196f3;
+}
+
+/* ===== BRAND & ACCENT COLORS ===== */
+:root {
+  /* Primary Brand */
+  --color-brand-primary: #6366f1;
+  --color-brand-secondary: #8b5cf6;
+  --color-brand-accent: #6366f1;
+  
+  /* Special Brand Colors */
+  --color-brand-red: #eb0606;
+  --color-brand-red-alt: #c91414;
+  --color-brand-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  /* Legacy Brand Colors */
+  --color-primary: #007bff;
+  --color-secondary: #6c757d;
+  --color-accent: #6366f1;
+}
+
+/* ===== COMPONENT-SPECIFIC COLORS ===== */
+:root {
+  /* Rating Stars */
+  --color-star: #ffc107;
+  --color-star-empty: #ddd;
+  
+  /* Links */
+  --color-link: #3b82f6;
+  --color-link-hover: #1d4ed8;
+  --color-link-visited: #7c3aed;
+  
+  /* Form Elements */
+  --color-input-border: #ccc;
+  --color-input-focus: #000000;
+  --color-input-error: #e00;
+  --color-checkbox-border: #000000;
+  
+  /* Notifications & Alerts */
+  --color-notification-success: #4caf50;
+  --color-notification-error: #f44336;
+  --color-notification-warning: #ff9800;
+  --color-notification-info: #2196f3;
+  
+  /* Badges & Tags */
+  --color-badge-new: #ff3b30;
+  --color-badge-sale: #ff3b30;
+  --color-badge-default: #4caf50;
+  
+  /* Progress & Loading */
+  --color-progress-bg: #f3f3f3;
+  --color-progress-fill: #000000;
+  --color-loading-border: #f3f3f3;
+  --color-loading-spinner: #000000;
+  
+  /* Shadows & Effects */
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-shadow-light: rgba(0, 0, 0, 0.05);
+  --color-shadow-dark: rgba(0, 0, 0, 0.2);
+  --color-shadow-glow: rgba(99, 102, 241, 0.3);
+}
+
+/* ===== SPECIAL USE COLORS ===== */
+:root {
+  /* Search & Focus */
+  --color-search-bg: rgba(255, 255, 255, 0.9);
+  --color-focus-ring: #646cff;
+  
+  /* Overlay Colors */
+  --color-overlay-dark: rgba(0, 0, 0, 0.4);
+  --color-overlay-light: rgba(0, 0, 0, 0.7);
+  --color-overlay-card: rgba(0, 0, 0, 0.8);
+  
+  /* Glass Effect */
+  --color-glass-bg: rgba(255, 255, 255, 0.25);
+  --color-glass-border: rgba(255, 255, 255, 0.18);
+  
+  /* Scrollbar */
+  --color-scrollbar-track: #f1f1f1;
+  --color-scrollbar-thumb: #888888;
+  --color-scrollbar-thumb-hover: #555555;
+  
+  /* Selection */
+  --color-selection: rgba(99, 102, 241, 0.1);
+  
+  /* Disabled States */
+  --color-disabled: #ccc;
+  --color-disabled-text: #999;
+}
+
+/* ===== DARK MODE COLORS (if needed) ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Override with dark theme colors if needed */
+    --color-bg-primary: #000000;
+    --color-text-primary: #ffffff;
+    --color-border-primary: #333333;
+  }
+}
+
+/* ===== PRINT COLORS ===== */
+@media print {
+  :root {
+    --color-bg-primary: #ffffff;
+    --color-text-primary: #000000;
+    --color-border-primary: #000000;
+  }
+}

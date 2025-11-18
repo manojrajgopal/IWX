@@ -8,11 +8,13 @@ import './Dashboard.css';
 import { ChangePassword } from '../../components/Profile/SecurityComponents'; // Adjust path as needed
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, updateUser } from '../../redux/slices/authSlice';
+import { toggleTheme } from '../../redux/slices/themeSlice';
 import { authAPI } from '../../api/authAPI';
 import AddProductForm from '../../components/AddProductForm';
 
 const AdminDashboard = () => {
   const { user } = useSelector(state => state.auth);
+  const { isDarkMode } = useSelector(state => state.theme);
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -189,8 +191,7 @@ const AdminDashboard = () => {
     emailNotifications: true,
     smsAlerts: false,
     autoBackup: true,
-    twoFactorAuth: true,
-    darkMode: false
+    twoFactorAuth: true
   });
 
   const [users, setUsers] = useState([]);
@@ -215,11 +216,32 @@ const AdminDashboard = () => {
   const [revenueTrend, setRevenueTrend] = useState([]);
 
   // Toggle functionality for settings
-  const handleSettingChange = (settingKey) => {
-    setSettings(prev => ({
-      ...prev,
-      [settingKey]: !prev[settingKey]
-    }));
+  const handleSettingChange = async (settingKey) => {
+    if (settingKey === 'darkMode') {
+      // Handle dark mode toggle separately
+      dispatch(toggleTheme());
+      const newDarkMode = !isDarkMode;
+
+      // Update user preferences to persist the setting
+      const newPreferences = {
+        ...user.preferences,
+        darkMode: newDarkMode
+      };
+
+      try {
+        const updatedUser = await authAPI.updateCurrentUser({ preferences: newPreferences });
+        dispatch(updateUser(updatedUser));
+      } catch (err) {
+        console.error('Error updating dark mode preference:', err);
+        // Revert on error
+        dispatch(toggleTheme());
+      }
+    } else {
+      setSettings(prev => ({
+        ...prev,
+        [settingKey]: !prev[settingKey]
+      }));
+    }
   };
 
   const handleStatusFilterChange = (status) => {
@@ -3730,7 +3752,7 @@ const AdminDashboard = () => {
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '15px 0'}}>
           <span>Dark Mode</span>
           <label className="toggle-switch">
-            <input type="checkbox" checked={settings.darkMode} onChange={() => handleSettingChange('darkMode')} />
+            <input type="checkbox" checked={isDarkMode} onChange={() => handleSettingChange('darkMode')} />
             <span className="toggle-slider"></span>
           </label>
         </div>

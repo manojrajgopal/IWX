@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import './styles/global.css'
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation} from "react-router-dom"
 import Home from './pages/Home'
 import ProductListing from './pages/ProductListing'
@@ -23,10 +24,12 @@ import PublicRoute from './routes/PublicRoute'
 import AdminRoute from './routes/AdminRoute'
 import { useSelector, useDispatch } from 'react-redux'
 import { loginSuccess, loginFailure, setLoading } from './redux/slices/authSlice'
+import { setTheme } from './redux/slices/themeSlice'
 import { authAPI } from './api/authAPI'
 import { useServerStatus } from './hooks/useServerStatus'
 import BackendServerDown from './components/BackendServerDown'
 import FrontendServerDown from './components/FrontendServerDown'
+import ThemeProvider from './components/ThemeProvider'
 
 function AppContent() {
   const dispatch = useDispatch();
@@ -56,6 +59,11 @@ function AppContent() {
             user: response.user,
             token: response.access_token
           }));
+
+          // Set theme from user preferences
+          if (response.user?.preferences && response.user.preferences.darkMode !== undefined) {
+            dispatch(setTheme(response.user.preferences.darkMode));
+          }
           // Clean up URL
           window.history.replaceState({}, document.title, '/');
           return;
@@ -80,6 +88,11 @@ function AppContent() {
             const userRole = user.role || 'user';
             localStorage.setItem('userRole', userRole);
             dispatch(loginSuccess({ user, token, rememberMe }));
+
+            // Set theme from user preferences
+            if (user.preferences && user.preferences.darkMode !== undefined) {
+              dispatch(setTheme(user.preferences.darkMode));
+            }
           } else {
             throw new Error('Failed to get user data');
           }
@@ -156,9 +169,11 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </ThemeProvider>
   )
 }
 
