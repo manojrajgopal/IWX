@@ -48,7 +48,10 @@ const Profile = () => {
     smsNotifications: false,
     promotions: true,
     orderUpdates: true,
-    stockAlerts: true
+    stockAlerts: true,
+    darkMode: false,
+    pushNotifications: true,
+    appUpdates: true
   });
 
   // Real data states
@@ -347,7 +350,10 @@ const Profile = () => {
         smsNotifications: false,
         promotions: true,
         orderUpdates: true,
-        stockAlerts: true
+        stockAlerts: true,
+        darkMode: false,
+        pushNotifications: true,
+        appUpdates: true
       });
     }
     setIsEditing(false);
@@ -767,6 +773,56 @@ const Profile = () => {
                           disabled={!isEditing}
                         />
                       </div>
+                    </div>
+                  </div>
+                  
+                  <div className="preferences-section">
+                    <h3>App Preferences</h3>
+                    <p>Customize your app experience</p>
+
+                    <div className="preference-item">
+                      <div>
+                        <h4>Dark Mode</h4>
+                        <p>Enable dark theme for the application</p>
+                      </div>
+                      <label className="switch">
+                        <input
+                          type="checkbox"
+                          checked={preferences.darkMode}
+                          onChange={() => handlePreferenceChange('darkMode')}
+                        />
+                        <span className="slider"></span>
+                      </label>
+                    </div>
+
+                    <div className="preference-item">
+                      <div>
+                        <h4>Push Notifications</h4>
+                        <p>Receive push notifications on your device</p>
+                      </div>
+                      <label className="switch">
+                        <input
+                          type="checkbox"
+                          checked={preferences.pushNotifications}
+                          onChange={() => handlePreferenceChange('pushNotifications')}
+                        />
+                        <span className="slider"></span>
+                      </label>
+                    </div>
+
+                    <div className="preference-item">
+                      <div>
+                        <h4>App Updates</h4>
+                        <p>Get notified about new app features and updates</p>
+                      </div>
+                      <label className="switch">
+                        <input
+                          type="checkbox"
+                          checked={preferences.appUpdates}
+                          onChange={() => handlePreferenceChange('appUpdates')}
+                        />
+                        <span className="slider"></span>
+                      </label>
                     </div>
                   </div>
 
