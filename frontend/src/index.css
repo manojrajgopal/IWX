@@ -30,8 +30,8 @@ body {
   min-height: 100vh;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
-  color: var(--color-text-dark);
-  background-color: var(--color-bg-primary);
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
 h1 {
