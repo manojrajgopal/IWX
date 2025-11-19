@@ -1,3 +1,5 @@
+@import '../styles/colors.css';
+
 /* Contact.css */
 .contact-container {
   width: 100%;
@@ -13,7 +15,7 @@
 /* Hero Section */
 .contact-hero {
   height: 50vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+  background: linear-gradient(var(--color-overlay-light), var(--color-overlay-light)), 
               url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1771&q=80');
   background-size: cover;
   background-position: center;
@@ -21,7 +23,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: white;
+  color: var(--color-text-light);
 }
 
 .contact-hero-content h1 {
@@ -46,6 +48,7 @@
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 50px;
+  color: var(--color-text-primary);
 }
 
 .methods-grid {
@@ -56,10 +59,11 @@
 
 .method-card {
   padding: 40px 30px;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   border-radius: 5px;
   text-align: center;
   transition: transform 0.3s ease;
+  border: 1px solid var(--color-border-secondary);
 }
 
 .method-card:hover {
@@ -69,53 +73,58 @@
 .method-icon {
   font-size: 40px;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .method-card h3 {
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: 400;
+  color: var(--color-text-primary);
 }
 
 .method-details {
   font-size: 16px;
   margin-bottom: 10px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .method-description {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 /* Contact Form Section */
 .contact-form-section {
   padding: 100px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
 }
 
 .form-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  background: white;
+  background: var(--color-bg-primary);
   padding: 60px;
   border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px var(--color-shadow-light);
+  border: 1px solid var(--color-border-primary);
 }
 
 .form-intro h2 {
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .form-intro p {
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 30px;
-  color: #555;
+  color: var(--color-text-tertiary);
 }
 
 .form-tabs {
@@ -132,10 +141,11 @@
   cursor: pointer;
   border-bottom: 2px solid transparent;
   transition: all 0.3s ease;
+  color: var(--color-text-primary);
 }
 
 .form-tabs button.tab-active {
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--color-border-dark);
   font-weight: 500;
 }
 
@@ -160,26 +170,29 @@
   font-size: 14px;
   margin-bottom: 8px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .form-group input,
 .form-group textarea {
   padding: 12px 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-primary);
   border-radius: 3px;
   font-size: 14px;
   transition: border-color 0.3s ease;
+  background-color: var(--color-bg-input);
+  color: var(--color-text-primary);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #000;
+  border-color: var(--color-input-focus);
 }
 
 .submit-button {
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   padding: 15px 30px;
   font-size: 14px;
@@ -187,10 +200,11 @@
   cursor: pointer;
   transition: background 0.3s ease;
   align-self: flex-start;
+  border-radius: 3px;
 }
 
 .submit-button:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 /* FAQ Preview */
@@ -203,6 +217,7 @@
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 50px;
+  color: var(--color-text-primary);
 }
 
 .faq-list {
@@ -214,19 +229,21 @@
 
 .faq-item {
   padding: 30px;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   border-radius: 5px;
+  border: 1px solid var(--color-border-secondary);
 }
 
 .faq-item h4 {
   font-size: 16px;
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .faq-item p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -234,7 +251,7 @@
 .view-all-faq {
   display: block;
   text-align: center;
-  color: #000;
+  color: var(--color-text-primary);
   font-size: 16px;
   text-decoration: none;
   font-weight: 500;
@@ -242,12 +259,13 @@
 
 .view-all-faq:hover {
   text-decoration: underline;
+  color: var(--color-link-hover);
 }
 
 /* Store Locations */
 .store-locations {
   padding: 100px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
 }
 
 .store-locations h2 {
@@ -255,12 +273,13 @@
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .section-subtitle {
   text-align: center;
   font-size: 16px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 50px;
 }
 
@@ -271,10 +290,11 @@
 }
 
 .store-detail-card {
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px var(--color-shadow-light);
+  border: 1px solid var(--color-border-primary);
 }
 
 .store-image {
@@ -295,6 +315,7 @@
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: 400;
+  color: var(--color-text-primary);
 }
 
 .store-address,
@@ -302,23 +323,25 @@
 .store-phone {
   font-size: 14px;
   margin-bottom: 10px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .store-direction {
   background: transparent;
-  color: #000;
-  border: 1px solid #000;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-dark);
   padding: 8px 20px;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 15px;
+  border-radius: 3px;
 }
 
 .store-direction:hover {
-  background: #000;
-  color: #fff;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
+  border-color: var(--color-btn-primary);
 }
 
 /* Social Connect */
@@ -331,12 +354,13 @@
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .social-content p {
   font-size: 16px;
   margin-bottom: 40px;
-  color: #666;
+  color: var(--color-text-secondary);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -350,17 +374,18 @@
 
 .social-icon {
   padding: 12px 25px;
-  border: 1px solid #000;
+  border: 1px solid var(--color-border-dark);
   border-radius: 30px;
-  color: #000;
+  color: var(--color-text-primary);
   text-decoration: none;
   font-size: 14px;
   transition: all 0.3s ease;
 }
 
 .social-icon:hover {
-  background: #000;
-  color: #fff;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
+  border-color: var(--color-btn-primary);
 }
 
 /* Responsive Design */

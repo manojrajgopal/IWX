@@ -1,8 +1,10 @@
 /* ModelViewer.css */
+@import '../styles/colors.css';
+
 .model-viewer-page {
   padding-top: 80px;
-  background: #fff;
-  color: #000;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
   min-height: 100vh;
 }
 
@@ -16,7 +18,7 @@
 .model-viewer-header {
   padding: 60px 0;
   text-align: center;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, var(--color-bg-button) 0%, var(--color-bg-button-hover) 100%);
 }
 
 .model-viewer-header h1 {
@@ -24,18 +26,19 @@
   font-weight: 400;
   letter-spacing: 3px;
   margin-bottom: 10px;
+  color: var(--color-text-primary);
 }
 
 .model-viewer-header .slogan {
   font-size: 18px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 5px;
   font-style: italic;
 }
 
 .model-viewer-header .tagline {
   font-size: 16px;
-  color: #888;
+  color: var(--color-text-light-gray);
   margin-bottom: 20px;
 }
 
@@ -44,7 +47,7 @@
   margin: 0 auto;
   font-size: 16px;
   line-height: 1.6;
-  color: #555;
+  color: var(--color-text-tertiary);
 }
 
 /* Notification */
@@ -52,12 +55,12 @@
   position: fixed;
   top: 100px;
   right: 20px;
-  background: #4caf50;
-  color: white;
+  background: var(--color-notification-success);
+  color: var(--color-text-light);
   padding: 15px 25px;
   border-radius: 4px;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
 }
 
 /* Main Content */
@@ -75,9 +78,9 @@
 .controls-panel {
   width: 320px;
   flex-shrink: 0;
-  background: #fff;
+  background: var(--color-bg-primary);
   border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-lg);
   padding: 25px;
   position: sticky;
   top: 100px;
@@ -87,18 +90,19 @@
   text-align: center;
   margin-bottom: 25px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-secondary);
 }
 
 .panel-header h2 {
   font-size: 22px;
   font-weight: 500;
   margin-bottom: 8px;
+  color: var(--color-text-primary);
 }
 
 .panel-header p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .model-selector {
@@ -109,6 +113,7 @@
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 15px;
+  color: var(--color-text-primary);
 }
 
 .button-group {
@@ -119,8 +124,8 @@
 .model-btn {
   flex: 1;
   padding: 12px;
-  border: 1px solid #ddd;
-  background: #fff;
+  border: 1px solid var(--color-border-primary);
+  background: var(--color-bg-primary);
   border-radius: 8px;
   cursor: pointer;
   display: flex;
@@ -128,16 +133,17 @@
   align-items: center;
   gap: 5px;
   transition: all 0.3s ease;
+  color: var(--color-text-primary);
 }
 
 .model-btn:hover {
-  border-color: #000;
+  border-color: var(--color-btn-primary);
 }
 
 .model-btn.active {
-  background: #000;
-  color: #fff;
-  border-color: #000;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
+  border-color: var(--color-btn-primary);
 }
 
 .model-icon {
@@ -152,25 +158,27 @@
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 15px;
+  color: var(--color-text-primary);
 }
 
 .upload-zone {
-  border: 2px dashed #ddd;
+  border: 2px dashed var(--color-border-primary);
   border-radius: 8px;
   padding: 30px 20px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 15px;
+  background: var(--color-bg-input);
 }
 
 .upload-zone:hover {
-  border-color: #000;
+  border-color: var(--color-btn-primary);
 }
 
 .upload-zone.dragging {
-  border-color: #000;
-  background: #f8f9fa;
+  border-color: var(--color-btn-primary);
+  background: var(--color-bg-secondary);
 }
 
 .upload-zone.has-image {
@@ -182,21 +190,23 @@
 .upload-icon {
   font-size: 40px;
   margin-bottom: 10px;
+  color: var(--color-text-secondary);
 }
 
 .upload-zone p {
   margin-bottom: 5px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .upload-zone span {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .upload-note {
   font-size: 12px !important;
-  color: #999 !important;
+  color: var(--color-text-quaternary) !important;
   margin-top: 10px !important;
 }
 
@@ -207,8 +217,8 @@
 .loading-spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #000;
+  border: 4px solid var(--color-loading-border);
+  border-top: 4px solid var(--color-loading-spinner);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin: 0 auto 15px;
@@ -235,8 +245,8 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
+  background: var(--color-bg-overlay);
+  color: var(--color-text-light);
   border: none;
   width: 30px;
   height: 30px;
@@ -256,9 +266,9 @@
 
 .try-outfit-btn, .retake-btn {
   padding: 12px;
-  border: 1px solid #000;
-  background: #000;
-  color: #fff;
+  border: 1px solid var(--color-btn-primary);
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
@@ -266,22 +276,23 @@
 }
 
 .retake-btn {
-  background: #fff;
-  color: #000;
+  background: var(--color-btn-secondary);
+  color: var(--color-btn-text-secondary);
 }
 
 .try-outfit-btn:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 .retake-btn:hover {
-  background: #f8f8f8;
+  background: var(--color-btn-secondary-hover);
 }
 
 .outfit-selection h3 {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 15px;
+  color: var(--color-text-primary);
 }
 
 .outfit-grid {
@@ -291,7 +302,7 @@
 }
 
 .outfit-card {
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-secondary);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -299,13 +310,13 @@
 }
 
 .outfit-card:hover {
-  border-color: #000;
+  border-color: var(--color-btn-primary);
   transform: translateY(-2px);
 }
 
 .outfit-card.selected {
-  border-color: #000;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-btn-primary);
+  box-shadow: var(--shadow-md);
 }
 
 .outfit-image {
@@ -324,8 +335,8 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  background: #000;
-  color: #fff;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -337,23 +348,26 @@
 
 .outfit-info {
   padding: 8px;
+  background: var(--color-bg-primary);
 }
 
 .outfit-info h4 {
   font-size: 12px;
   margin-bottom: 3px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .outfit-category {
   font-size: 10px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 3px;
 }
 
 .outfit-price {
   font-size: 12px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 /* Canvas Container */
@@ -362,7 +376,7 @@
   height: 600px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-lg);
   position: relative;
 }
 
@@ -372,7 +386,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #f8f9fa;
+  background: var(--color-bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -388,17 +402,18 @@
   font-size: 24px;
   margin-bottom: 10px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .placeholder-content p {
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 20px;
 }
 
 .cta-button {
   padding: 12px 24px;
-  background: #000;
-  color: #fff;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -407,13 +422,13 @@
 }
 
 .cta-button:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 /* Features Section */
 .features-section {
   padding: 80px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-light);
 }
 
 .features-section h2 {
@@ -422,6 +437,7 @@
   font-weight: 400;
   margin-bottom: 50px;
   letter-spacing: 2px;
+  color: var(--color-text-primary);
 }
 
 .features-grid {
@@ -433,24 +449,26 @@
 .feature-card {
   text-align: center;
   padding: 30px 20px;
-  background: #fff;
+  background: var(--color-bg-primary);
   border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .feature-icon {
   font-size: 40px;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .feature-card h3 {
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .feature-card p {
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 1.6;
 }
 
@@ -465,6 +483,7 @@
   font-weight: 400;
   margin-bottom: 50px;
   letter-spacing: 2px;
+  color: var(--color-text-primary);
 }
 
 .steps-container {
@@ -485,15 +504,15 @@
   right: -15px;
   width: 30px;
   height: 2px;
-  background: #ddd;
+  background: var(--color-border-secondary);
 }
 
 .step-number {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #000;
-  color: #fff;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -506,17 +525,18 @@
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .step p {
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 1.6;
 }
 
 /* Testimonials Section */
 .testimonials-section {
   padding: 80px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-light);
 }
 
 .testimonials-section h2 {
@@ -525,6 +545,7 @@
   font-weight: 400;
   margin-bottom: 50px;
   letter-spacing: 2px;
+  color: var(--color-text-primary);
 }
 
 .testimonials-grid {
@@ -534,10 +555,10 @@
 }
 
 .testimonial-card {
-  background: #fff;
+  background: var(--color-bg-primary);
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .testimonial-content {
@@ -547,7 +568,7 @@
 .testimonial-content p {
   font-style: italic;
   line-height: 1.6;
-  color: #555;
+  color: var(--color-text-tertiary);
 }
 
 .testimonial-author {
@@ -566,11 +587,12 @@
 .testimonial-author h4 {
   font-size: 16px;
   margin-bottom: 5px;
+  color: var(--color-text-primary);
 }
 
 .testimonial-author p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 /* FAQ Section */
@@ -584,6 +606,7 @@
   font-weight: 400;
   margin-bottom: 50px;
   letter-spacing: 2px;
+  color: var(--color-text-primary);
 }
 
 .faq-grid {
@@ -594,26 +617,28 @@
 
 .faq-item {
   padding: 25px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-secondary);
   border-radius: 8px;
+  background: var(--color-bg-primary);
 }
 
 .faq-item h3 {
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .faq-item p {
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 1.6;
 }
 
 /* CTA Section */
 .cta-section {
   padding: 80px 0;
-  background: #000;
-  color: #fff;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   text-align: center;
 }
 
@@ -640,22 +665,22 @@
 }
 
 .cta-button.primary {
-  background: #fff;
-  color: #000;
+  background: var(--color-btn-secondary);
+  color: var(--color-btn-text-secondary);
 }
 
 .cta-button.secondary {
   background: transparent;
-  color: #fff;
-  border: 1px solid #fff;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-text-light);
 }
 
 .cta-button.primary:hover {
-  background: #f8f8f8;
+  background: var(--color-btn-secondary-hover);
 }
 
 .cta-button.secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-bg-overlay);
 }
 
 /* Responsive Design */

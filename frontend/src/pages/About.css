@@ -1,4 +1,6 @@
 /* About.css */
+@import '../styles/colors.css';
+
 .about-container {
   width: 100%;
   padding-top: 80px;
@@ -13,7 +15,7 @@
 /* Hero Section */
 .about-hero {
   height: 60vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+  background: linear-gradient(var(--color-overlay-light), var(--color-overlay-light)), 
               url('https://images.unsplash.com/photo-1463171379579-3fdfb86d6285?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
   background-size: cover;
   background-position: center;
@@ -21,7 +23,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: white;
+  color: var(--color-text-light);
 }
 
 .about-hero-content h1 {
@@ -55,13 +57,14 @@
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 10px;
+  color: var(--color-text-primary);
 }
 
 .brand-text h3 {
   font-size: 18px;
   font-weight: 400;
   margin-bottom: 30px;
-  color: #666;
+  color: var(--color-text-secondary);
   font-style: italic;
 }
 
@@ -69,7 +72,7 @@
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 20px;
-  color: #555;
+  color: var(--color-text-tertiary);
 }
 
 .brand-image {
@@ -84,32 +87,31 @@
 /* Tabs Section */
 .about-tabs {
   padding: 80px 0;
-  background: #f8f8f8;
-  color: black;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
 }
 
 .tabs-header {
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
-  border-bottom: 1px solid #ddd;
-  color: #000;
+  border-bottom: 1px solid var(--color-border-primary);
+  color: var(--color-text-primary);
 }
 
 .tabs-header button {
   background: none;
-  color: black;
+  color: var(--color-text-primary);
   border: none;
   padding: 15px 30px;
   font-size: 16px;
   cursor: pointer;
   position: relative;
   transition: all 0.3s ease;
-  color: #000;
 }
 
 .tabs-header button:hover {
-  color: #000;
+  color: var(--color-text-primary);
 }
 
 .tabs-header button.tab-active {
@@ -117,7 +119,7 @@
 }
 
 button.tab-active {
-  color: rgb(201, 20, 20);
+  color: var(--color-brand-red-alt);
   font-weight: 600;
 }
 
@@ -128,7 +130,7 @@ button.tab-active {
   left: 0;
   width: 100%;
   height: 2px;
-  background: #eb0606;
+  background: var(--color-brand-red);
 }
 
 .tab-content {
@@ -139,13 +141,14 @@ button.tab-active {
   font-size: 24px;
   margin-bottom: 20px;
   font-weight: 400;
+  color: var(--color-text-primary);
 }
 
 .tab-panel p {
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 20px;
-  color: #555;
+  color: var(--color-text-tertiary);
 }
 
 .story-stats {
@@ -158,22 +161,22 @@ button.tab-active {
 .stat {
   text-align: center;
   padding: 30px 20px;
-  background: rgb(0, 0, 0);
+  background: var(--color-bg-dark);
   border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .stat h4 {
   font-size: 36px;
   font-weight: 300;
   margin-bottom: 10px;
-  color: #fffcfc;
+  color: var(--color-text-light);
 }
 
 .stat p {
   font-size: 14px;
   margin: 0;
-  color: #cfcece;
+  color: var(--color-text-muted);
 }
 
 .values-grid {
@@ -184,9 +187,9 @@ button.tab-active {
 
 .value-card {
   padding: 30px;
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   text-align: center;
 }
 
@@ -199,11 +202,12 @@ button.tab-active {
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: 400;
+  color: var(--color-text-primary);
 }
 
 .value-card p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -214,10 +218,10 @@ button.tab-active {
 }
 
 .team-card {
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .team-image {
@@ -243,14 +247,14 @@ button.tab-active {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--color-overlay-card);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease;
   padding: 20px;
-  color: white;
+  color: var(--color-text-light);
   text-align: center;
 }
 
@@ -267,11 +271,12 @@ button.tab-active {
   font-size: 18px;
   margin-bottom: 5px;
   font-weight: 400;
+  color: var(--color-text-primary);
 }
 
 .team-info p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -285,7 +290,7 @@ button.tab-active {
   content: '';
   position: absolute;
   width: 2px;
-  background: #ddd;
+  background: var(--color-border-primary);
   top: 0;
   bottom: 0;
   left: 50%;
@@ -304,7 +309,7 @@ button.tab-active {
   position: absolute;
   width: 20px;
   height: 20px;
-  background: #000;
+  background: var(--color-bg-dark);
   border-radius: 50%;
   top: 50%;
   right: -10px;
@@ -318,29 +323,29 @@ button.tab-active {
 
 .timeline-content {
   padding: 20px;
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
 }
 
 .timeline-content h4 {
   font-size: 18px;
   margin-bottom: 10px;
   font-weight: 400;
-  color: #000;
+  color: var(--color-text-primary);
 }
 
 .timeline-content p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 /* Sustainability */
 .sustainability {
   padding: 100px 0;
-  background: #000;
-  color: white;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   text-align: center;
 }
 
@@ -383,8 +388,8 @@ button.tab-active {
 }
 
 .cta-button {
-  background: #fff;
-  color: #000;
+  background: var(--color-bg-primary);
+  color: var(--color-text-dark);
   border: none;
   padding: 15px 40px;
   font-size: 14px;
@@ -394,7 +399,7 @@ button.tab-active {
 }
 
 .cta-button:hover {
-  background: #ddd;
+  background: var(--color-bg-button-hover);
 }
 
 /* Global Presence */
@@ -407,12 +412,13 @@ button.tab-active {
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .section-subtitle {
   text-align: center;
   font-size: 16px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 50px;
 }
 
@@ -446,14 +452,14 @@ button.tab-active {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-overlay-dark);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease;
-  color: white;
+  color: var(--color-text-light);
 }
 
 .store-card:hover .store-overlay {
@@ -468,8 +474,8 @@ button.tab-active {
 
 .store-overlay button {
   background: transparent;
-  color: white;
-  border: 1px solid white;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-text-light);
   padding: 8px 20px;
   font-size: 12px;
   cursor: pointer;
@@ -477,14 +483,14 @@ button.tab-active {
 }
 
 .store-overlay button:hover {
-  background: white;
-  color: #000;
+  background: var(--color-text-light);
+  color: var(--color-text-dark);
 }
 
 /* CTA Section */
 .about-cta {
   padding: 100px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   text-align: center;
 }
 
@@ -492,12 +498,13 @@ button.tab-active {
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .cta-content p {
   font-size: 16px;
   margin-bottom: 40px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .cta-buttons {
@@ -507,8 +514,8 @@ button.tab-active {
 }
 
 .cta-primary {
-  background: #000;
-  color: #fff;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   border: none;
   padding: 15px 40px;
   font-size: 14px;
@@ -518,13 +525,13 @@ button.tab-active {
 }
 
 .cta-primary:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 .cta-secondary {
   background: transparent;
-  color: #000;
-  border: 1px solid #000;
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-border-dark);
   padding: 15px 40px;
   font-size: 14px;
   letter-spacing: 1px;
@@ -533,8 +540,8 @@ button.tab-active {
 }
 
 .cta-secondary:hover {
-  background: #000;
-  color: #fff;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
 }
 
 /* Responsive Design */

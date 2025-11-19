@@ -1,4 +1,5 @@
-ReturnRefund.css
+@import '../styles/colors.css';
+
 .return-refund-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -8,7 +9,7 @@ ReturnRefund.css
 .return-refund-header {
   text-align: center;
   padding: 40px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-secondary);
   margin-bottom: 30px;
 }
 
@@ -17,11 +18,12 @@ ReturnRefund.css
   font-weight: 400;
   letter-spacing: 3px;
   margin-bottom: 5px;
+  color: var(--color-text-primary);
 }
 
 .slogan {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 15px;
   font-style: italic;
 }
@@ -30,11 +32,12 @@ ReturnRefund.css
   font-size: 28px;
   font-weight: 400;
   margin-bottom: 10px;
+  color: var(--color-text-primary);
 }
 
 .tagline {
   font-size: 16px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .search-container {
@@ -50,6 +53,7 @@ ReturnRefund.css
   cursor: pointer;
   padding: 10px;
   transition: opacity 0.3s ease;
+  color: var(--color-text-primary);
 }
 
 .search-btn:hover {
@@ -65,15 +69,17 @@ ReturnRefund.css
 
 .search-input {
   padding: 10px 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-primary);
   border-radius: 4px;
   font-size: 14px;
   width: 100%;
   outline: none;
+  background-color: var(--color-bg-input);
+  color: var(--color-text-primary);
 }
 
 .tabs-container {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-secondary);
   margin-bottom: 30px;
 }
 
@@ -90,17 +96,17 @@ ReturnRefund.css
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
-  color: #666;
+  color: var(--color-text-secondary);
   transition: all 0.3s ease;
 }
 
 .tabs button:hover {
-  color: #000;
+  color: var(--color-text-primary);
 }
 
 .tabs button.active {
-  color: #000;
-  border-bottom-color: #000;
+  color: var(--color-text-primary);
+  border-bottom-color: var(--color-text-primary);
 }
 
 .tab-content {
@@ -110,18 +116,20 @@ ReturnRefund.css
 .form-section {
   margin-bottom: 40px;
   padding: 25px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-secondary);
   border-radius: 8px;
+  background-color: var(--color-bg-card);
 }
 
 .form-section h3 {
   font-size: 20px;
   margin-bottom: 10px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .form-section p {
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 20px;
 }
 
@@ -133,19 +141,20 @@ ReturnRefund.css
 
 .order-card {
   padding: 15px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-primary);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
+  background-color: var(--color-bg-card);
 }
 
 .order-card:hover {
-  border-color: #000;
+  border-color: var(--color-text-primary);
 }
 
 .order-card.selected {
-  border-color: #000;
-  background: #f8f8f8;
+  border-color: var(--color-text-primary);
+  background: var(--color-bg-light);
 }
 
 .order-header {
@@ -157,10 +166,11 @@ ReturnRefund.css
 
 .order-id {
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .order-date {
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 
@@ -172,11 +182,12 @@ ReturnRefund.css
 
 .items-count {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .order-total {
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .items-grid {
@@ -188,20 +199,21 @@ ReturnRefund.css
 .item-card {
   display: flex;
   padding: 15px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-primary);
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
+  background-color: var(--color-bg-card);
 }
 
 .item-card:hover {
-  border-color: #000;
+  border-color: var(--color-text-primary);
 }
 
 .item-card.selected {
-  border-color: #000;
-  background: #f8f8f8;
+  border-color: var(--color-text-primary);
+  background: var(--color-bg-light);
 }
 
 .item-image {
@@ -225,17 +237,18 @@ ReturnRefund.css
   font-size: 14px;
   margin-bottom: 5px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .item-details p {
   font-size: 12px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 5px;
 }
 
 .item-price {
   font-weight: 500;
-  color: #000;
+  color: var(--color-text-primary);
 }
 
 .item-checkbox {
@@ -257,15 +270,18 @@ ReturnRefund.css
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .form-group select,
 .form-group textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-primary);
   border-radius: 4px;
   font-size: 15px;
+  background-color: var(--color-bg-input);
+  color: var(--color-text-primary);
 }
 
 .form-group textarea {
@@ -284,8 +300,9 @@ ReturnRefund.css
   align-items: center;
   gap: 10px;
   padding: 10px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-primary);
   border-radius: 4px;
+  background-color: var(--color-bg-card);
 }
 
 .refund-option input {
@@ -294,7 +311,7 @@ ReturnRefund.css
 
 .return-summary {
   padding: 20px;
-  background: #f8f8f8;
+  background: var(--color-bg-light);
   border-radius: 4px;
   margin: 20px 0;
 }
@@ -302,6 +319,7 @@ ReturnRefund.css
 .return-summary h4 {
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .summary-items {
@@ -312,7 +330,8 @@ ReturnRefund.css
   display: flex;
   justify-content: space-between;
   padding: 8px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-secondary);
+  color: var(--color-text-primary);
 }
 
 .summary-total {
@@ -320,14 +339,15 @@ ReturnRefund.css
   justify-content: space-between;
   font-weight: 500;
   padding-top: 10px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--color-border-primary);
+  color: var(--color-text-primary);
 }
 
 .submit-return-btn {
   width: 100%;
   padding: 15px;
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   border-radius: 4px;
   font-size: 16px;
@@ -337,11 +357,11 @@ ReturnRefund.css
 }
 
 .submit-return-btn:hover:not(:disabled) {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 .submit-return-btn:disabled {
-  background: #ccc;
+  background: var(--color-disabled);
   cursor: not-allowed;
 }
 
@@ -354,15 +374,17 @@ ReturnRefund.css
 .status-search input {
   flex: 1;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-primary);
   border-radius: 4px;
   font-size: 15px;
+  background-color: var(--color-bg-input);
+  color: var(--color-text-primary);
 }
 
 .btn-primary {
   padding: 12px 24px;
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   border-radius: 4px;
   font-weight: 500;
@@ -371,14 +393,14 @@ ReturnRefund.css
 }
 
 .btn-primary:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 .btn-secondary {
   padding: 12px 24px;
-  background: white;
-  color: #000;
-  border: 1px solid #000;
+  background: var(--color-btn-secondary);
+  color: var(--color-btn-text-secondary);
+  border: 1px solid var(--color-border-primary);
   border-radius: 4px;
   font-weight: 500;
   cursor: pointer;
@@ -386,7 +408,7 @@ ReturnRefund.css
 }
 
 .btn-secondary:hover {
-  background: #f8f8f8;
+  background: var(--color-btn-secondary-hover);
 }
 
 .return-status-example {
@@ -402,8 +424,9 @@ ReturnRefund.css
 
 .status-card {
   padding: 20px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-primary);
   border-radius: 8px;
+  background-color: var(--color-bg-card);
 }
 
 .status-header {
@@ -415,6 +438,7 @@ ReturnRefund.css
 
 .return-id {
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .status-badge {
@@ -425,18 +449,19 @@ ReturnRefund.css
 }
 
 .status-badge.processing {
-  background: #fff3cd;
-  color: #856404;
+  background: var(--color-warning-bg-light);
+  color: var(--color-warning-text);
 }
 
 .status-badge.completed {
-  background: #d4edda;
-  color: #155724;
+  background: var(--color-success-bg-light);
+  color: var(--color-success-text);
 }
 
 .status-details p {
   margin-bottom: 8px;
   font-size: 14px;
+  color: var(--color-text-primary);
 }
 
 .status-progress {
@@ -445,7 +470,7 @@ ReturnRefund.css
 
 .progress-bar {
   height: 6px;
-  background: #eee;
+  background: var(--color-progress-bg);
   border-radius: 3px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -453,7 +478,7 @@ ReturnRefund.css
 
 .progress-fill {
   height: 100%;
-  background: #000;
+  background: var(--color-progress-fill);
   transition: width 0.5s ease;
 }
 
@@ -461,11 +486,11 @@ ReturnRefund.css
   display: flex;
   justify-content: space-between;
   font-size: 10px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .progress-labels span.active {
-  color: #000;
+  color: var(--color-text-primary);
   font-weight: 500;
 }
 
@@ -475,20 +500,23 @@ ReturnRefund.css
 
 .policy-card {
   padding: 25px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-primary);
   border-radius: 8px;
   margin-bottom: 20px;
+  background-color: var(--color-bg-card);
 }
 
 .policy-card h4 {
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .policy-card p {
   margin-bottom: 20px;
   line-height: 1.6;
+  color: var(--color-text-primary);
 }
 
 .policy-details {
@@ -506,8 +534,8 @@ ReturnRefund.css
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #000;
-  color: white;
+  background: var(--color-text-primary);
+  color: var(--color-text-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -518,11 +546,12 @@ ReturnRefund.css
   font-size: 16px;
   margin-bottom: 5px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .policy-point p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -540,8 +569,8 @@ ReturnRefund.css
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #000;
-  color: white;
+  background: var(--color-text-primary);
+  color: var(--color-text-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -552,22 +581,24 @@ ReturnRefund.css
   font-size: 16px;
   margin-bottom: 5px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .timeline-content p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 .faq-list {
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-primary);
   border-radius: 8px;
   overflow: hidden;
+  background-color: var(--color-bg-card);
 }
 
 .faq-item {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-primary);
 }
 
 .faq-item:last-child {
@@ -578,7 +609,7 @@ ReturnRefund.css
   padding: 20px;
   display: flex;
   justify-content: space-between;
-  color: black;
+  color: var(--color-text-primary);
   align-items: center;
   cursor: pointer;
   font-weight: 500;
@@ -586,7 +617,7 @@ ReturnRefund.css
 }
 
 .faq-question:hover {
-  background: #f8f8f8;
+  background: var(--color-bg-light);
 }
 
 .faq-toggle {
@@ -596,7 +627,7 @@ ReturnRefund.css
 
 .faq-answer {
   padding: 0 20px 20px;
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 1.6;
 }
 
@@ -612,16 +643,17 @@ ReturnRefund.css
   text-align: center;
   max-width: 600px;
   padding: 40px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-primary);
   border-radius: 8px;
+  background-color: var(--color-bg-card);
 }
 
 .confirmation-icon {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #4caf50;
-  color: white;
+  background: var(--color-success-legacy);
+  color: var(--color-text-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -632,11 +664,12 @@ ReturnRefund.css
 .confirmation-content h2 {
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .confirmation-content p {
   margin-bottom: 10px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .next-steps {
@@ -647,6 +680,7 @@ ReturnRefund.css
 .next-steps h3 {
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .next-steps ol {
@@ -655,7 +689,7 @@ ReturnRefund.css
 
 .next-steps li {
   margin-bottom: 10px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .confirmation-actions {
@@ -667,18 +701,19 @@ ReturnRefund.css
 
 .support-section {
   padding: 40px 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--color-border-primary);
   text-align: center;
 }
 
 .support-section h3 {
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .support-section p {
   margin-bottom: 30px;
-  color: #666;
+  color: var(--color-text-secondary);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -693,24 +728,27 @@ ReturnRefund.css
 
 .support-option {
   padding: 25px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-primary);
   border-radius: 8px;
+  background-color: var(--color-bg-card);
 }
 
 .support-icon {
   font-size: 32px;
   margin-bottom: 15px;
+  color: var(--color-text-primary);
 }
 
 .support-option h4 {
   margin-bottom: 10px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .support-option p {
   margin-bottom: 5px;
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 /* Responsive Design */

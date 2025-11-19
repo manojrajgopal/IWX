@@ -1,3 +1,4 @@
+@import './styles/colors.css';
 
 #root {
   max-width: 1280px;
@@ -12,9 +13,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em rgba(99, 102, 241, 0.67));
+  filter: drop-shadow(0 0 2em var(--color-shadow-glow));
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em rgba(97, 218, 251, 0.67));
 }
@@ -36,6 +39,10 @@
 
 .card {
   padding: 2em;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-lg, 8px);
+  box-shadow: var(--shadow-sm);
 }
 
 .read-the-docs {

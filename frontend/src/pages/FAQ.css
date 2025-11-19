@@ -1,4 +1,6 @@
 /* FAQ.css */
+@import '../styles/colors.css';
+
 .faq-container {
   width: 100%;
   padding-top: 80px;
@@ -13,7 +15,7 @@
 /* Hero Section */
 .faq-hero {
   height: 50vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+  background: linear-gradient(var(--color-overlay-light), var(--color-overlay-light)), 
               url('https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80');
   background-size: cover;
   background-position: center;
@@ -21,7 +23,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: white;
+  color: var(--color-text-light);
 }
 
 .faq-hero-content h1 {
@@ -49,11 +51,13 @@
   border: none;
   font-size: 14px;
   outline: none;
+  background-color: var(--color-bg-input);
+  color: var(--color-text-primary);
 }
 
 .search-faq button {
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   padding: 0 30px;
   font-size: 14px;
@@ -62,13 +66,13 @@
 }
 
 .search-faq button:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 /* FAQ Categories */
 .faq-categories {
   padding: 80px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
 }
 
 .faq-categories h2 {
@@ -76,6 +80,7 @@
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 40px;
+  color: var(--color-text-primary);
 }
 
 .category-tabs {
@@ -86,9 +91,9 @@
 }
 
 .category-tabs button {
-  background: white;
-  color: rgb(0, 0, 0);
-  border: 1px solid #ddd;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-primary);
   padding: 12px 25px;
   font-size: 14px;
   cursor: pointer;
@@ -97,13 +102,13 @@
 }
 
 .category-tabs button:hover {
-  border-color: #000;
+  border-color: var(--color-btn-primary);
 }
 
 .category-tabs button.active {
-  background: #000;
-  color: white;
-  border-color: #000;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
+  border-color: var(--color-btn-primary);
 }
 
 /* FAQ List */
@@ -116,6 +121,7 @@
   font-size: 28px;
   font-weight: 400;
   margin-bottom: 40px;
+  color: var(--color-text-primary);
 }
 
 .faq-accordion {
@@ -124,7 +130,7 @@
 }
 
 .faq-item {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-secondary);
   margin-bottom: 15px;
 }
 
@@ -141,14 +147,15 @@
   justify-content: space-between;
   align-items: center;
   transition: color 0.3s ease;
+  color: var(--color-text-primary);
 }
 
 .faq-question:hover {
-  color: #000;
+  color: var(--color-btn-primary);
 }
 
 .faq-question.active {
-  color: #000;
+  color: var(--color-btn-primary);
 }
 
 .faq-question span {
@@ -170,14 +177,14 @@
   padding: 0 0 20px 0;
   font-size: 14px;
   line-height: 1.6;
-  color: #666;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 /* Support Options */
 .support-options {
   padding: 80px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
 }
 
 .support-options h2 {
@@ -185,12 +192,13 @@
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .section-subtitle {
   text-align: center;
   font-size: 16px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 50px;
 }
 
@@ -201,11 +209,11 @@
 }
 
 .support-card {
-  background: white;
+  background: var(--color-bg-primary);
   padding: 40px 30px;
   border-radius: 5px;
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.3s ease;
 }
 
@@ -216,37 +224,39 @@
 .support-icon {
   font-size: 40px;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .support-card h3 {
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: 400;
+  color: var(--color-text-primary);
 }
 
 .support-card p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 20px;
 }
 
 .support-link {
-  color: #fcfcfc;
+  color: var(--color-link);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .support-link:hover {
-  color: #333;
+  color: var(--color-link-hover);
   text-decoration: underline;
 }
 
 /* Order Tracking */
 .order-tracking {
   padding: 80px 0;
-  background: #000;
-  color: white;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   text-align: center;
 }
 
@@ -275,11 +285,13 @@
   border: none;
   font-size: 14px;
   outline: none;
+  background-color: var(--color-bg-input);
+  color: var(--color-text-primary);
 }
 
 .tracking-form button {
-  background: white;
-  color: #000;
+  background: var(--color-bg-primary);
+  color: var(--color-btn-text-secondary);
   border: none;
   padding: 0 30px;
   font-size: 14px;
@@ -288,7 +300,7 @@
 }
 
 .tracking-form button:hover {
-  background: #ddd;
+  background: var(--color-btn-secondary-hover);
 }
 
 /* Size Guide */
@@ -301,6 +313,7 @@
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .size-tables {
@@ -311,7 +324,7 @@
 }
 
 .size-table {
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   padding: 30px;
   border-radius: 5px;
 }
@@ -321,6 +334,7 @@
   margin-bottom: 20px;
   font-weight: 400;
   text-align: center;
+  color: var(--color-text-primary);
 }
 
 .size-table table {
@@ -332,16 +346,17 @@
 .size-table td {
   padding: 12px 15px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--color-border-primary);
+  color: var(--color-text-primary);
 }
 
 .size-table th {
   font-weight: 500;
-  background: #eee;
+  background: var(--color-bg-tertiary);
 }
 
 .measurement-guide {
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   padding: 30px;
   border-radius: 5px;
 }
@@ -350,12 +365,13 @@
   font-size: 18px;
   margin-bottom: 20px;
   font-weight: 400;
+  color: var(--color-text-primary);
 }
 
 .measurement-guide p {
   font-size: 14px;
   line-height: 1.6;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 20px;
 }
 
@@ -366,14 +382,14 @@
 .measurement-guide li {
   font-size: 14px;
   line-height: 1.6;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 10px;
 }
 
 /* Contact Prompt */
 .contact-prompt {
   padding: 80px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   text-align: center;
 }
 
@@ -381,12 +397,13 @@
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 20px;
+  color: var(--color-text-primary);
 }
 
 .prompt-content p {
   font-size: 16px;
   margin-bottom: 40px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .prompt-buttons {
@@ -396,8 +413,8 @@
 }
 
 .cta-button {
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   padding: 15px 40px;
   font-size: 14px;
@@ -407,13 +424,13 @@
 }
 
 .cta-button:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 .secondary-button {
   background: transparent;
-  color: #000;
-  border: 1px solid #000;
+  color: var(--color-btn-text-secondary);
+  border: 1px solid var(--color-btn-primary);
   padding: 15px 40px;
   font-size: 14px;
   letter-spacing: 1px;
@@ -422,8 +439,8 @@
 }
 
 .secondary-button:hover {
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
 }
 
 /* Responsive Design */

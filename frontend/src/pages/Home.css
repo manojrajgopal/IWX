@@ -1,4 +1,6 @@
 /* Home.css */
+@import '../styles/colors.css';
+
 * {
   margin: 0;
   padding: 0;
@@ -7,8 +9,8 @@
 }
 
 body {
-  color: #000;
-  background: #fff;
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
   overflow-x: hidden;
 }
 
@@ -52,7 +54,7 @@ body {
 
 .slide-content {
   text-align: center;
-  color: #fff;
+  color: var(--color-text-light);
   max-width: 700px;
   padding: 0 20px;
 }
@@ -62,19 +64,19 @@ body {
   font-weight: 400;
   letter-spacing: 3px;
   margin-bottom: 20px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 4px var(--color-shadow-dark);
 }
 
 .slide-content p {
   font-size: 18px;
   margin-bottom: 30px;
   letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 4px var(--color-shadow-dark);
 }
 
 .cta-button {
-  background: #000;
-  color: #fff;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   padding: 15px 40px;
   font-size: 14px;
@@ -84,7 +86,7 @@ body {
 }
 
 .cta-button:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 .slider-dots {
@@ -102,21 +104,21 @@ body {
   height: 10px;
   border-radius: 50%;
   border-color: none;
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--color-glass-bg);
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .dot.active {
-  background: #fff;
+  background: var(--color-text-light);
   border: none;
-  border-color: white;
+  border-color: var(--color-text-light);
 }
 
 /* Brand Story */
 .brand-story {
   padding: 100px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
 }
 
 .brand-story .container {
@@ -140,7 +142,7 @@ body {
   font-size: 18px;
   font-weight: 400;
   margin-bottom: 20px;
-  color: #666;
+  color: var(--color-text-secondary);
   font-style: italic;
 }
 
@@ -148,7 +150,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 30px;
-  color: #555;
+  color: var(--color-text-tertiary);
 }
 
 .brand-stats {
@@ -164,13 +166,13 @@ body {
   font-size: 32px;
   font-weight: 300;
   margin-bottom: 5px;
-  color: #f5eeee;
+  color: var(--color-text-light);
 }
 
 .stat p {
   font-size: 14px;
   margin: 0;
-  color: #eeeaea;
+  color: var(--color-text-light);
 }
 
 .brand-image {
@@ -203,12 +205,12 @@ section {
 
 .section-subtitle {
   font-size: 16px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-top: 10px;
 }
 
 .view-all {
-  color: #000;
+  color: var(--color-text-primary);
   text-decoration: none;
   font-size: 14px;
   letter-spacing: 1px;
@@ -223,7 +225,7 @@ section {
   left: 0;
   width: 100%;
   height: 1px;
-  background: #000;
+  background: var(--color-text-primary);
   transition: transform 0.3s ease;
   transform: scaleX(0);
   transform-origin: right;
@@ -285,16 +287,16 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--color-overlay-dark);
   transition: background 0.3s ease;
 }
 
 .category-card:hover .overlay {
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--color-overlay-light);
 }
 
 .category-image h3 {
-  color: #fff;
+  color: var(--color-text-light);
   font-size: 32px;
   font-weight: 400;
   letter-spacing: 3px;
@@ -305,8 +307,8 @@ section {
 
 .category-btn {
   background: transparent;
-  color: #fff;
-  border: 1px solid #fff;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-text-light);
   padding: 12px 30px;
   font-size: 14px;
   letter-spacing: 1px;
@@ -323,8 +325,8 @@ section {
 }
 
 .category-btn:hover {
-  background: #fff;
-  color: #000;
+  background: var(--color-text-light);
+  color: var(--color-text-primary);
 }
 
 /* Products Grid */
@@ -362,9 +364,9 @@ section {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: #fff;
-  color: #000;
-  border: 1px solid #000;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-text-primary);
   padding: 12px 20px;
   font-size: 12px;
   letter-spacing: 1px;
@@ -381,8 +383,8 @@ section {
   position: absolute;
   top: 15px;
   left: 15px;
-  background: #000;
-  color: #fff;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   font-size: 10px;
   padding: 5px 10px;
   letter-spacing: 1px;
@@ -392,8 +394,8 @@ section {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: #ff3b30;
-  color: #fff;
+  background: var(--color-badge-new);
+  color: var(--color-text-light);
   font-size: 10px;
   padding: 5px 10px;
   letter-spacing: 1px;
@@ -412,22 +414,22 @@ section {
 
 .product-info p {
   font-size: 14px;
-  color: #555;
+  color: var(--color-text-tertiary);
 }
 
 /* Featured Products & New Arrivals */
 .featured-products {
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
 }
 
 .new-arrivals {
-  background: #fff;
+  background: var(--color-bg-primary);
 }
 
 /* Testimonials */
 .testimonials {
-  background: #000;
-  color: #fff;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   padding: 100px 0;
 }
 
@@ -447,7 +449,7 @@ section {
 }
 
 .testimonial-card {
-  background: #111;
+  background: var(--color-bg-card);
   padding: 30px;
   border-radius: 5px;
   display: flex;
@@ -465,12 +467,12 @@ section {
 }
 
 .star {
-  color: #444;
+  color: var(--color-star-empty);
   font-size: 14px;
 }
 
 .star.filled {
-  color: #ffc107;
+  color: var(--color-star);
 }
 
 .testimonial-content p {
@@ -498,14 +500,14 @@ section {
 
 .testimonial-author p {
   font-size: 14px;
-  color: #999;
+  color: var(--color-text-quaternary);
   margin: 0;
 }
 
 /* Blog Section */
 .blog-section {
   padding: 100px 0;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
 }
 
 .blog-grid {
@@ -515,10 +517,10 @@ section {
 }
 
 .blog-card {
-  background: #fff;
+  background: var(--color-bg-primary);
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px var(--color-shadow-light);
 }
 
 .blog-image {
@@ -542,8 +544,8 @@ section {
   position: absolute;
   top: 15px;
   left: 15px;
-  background: #000;
-  color: #fff;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   font-size: 12px;
   padding: 5px 10px;
 }
@@ -560,13 +562,13 @@ section {
 
 .blog-content p {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 15px;
   line-height: 1.6;
 }
 
 .read-more {
-  color: #000;
+  color: var(--color-text-primary);
   font-size: 14px;
   text-decoration: none;
   position: relative;
@@ -579,7 +581,7 @@ section {
   left: 0;
   width: 100%;
   height: 1px;
-  background: #000;
+  background: var(--color-text-primary);
   transition: transform 0.3s ease;
   transform: scaleX(0);
   transform-origin: right;
@@ -634,12 +636,12 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--color-overlay-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  color: #fff;
+  color: var(--color-text-light);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -651,8 +653,8 @@ section {
 /* Newsletter */
 .newsletter {
   padding: 80px 0;
-  background: #000;
-  color: #fff;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   text-align: center;
 }
 
@@ -684,11 +686,13 @@ section {
   border: none;
   font-size: 14px;
   outline: none;
+  background: var(--color-bg-input);
+  color: var(--color-text-primary);
 }
 
 .newsletter-form button {
-  background: #fff;
-  color: #000;
+  background: var(--color-btn-secondary);
+  color: var(--color-btn-text-secondary);
   border: none;
   padding: 0 30px;
   font-size: 14px;
@@ -698,7 +702,7 @@ section {
 }
 
 .newsletter-form button:hover {
-  background: #ddd;
+  background: var(--color-btn-secondary-hover);
 }
 
 .newsletter-note {
@@ -710,8 +714,8 @@ section {
 /* Footer */
 .footer {
   padding: 80px 0 40px;
-  background: #111;
-  color: #fff;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
 }
 
 .footer-content {
@@ -731,19 +735,19 @@ section {
   font-size: 16px;
   margin-bottom: 20px;
   font-weight: 400;
-  color: #fff;
+  color: var(--color-text-primary);
 }
 
 .footer-slogan {
   font-size: 14px;
   margin-bottom: 5px;
-  color: #999;
+  color: var(--color-text-quaternary);
 }
 
 .footer-tagline {
   font-size: 12px;
   margin-bottom: 20px;
-  color: #666;
+  color: var(--color-text-secondary);
   font-style: italic;
 }
 
@@ -753,18 +757,18 @@ section {
 
 .footer-section li {
   margin-bottom: 10px;
-  color: #999;
+  color: var(--color-text-quaternary);
 }
 
 .footer-section a {
-  color: #999;
+  color: var(--color-text-quaternary);
   text-decoration: none;
   font-size: 14px;
   transition: color 0.3s ease;
 }
 
 .footer-section a:hover {
-  color: #fff;
+  color: var(--color-text-primary);
 }
 
 .social-icons {
@@ -777,18 +781,19 @@ section {
   display: inline-block;
   width: 36px;
   height: 36px;
-  border: 1px solid #999;
+  border: 1px solid var(--color-text-quaternary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   transition: all 0.3s ease;
+  color: var(--color-text-quaternary);
 }
 
 .social-icons a:hover {
-  border-color: #fff;
-  color: #fff;
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
 }
 
 .payment-methods {
@@ -799,7 +804,7 @@ section {
   display: block;
   font-size: 12px;
   margin-bottom: 10px;
-  color: #999;
+  color: var(--color-text-quaternary);
 }
 
 .payment-icons {
@@ -808,11 +813,12 @@ section {
 }
 
 .payment-icons span {
-  background: #333;
+  background: var(--color-bg-tertiary);
   padding: 5px 10px;
   border-radius: 3px;
   font-size: 10px;
   margin: 0;
+  color: var(--color-text-primary);
 }
 
 .footer-bottom {
@@ -820,12 +826,12 @@ section {
   justify-content: space-between;
   align-items: center;
   padding-top: 40px;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--color-border-primary);
 }
 
 .footer-bottom p {
   font-size: 12px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .footer-links {
@@ -834,19 +840,18 @@ section {
 }
 
 .footer-links a {
-  color: #666;
+  color: var(--color-text-secondary);
   text-decoration: none;
   font-size: 12px;
   transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
-  color: #999;
+  color: var(--color-text-quaternary);
 }
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-
   .products-grid {
     grid-template-columns: repeat(3, 1fr);
   }

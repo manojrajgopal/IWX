@@ -20,6 +20,7 @@ a {
   color: var(--color-link);
   text-decoration: inherit;
 }
+
 a:hover {
   color: var(--color-link-hover);
 }
@@ -30,13 +31,14 @@ body {
   min-height: 100vh;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--bg-color);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: var(--color-text-primary);
 }
 
 button {
@@ -46,16 +48,20 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--color-dark-gray);
+  background-color: var(--color-button-bg);
+  color: var(--color-btn-text-secondary);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s;
 }
+
 button:hover {
   border-color: var(--color-link);
+  background-color: var(--color-button-hover);
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto var(--color-focus-ring);
 }
 
 @media (prefers-color-scheme: light) {
@@ -63,10 +69,17 @@ button:focus-visible {
     color: var(--color-text-dark);
     background-color: var(--color-bg-primary);
   }
+
   a:hover {
     color: var(--color-link-hover);
   }
+
   button {
     background-color: var(--color-bg-secondary);
+    color: var(--color-btn-text-secondary);
+  }
+
+  button:hover {
+    background-color: var(--color-button-hover);
   }
 }

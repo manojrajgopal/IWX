@@ -1,30 +1,32 @@
+@import '../styles/colors.css';
+
 .status-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
+  background: var(--color-bg-light);
   padding: 20px;
 }
 
 .status-container {
-  background: white;
+  background: var(--color-bg-primary);
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px var(--color-shadow);
   max-width: 600px;
   width: 100%;
   text-align: center;
 }
 
 .status-container h1 {
-  color: #333;
+  color: var(--color-text-dark);
   margin-bottom: 10px;
   font-size: 2.5rem;
 }
 
 .status-container > p {
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 30px;
   font-size: 1.1rem;
 }
@@ -37,15 +39,15 @@
 }
 
 .status-card {
-  background: #f8f9fa;
+  background: var(--color-bg-light);
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--color-border-secondary);
 }
 
 .status-card h3 {
   margin: 0 0 15px 0;
-  color: #333;
+  color: var(--color-text-dark);
   font-size: 1.2rem;
 }
 
@@ -53,14 +55,14 @@
   display: inline-block;
   padding: 8px 16px;
   border-radius: 20px;
-  color: white;
+  color: var(--color-text-light);
   font-weight: bold;
   font-size: 0.9rem;
   margin-bottom: 10px;
 }
 
 .status-card p {
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 0.9rem;
   margin: 0;
 }
@@ -79,43 +81,43 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-light);
   min-width: 140px;
 }
 
 .retry-btn {
-  background: #1f1f1f;
-  color: white;
-  border-color: #1f1f1f;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
+  border-color: var(--color-btn-primary);
 }
 
 .retry-btn:hover {
-  background: #383838;
-  border-color: #383838;
+  background: var(--color-btn-primary-hover);
+  border-color: var(--color-btn-primary-hover);
 }
 
 .home-btn {
-  background: white;
-  color: #333;
-  border-color: #ddd;
+  background: var(--color-bg-primary);
+  color: var(--color-text-dark);
+  border-color: var(--color-border-light);
 }
 
 .home-btn:hover {
-  background: #f8f9fa;
-  border-color: #bbb;
+  background: var(--color-bg-light);
+  border-color: var(--color-border-medium);
 }
 
 .status-info {
   text-align: left;
-  background: #f8f9fa;
+  background: var(--color-bg-light);
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--color-border-secondary);
 }
 
 .status-info h4 {
   margin: 0 0 15px 0;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .status-info ul {
@@ -125,17 +127,17 @@
 
 .status-info li {
   margin-bottom: 8px;
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 1.5;
 }
 
 .status-info strong {
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .stored-path-notice {
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
+  background: var(--color-warning-bg-light);
+  border: 1px solid var(--color-warning-border);
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 20px;
@@ -144,16 +146,17 @@
 
 .stored-path-notice p {
   margin: 0;
-  color: #856404;
+  color: var(--color-warning-text);
   font-size: 0.95rem;
 }
 
 .stored-path-notice code {
-  background: #f8f9fa;
+  background: var(--color-bg-light);
   padding: 2px 6px;
   border-radius: 4px;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 0.9em;
+  color: var(--color-text-dark);
 }
 
 @media (max-width: 768px) {

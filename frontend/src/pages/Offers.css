@@ -1,4 +1,6 @@
 /* Offers.css */
+@import '../styles/colors.css';
+
 .offers-container {
   padding-top: 80px;
 }
@@ -11,7 +13,7 @@
 
 /* Header Banner */
 .offers-banner {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+  background: linear-gradient(var(--color-overlay-card), var(--color-overlay-card)), 
               url('https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
   background-size: cover;
   background-position: center;
@@ -20,7 +22,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: white;
+  color: var(--color-text-light);
 }
 
 .banner-content h1 {
@@ -37,9 +39,9 @@
 
 /* Filter Bar */
 .filter-bar {
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   padding: 20px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-secondary);
   position: sticky;
   top: 80px;
   z-index: 90;
@@ -62,16 +64,16 @@
   padding: 8px 16px;
   cursor: pointer;
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-muted);
   transition: all 0.3s ease;
 }
 
 .filter-tab.active,
 .filter-tab:hover {
-  color: #000;
-  background: #fff;
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
   border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .filter-controls {
@@ -88,20 +90,21 @@
 
 .sort-by label {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-muted);
 }
 
 .sort-by select {
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-primary);
   padding: 8px 12px;
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 4px;
   font-size: 14px;
+  color: var(--color-text-primary);
 }
 
 .filter-toggle {
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
@@ -120,8 +123,8 @@
 .filters-sidebar {
   width: 280px;
   padding: 20px;
-  background: #fff;
-  border-right: 1px solid #eee;
+  background: var(--color-bg-primary);
+  border-right: 1px solid var(--color-border-secondary);
   height: calc(100vh - 200px);
   position: sticky;
   top: 180px;
@@ -136,12 +139,13 @@
   font-size: 16px;
   margin-bottom: 15px;
   font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .price-slider {
   position: relative;
   height: 5px;
-  background: #ddd;
+  background: var(--color-border-primary);
   border-radius: 5px;
   margin-bottom: 15px;
 }
@@ -160,7 +164,7 @@
   -webkit-appearance: none;
   width: 16px;
   height: 16px;
-  background: #000;
+  background: var(--color-btn-primary);
   border-radius: 50%;
   cursor: pointer;
 }
@@ -169,7 +173,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-muted);
 }
 
 .size-filters {
@@ -181,21 +185,22 @@
 .size-filter {
   width: 40px;
   height: 40px;
-  border: 1px solid #ddd;
-  background: white;
+  border: 1px solid var(--color-border-primary);
+  background: var(--color-bg-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: 12px;
   transition: all 0.3s ease;
+  color: var(--color-text-primary);
 }
 
 .size-filter.active,
 .size-filter:hover {
-  background: #000;
-  color: white;
-  border-color: #000;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
+  border-color: var(--color-btn-primary);
 }
 
 .color-filters {
@@ -214,7 +219,7 @@
 }
 
 .color-filter.active {
-  border-color: #000;
+  border-color: var(--color-border-dark);
   transform: scale(1.1);
 }
 
@@ -230,6 +235,7 @@
   gap: 10px;
   cursor: pointer;
   font-size: 14px;
+  color: var(--color-text-primary);
 }
 
 .discount-filters input[type="checkbox"] {
@@ -245,16 +251,17 @@
   border: none;
   cursor: pointer;
   font-size: 14px;
+  border-radius: var(--border-radius-md, 4px);
 }
 
 .apply-filters {
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
 }
 
 .clear-filters {
-  background: #f8f8f8;
-  color: #666;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-muted);
 }
 
 /* Products Section */
@@ -278,6 +285,7 @@
   font-weight: 400;
   margin-bottom: 20px;
   letter-spacing: 2px;
+  color: var(--color-text-primary);
 }
 
 .section-header {
@@ -292,7 +300,7 @@
 }
 
 .section-header p {
-  color: #666;
+  color: var(--color-text-muted);
   font-size: 14px;
 }
 
@@ -305,10 +313,10 @@
 }
 
 .deal-card {
-  background: #fff;
+  background: var(--color-bg-primary);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.3s ease;
 }
 
@@ -333,8 +341,8 @@
   position: absolute;
   top: 15px;
   left: 15px;
-  background: #ff3b30;
-  color: white;
+  background: var(--color-badge-new);
+  color: var(--color-text-light);
   padding: 5px 10px;
   font-size: 12px;
   border-radius: 20px;
@@ -348,47 +356,50 @@
   font-size: 18px;
   margin-bottom: 10px;
   font-weight: 400;
+  color: var(--color-text-primary);
 }
 
 .discount {
-  color: #ff3b30;
+  color: var(--color-error);
   font-weight: 600;
   margin-bottom: 10px;
   font-size: 16px;
 }
 
 .description {
-  color: #666;
+  color: var(--color-text-muted);
   margin-bottom: 15px;
   font-size: 14px;
 }
 
 .countdown-timer {
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 15px;
   font-size: 14px;
+  color: var(--color-text-primary);
 }
 
 .countdown-timer .time-unit {
   font-weight: 600;
-  color: #ff3b30;
+  color: var(--color-error);
 }
 
 .shop-now-btn {
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   padding: 10px 20px;
   width: 100%;
   cursor: pointer;
   font-size: 14px;
   transition: background 0.3s ease;
+  border-radius: var(--border-radius-md, 4px);
 }
 
 .shop-now-btn:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 /* Products Grid */
@@ -439,13 +450,13 @@
 }
 
 .discount-badge {
-  background: #ff3b30;
-  color: white;
+  background: var(--color-badge-new);
+  color: var(--color-text-light);
 }
 
 .stock-badge {
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
 }
 
 .quick-add {
@@ -453,9 +464,9 @@
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: #fff;
-  color: #000;
-  border: 1px solid #000;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-dark);
   padding: 10px 20px;
   font-size: 12px;
   cursor: pointer;
@@ -475,6 +486,7 @@
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 8px;
+  color: var(--color-text-primary);
 }
 
 .price {
@@ -487,11 +499,12 @@
 .current-price {
   font-weight: 600;
   font-size: 16px;
+  color: var(--color-text-primary);
 }
 
 .original-price {
   text-decoration: line-through;
-  color: #999;
+  color: var(--color-text-quaternary);
   font-size: 14px;
 }
 
@@ -502,13 +515,13 @@
 }
 
 .stars {
-  color: #ffc107;
+  color: var(--color-star);
   font-size: 12px;
 }
 
 .review-count {
   font-size: 12px;
-  color: #666;
+  color: var(--color-text-muted);
 }
 
 /* Limited Offers */
@@ -521,7 +534,7 @@
 
 /* Newsletter */
 .offers-newsletter {
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   padding: 60px 0;
   text-align: center;
   margin-top: 40px;
@@ -532,10 +545,11 @@
   font-weight: 400;
   margin-bottom: 15px;
   letter-spacing: 2px;
+  color: var(--color-text-primary);
 }
 
 .newsletter-content p {
-  color: #666;
+  color: var(--color-text-muted);
   margin-bottom: 30px;
   max-width: 500px;
   margin-left: auto;
@@ -551,14 +565,16 @@
 .newsletter-form input {
   flex: 1;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-primary);
   font-size: 14px;
   outline: none;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
 }
 
 .newsletter-form button {
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   padding: 0 30px;
   font-size: 14px;
@@ -573,12 +589,12 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   border: none;
   cursor: pointer;
   font-size: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
   z-index: 1000;
 }
 
@@ -608,7 +624,7 @@
     position: static;
     margin-bottom: 30px;
     border-right: none;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border-secondary);
   }
   
   .products-section {

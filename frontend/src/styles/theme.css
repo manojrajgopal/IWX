@@ -1,18 +1,7 @@
 /* Theme Variables */
-:root {
-  /* Colors */
-  --primary-color: #000000;
-  --secondary-color: #ffffff;
-  --accent-color: #6366F1;
-  --text-color: #333333;
-  --text-light: #666666;
-  --background-color: #ffffff;
-  --background-light: #f8f9fa;
-  --border-color: #e0e0e0;
-  --error-color: #e74c3c;
-  --success-color: #27ae60;
-  --warning-color: #f39c12;
+@import './colors.css';
 
+:root {
   /* Typography */
   --font-family-primary: 'Helvetica Neue', Arial, sans-serif;
   --font-family-secondary: 'Times New Roman', serif;
@@ -39,10 +28,10 @@
   --border-radius-xl: 16px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 1px 3px var(--color-shadow);
+  --shadow-md: 0 4px 6px var(--color-shadow);
+  --shadow-lg: 0 10px 15px var(--color-shadow);
+  --shadow-xl: 0 20px 25px var(--color-shadow);
 
   /* Transitions */
   --transition-fast: 0.15s ease;
@@ -57,17 +46,6 @@
   --z-modal: 1050;
   --z-popover: 1060;
   --z-tooltip: 1070;
-}
-
-/* Dark Theme (Optional) */
-[data-theme="dark"] {
-  --primary-color: #ffffff;
-  --secondary-color: #000000;
-  --text-color: #ffffff;
-  --text-light: #cccccc;
-  --background-color: #1a1a1a;
-  --background-light: #2a2a2a;
-  --border-color: #404040;
 }
 
 /* Button Styles */
@@ -86,33 +64,36 @@
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  border-color: var(--primary-color);
+  background-color: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
+  border-color: var(--color-btn-primary);
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
+  background-color: var(--color-btn-primary-hover);
+  border-color: var(--color-btn-primary-hover);
 }
 
 .btn-secondary {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  border-color: var(--border-color);
+  background-color: var(--color-btn-secondary);
+  color: var(--color-btn-text-secondary);
+  border-color: var(--color-border-primary);
 }
 
 .btn-secondary:hover {
-  background-color: var(--background-light);
+  background-color: var(--color-btn-secondary-hover);
+  border-color: var(--color-border-primary);
 }
 
 .btn-accent {
-  background-color: var(--accent-color);
-  color: white;
-  border-color: var(--accent-color);
+  background-color: var(--color-brand-primary);
+  color: var(--color-text-light);
+  border-color: var(--color-brand-primary);
 }
 
 .btn-accent:hover {
-  opacity: 0.9;
+  background-color: var(--color-brand-secondary);
+  border-color: var(--color-brand-secondary);
 }
 
 /* Form Styles */
@@ -124,25 +105,66 @@
   display: block;
   margin-bottom: var(--spacing-sm);
   font-weight: 500;
-  color: var(--text-color);
+  color: var(--color-text-primary);
 }
 
 .form-input {
   width: 100%;
   padding: var(--spacing-md);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-input-border);
   border-radius: var(--border-radius-md);
   font-size: var(--font-size-base);
   transition: border-color var(--transition-fast);
+  background-color: var(--color-bg-input);
+  color: var(--color-text-primary);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: var(--accent-color);
+  border-color: var(--color-input-focus);
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
+}
+
+.form-input.error {
+  border-color: var(--color-input-error);
 }
 
 .form-error {
-  color: var(--error-color);
+  color: var(--color-error);
   font-size: var(--font-size-sm);
   margin-top: var(--spacing-xs);
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--color-bg-card);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-border-primary);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-bg-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+}
+
+.modal-content {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
 }
