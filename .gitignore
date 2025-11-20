@@ -32,3 +32,5 @@ venv
 backend/alembic/
 backend/alembic.ini
 backend/utils/config.py
+
+secrets.txt
