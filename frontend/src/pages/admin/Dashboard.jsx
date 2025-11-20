@@ -36,6 +36,8 @@ const AdminDashboard = () => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [showSecurityDropdown, setShowSecurityDropdown] = useState(false);
+  const [securityScanResults, setSecurityScanResults] = useState(null);
   const [orderStatusFilter, setOrderStatusFilter] = useState('');
   const [paymentStatusFilter, setPaymentStatusFilter] = useState('');
   const [dateRangeFilter, setDateRangeFilter] = useState({ from: '', to: '' });
@@ -487,6 +489,7 @@ const AdminDashboard = () => {
         setShowWebsocketDropdown(false);
         setShowUserDropdown(false);
         setShowSearchDropdown(false);
+        setShowSecurityDropdown(false);
         return;
       }
 
@@ -502,11 +505,14 @@ const AdminDashboard = () => {
       if (showSearchDropdown && !event.target.closest('.admin-search')) {
         setShowSearchDropdown(false);
       }
+      if (showSecurityDropdown && !event.target.closest('.security-section')) {
+        setShowSecurityDropdown(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showNotificationDropdown, showWebsocketDropdown, showUserDropdown, showSearchDropdown]);
+  }, [showNotificationDropdown, showWebsocketDropdown, showUserDropdown, showSearchDropdown, showSecurityDropdown]);
 
   // No polling - rely on WebSocket for real-time updates
   // If WebSocket fails, use the initial data loaded on mount
@@ -1251,12 +1257,14 @@ const AdminDashboard = () => {
     try {
       setLoadingSecurity(true);
       const result = await adminAPI.runSecurityScan();
-      alert(`Security scan completed!\n\n${JSON.stringify(result.results, null, 2)}`);
+      setSecurityScanResults(result.results);
+      setShowSecurityDropdown(true);
       // Reload security data after scan
       await loadSecurityData();
     } catch (error) {
       console.error('Failed to run security scan:', error);
-      alert(`Failed to run security scan: ${error.response?.data?.detail || error.message}`);
+      setSecurityScanResults({ error: error.response?.data?.detail || error.message });
+      setShowSecurityDropdown(true);
     } finally {
       setLoadingSecurity(false);
     }
@@ -1644,7 +1652,7 @@ const AdminDashboard = () => {
   return (
     <div className="admin-dashboard">
       {/* Dropdown Backdrop Overlay */}
-      {(showNotificationDropdown || showWebsocketDropdown || showUserDropdown || showSearchDropdown) && (
+      {(showNotificationDropdown || showWebsocketDropdown || showUserDropdown || showSearchDropdown || showSecurityDropdown) && (
         <div className="dropdown-backdrop" />
       )}
 
@@ -4587,6 +4595,53 @@ const AdminDashboard = () => {
                 Connected Devices
               </button>
             </div>
+
+            {/* Security Scan Results Dropdown */}
+            {showSecurityDropdown && (
+              <div className="security-scan-dropdown">
+                <div className="security-scan-header">
+                  <h4>Security Scan Results</h4>
+                  <button
+                    className="close-dropdown-btn"
+                    onClick={() => setShowSecurityDropdown(false)}
+                  >
+                    ×
+                  </button>
+                </div>
+                <div className="security-scan-content">
+                  {securityScanResults && !securityScanResults.error ? (
+                    <div className="scan-results-grid">
+                      {Object.entries(securityScanResults).map(([key, value]) => (
+                        <div key={key} className="scan-result-item">
+                          <div className="scan-result-label">
+                            {key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}:
+                          </div>
+                          <div className={`scan-result-value ${typeof value === 'number' && value > 0 ? 'warning' : 'safe'}`}>
+                            {key === 'scan_timestamp' ? new Date(value).toLocaleString() : value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="scan-error">
+                      <div className="error-icon">⚠️</div>
+                      <p>{securityScanResults?.error || 'Security scan failed'}</p>
+                    </div>
+                  )}
+                  <div className="scan-actions">
+                    <button
+                      className="primary-btn"
+                      onClick={() => {
+                        setShowSecurityDropdown(false);
+                        setSecurityScanResults(null);
+                      }}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {securityTab === 'events' && (
               <div className="recent-activity">
