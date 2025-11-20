@@ -258,6 +258,12 @@
   cursor: not-allowed;
 }
 
+.submit-btn:focus,
+.submit-btn:active {
+  outline: none;
+  border: none;
+}
+
 .spinner {
   width: 20px;
   height: 20px;
@@ -343,6 +349,12 @@
   background: var(--color-info);
 }
 
+.social-btn:focus,
+.social-btn:active {
+  outline: none;
+  border: none;
+}
+
 .form-footer {
   text-align: center;
   margin-top: 30px;
@@ -365,6 +377,12 @@
 
 .toggle-form-btn:hover {
   opacity: 0.7;
+}
+
+.toggle-form-btn:focus,
+.toggle-form-btn:active {
+  outline: none;
+  border: none;
 }
 
 /* Additional Content */

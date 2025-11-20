@@ -27,6 +27,12 @@
   cursor: not-allowed;
 }
 
+.btn:focus,
+.btn:active {
+  outline: none;
+  border: none;
+}
+
 .btn.secondary {
   background: var(--color-btn-secondary);
   color: var(--color-btn-text-secondary);

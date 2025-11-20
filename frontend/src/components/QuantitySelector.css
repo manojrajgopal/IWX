@@ -29,6 +29,12 @@
   cursor: not-allowed;
 }
 
+.quantity-btn:focus,
+.quantity-btn:active {
+  outline: none;
+  border: none;
+}
+
 .quantity-value {
   font-weight: 500;
   min-width: 20px;

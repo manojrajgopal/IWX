@@ -60,6 +60,12 @@
   color: var(--color-text-dark);
 }
 
+.close-btn:focus,
+.close-btn:active {
+  outline: none;
+  border: none;
+}
+
 .step-indicator {
   display: flex;
   justify-content: center;
@@ -215,6 +221,12 @@
   color: var(--color-text-primary);
 }
 
+.upload-btn:focus,
+.upload-btn:active {
+  outline: none;
+  border: none;
+}
+
 .upload-info {
   font-size: 14px;
   color: var(--color-text-secondary);
@@ -326,6 +338,14 @@
 .secondary-btn:hover {
   background: var(--color-btn-secondary-hover);
   border-color: var(--color-border-light);
+}
+
+.primary-btn:focus,
+.primary-btn:active,
+.secondary-btn:focus,
+.secondary-btn:active {
+  outline: none;
+  border: none;
 }
 
 @media (max-width: 768px) {

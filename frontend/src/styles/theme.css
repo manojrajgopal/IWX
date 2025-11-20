@@ -63,6 +63,12 @@
   transition: all var(--transition-normal);
 }
 
+.btn:focus,
+.btn:active {
+  outline: none;
+  border: none;
+}
+
 .btn-primary {
   background-color: var(--color-btn-primary);
   color: var(--color-btn-text-primary);

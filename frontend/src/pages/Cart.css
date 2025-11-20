@@ -433,6 +433,12 @@
   cursor: not-allowed;
 }
 
+.checkout-btn:focus,
+.checkout-btn:active {
+  outline: none;
+  border: none;
+}
+
 .security-notice {
   display: flex;
   align-items: center;

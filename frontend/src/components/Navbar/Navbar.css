@@ -184,6 +184,12 @@
   opacity: 0.7;
 }
 
+.search-btn:focus,
+.search-btn:active {
+  outline: none;
+  border: none;
+}
+
 .search-box {
   position: absolute;
   left: 0;
@@ -221,6 +227,12 @@
 
 .user-btn:hover, .cart-btn:hover {
   opacity: 0.7;
+}
+
+.user-btn:focus, .user-btn:active,
+.cart-btn:focus, .cart-btn:active {
+  outline: none;
+  border: none;
 }
 
 .cart-count {
@@ -296,6 +308,12 @@
   opacity: 0.7;
 }
 
+.close-menu-btn:focus,
+.close-menu-btn:active {
+  outline: none;
+  border: none;
+}
+
 .mobile-menu.open {
   display: block;
 }
@@ -362,6 +380,12 @@
 
 .mobile-action-btn:hover {
   opacity: 0.7;
+}
+
+.mobile-action-btn:focus,
+.mobile-action-btn:active {
+  outline: none;
+  border: none;
 }
 
 .mobile-action-btn svg {
