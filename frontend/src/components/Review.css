@@ -1,6 +1,8 @@
+@import '../styles/colors.css';
+
 .review {
   padding: 20px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-secondary);
 }
 
 .review-header {
@@ -29,12 +31,12 @@
 }
 
 .review-date {
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 
 .review p {
   margin: 0;
   line-height: 1.5;
-  color: #555;
+  color: var(--color-text-tertiary);
 }

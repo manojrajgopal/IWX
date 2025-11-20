@@ -1,10 +1,12 @@
+@import '../styles/colors.css';
+
 .faq-accordion {
   max-width: 800px;
   margin: 0 auto;
 }
 
 .faq-item {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-secondary);
 }
 
 .faq-question {
@@ -16,7 +18,7 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
-  color: #000;
+  color: var(--color-text-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,17 +26,17 @@
 }
 
 .faq-question:hover {
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .faq-question.active {
-  color: #000;
+  color: var(--color-text-primary);
 }
 
 .faq-question span {
   font-size: 20px;
   font-weight: bold;
-  color: #666;
+  color: var(--color-text-secondary);
   transition: transform 0.3s ease;
 }
 
@@ -56,7 +58,7 @@
   padding: 0 0 20px 0;
   margin: 0;
   line-height: 1.6;
-  color: #555;
+  color: var(--color-text-tertiary);
 }
 
 @media (max-width: 768px) {

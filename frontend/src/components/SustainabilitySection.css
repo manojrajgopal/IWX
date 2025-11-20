@@ -1,3 +1,5 @@
+@import '../styles/colors.css';
+
 .sustainability {
   margin-bottom: 60px;
 }
@@ -10,14 +12,14 @@
   font-size: 28px;
   font-weight: 400;
   margin-bottom: 20px;
-  color: #000;
+  color: var(--color-text-primary);
 }
 
 .sustainability-content > p {
   max-width: 700px;
   margin: 0 auto 40px;
   line-height: 1.6;
-  color: #555;
+  color: var(--color-text-tertiary);
 }
 
 .sustainability-stats {
@@ -35,13 +37,13 @@
   font-size: 32px;
   font-weight: 300;
   margin-bottom: 5px;
-  color: #000;
+  color: var(--color-text-primary);
 }
 
 .sust-stat p {
   font-size: 14px;
   margin: 0;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .sustainability-features {
@@ -54,14 +56,14 @@
 .sustainability-item {
   text-align: center;
   padding: 30px;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-border-secondary);
   border-radius: 8px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .sustainability-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px var(--color-shadow);
 }
 
 .sustainability-item .icon {
@@ -73,19 +75,19 @@
   font-size: 18px;
   margin-bottom: 15px;
   font-weight: 500;
-  color: #000;
+  color: var(--color-text-primary);
 }
 
 .sustainability-item p {
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 1.6;
 }
 
 .cta-button {
   padding: 15px 30px;
-  background: #000;
-  color: #fff;
-  border: 1px solid #000;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
+  border: 1px solid var(--color-btn-primary);
   border-radius: 4px;
   font-size: 16px;
   font-weight: 500;
@@ -94,7 +96,7 @@
 }
 
 .cta-button:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 @media (max-width: 1024px) {

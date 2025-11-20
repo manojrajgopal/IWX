@@ -1,3 +1,5 @@
+@import '../styles/colors.css';
+
 .notification {
   position: fixed;
   top: 100px;
@@ -5,7 +7,7 @@
   padding: 15px 25px;
   border-radius: 4px;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--color-shadow);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,23 +17,23 @@
 }
 
 .notification.success {
-  background: #4caf50;
-  color: white;
+  background: var(--color-notification-success);
+  color: var(--color-text-light);
 }
 
 .notification.error {
-  background: #f44336;
-  color: white;
+  background: var(--color-notification-error);
+  color: var(--color-text-light);
 }
 
 .notification.warning {
-  background: #ff9800;
-  color: white;
+  background: var(--color-notification-warning);
+  color: var(--color-text-light);
 }
 
 .notification.info {
-  background: #2196f3;
-  color: white;
+  background: var(--color-notification-info);
+  color: var(--color-text-light);
 }
 
 .notification p {

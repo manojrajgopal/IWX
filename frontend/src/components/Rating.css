@@ -1,3 +1,5 @@
+@import '../styles/colors.css';
+
 .rating {
   display: flex;
   align-items: center;
@@ -5,13 +7,13 @@
 }
 
 .star {
-  color: #ddd;
+  color: var(--color-star-empty);
   font-size: 14px;
   transition: color 0.3s ease;
 }
 
 .star.filled {
-  color: #ffc107;
+  color: var(--color-star);
 }
 
 .star.small {
@@ -23,11 +25,11 @@
 }
 
 .star:hover {
-  color: #ffc107;
+  color: var(--color-star);
 }
 
 .rating-value {
   margin-left: 5px;
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
 }

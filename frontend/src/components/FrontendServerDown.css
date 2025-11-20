@@ -1,19 +1,20 @@
-/* FrontendServerDown.css */
+@import '../styles/colors.css';
+
 .error-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   padding: 20px;
 }
 
 .error-container {
   text-align: center;
-  background: white;
+  background: var(--color-bg-primary);
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 10px var(--color-shadow-light);
   max-width: 600px;
   width: 100%;
 }
@@ -29,7 +30,7 @@
   font-size: 48px;
   font-weight: 300;
   margin-bottom: 10px;
-  color: #000;
+  color: var(--color-text-primary);
   letter-spacing: 2px;
 }
 
@@ -37,23 +38,22 @@
   font-size: 24px;
   font-weight: 400;
   margin-bottom: 15px;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .error-message {
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 25px;
   line-height: 1.6;
 }
 
-/* Browser Compatibility */
 .browser-compatibility {
   margin-bottom: 25px;
 }
 
 .compatibility-title {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 12px;
   font-weight: 500;
 }
@@ -70,17 +70,16 @@
   align-items: center;
   gap: 6px;
   padding: 8px 12px;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   border-radius: 6px;
   font-size: 12px;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .browser-icon {
   font-size: 14px;
 }
 
-/* Error Details */
 .error-details {
   margin-bottom: 25px;
   text-align: left;
@@ -90,11 +89,11 @@
   cursor: pointer;
   margin-bottom: 10px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .details-content {
-  background: #f5f5f5;
+  background: var(--color-bg-tertiary);
   padding: 15px;
   border-radius: 4px;
   overflow-x: auto;
@@ -108,7 +107,7 @@
 .detail-section h4 {
   font-size: 14px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-dark);
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -126,27 +125,27 @@
   justify-content: space-between;
   align-items: center;
   padding: 6px 10px;
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 4px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-border-medium);
 }
 
 .detail-label {
   font-size: 11px;
-  color: #666;
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
 .detail-value {
   font-size: 11px;
-  color: #333;
+  color: var(--color-text-dark);
   font-weight: 600;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
 }
 
 .suggestions-list {
   font-size: 12px;
-  color: #333;
+  color: var(--color-text-dark);
   padding-left: 20px;
   margin: 0;
 }
@@ -157,8 +156,8 @@
 }
 
 .debug-code {
-  background: #1f2937;
-  color: #9c9c9c;
+  background: var(--color-gray-900);
+  color: var(--color-gray-500);
   padding: 12px;
   border-radius: 4px;
   font-size: 11px;
@@ -168,15 +167,14 @@
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
 }
 
-/* Support Section */
 .support-section {
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--color-border-medium);
   padding-top: 20px;
   margin-bottom: 20px;
 }
 
 .support-section p {
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 14px;
   margin-bottom: 15px;
 }
@@ -188,7 +186,7 @@
 }
 
 .support-link {
-  color: #3b82f6;
+  color: var(--color-link);
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -196,11 +194,10 @@
 }
 
 .support-link:hover {
-  color: #1d4ed8;
+  color: var(--color-link-hover);
   text-decoration: underline;
 }
 
-/* Action Buttons */
 .error-actions {
   display: flex;
   gap: 15px;
@@ -211,9 +208,9 @@
 
 .btn-primary, .btn-secondary {
   padding: 12px 24px;
-  border: 1px solid #000;
-  background: #000;
-  color: white;
+  border: 1px solid var(--color-btn-primary);
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   cursor: pointer;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -222,19 +219,18 @@
 }
 
 .btn-secondary {
-  background: white;
-  color: #000;
+  background: var(--color-btn-secondary);
+  color: var(--color-btn-text-secondary);
 }
 
 .btn-primary:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 .btn-secondary:hover {
-  background: #f8f8f8;
+  background: var(--color-btn-secondary-hover);
 }
 
-/* Browser Crash Animation */
 .browser-crash-animation {
   position: relative;
   width: 100%;
@@ -246,20 +242,20 @@
 
 .browser-window {
   width: 120px;
-  background: #f0f0f0;
+  background: var(--color-gray-100);
   border-radius: 8px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--color-border-gray);
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--color-shadow);
 }
 
 .browser-header {
-  background: #e0e0e0;
+  background: var(--color-gray-200);
   padding: 6px 8px;
   display: flex;
   align-items: center;
   gap: 6px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--color-border-gray);
 }
 
 .browser-controls {
@@ -273,13 +269,13 @@
   border-radius: 50%;
 }
 
-.control.red { background: #ff5f57; }
-.control.yellow { background: #ffbd2e; }
-.control.green { background: #28ca42; }
+.control.red { background: var(--color-error); }
+.control.yellow { background: var(--color-warning); }
+.control.green { background: var(--color-success); }
 
 .browser-url {
   flex: 1;
-  background: white;
+  background: var(--color-bg-primary);
   height: 6px;
   border-radius: 3px;
   font-size: 0;
@@ -287,7 +283,7 @@
 
 .browser-content {
   height: 80px;
-  background: white;
+  background: var(--color-bg-primary);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -301,7 +297,7 @@
   top: 0;
   left: 0;
   height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  background: var(--color-brand-gradient);
   border-radius: 0 2px 2px 0;
 }
 
@@ -320,7 +316,7 @@
 
 .glitch-line {
   height: 3px;
-  background: #e0e0e0;
+  background: var(--color-gray-200);
   border-radius: 2px;
 }
 
@@ -350,24 +346,23 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff4444;
+  background: var(--color-error);
 }
 
 .status-light.active {
-  background: #4CAF50;
-  box-shadow: 0 0 4px #4CAF50;
+  background: var(--color-success);
+  box-shadow: 0 0 4px var(--color-success);
 }
 
 .error-particle {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: #ff4444;
+  background: var(--color-error);
   border-radius: 50%;
   pointer-events: none;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .error-container {
     padding: 30px 20px;

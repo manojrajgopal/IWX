@@ -1,3 +1,5 @@
+@import '../styles/colors.css';
+
 .add-product-modal {
   position: fixed;
   top: 0;
@@ -8,7 +10,7 @@
 }
 
 .modal-overlay {
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-bg-modal);
   width: 100%;
   height: 100%;
   display: flex;
@@ -18,13 +20,13 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 12px;
   width: 100%;
   max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--color-shadow-dark);
 }
 
 .modal-header {
@@ -32,14 +34,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-border-primary);
 }
 
 .modal-header h2 {
   margin: 0;
   font-size: 24px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .close-btn {
@@ -47,23 +49,23 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #666;
+  color: var(--color-text-secondary);
   padding: 4px;
   border-radius: 4px;
   transition: all 0.2s;
 }
 
 .close-btn:hover {
-  background: #f5f5f5;
-  color: #333;
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-dark);
 }
 
 .step-indicator {
   display: flex;
   justify-content: center;
   padding: 24px;
-  background: #f8f9fa;
-  border-bottom: 1px solid #e0e0e0;
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border-primary);
 }
 
 .step {
@@ -100,25 +102,25 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #e0e0e0;
+  background: var(--color-border-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 8px;
   transition: all 0.3s;
 }
 
 .step.active .step-number {
-  background: #000000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
 }
 
 .step-label {
   font-size: 14px;
   font-weight: 500;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .form-step {
@@ -140,7 +142,7 @@
   display: block;
   margin-bottom: 6px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .form-group input,
@@ -148,18 +150,20 @@
 .form-group textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-primary);
   border-radius: 6px;
   font-size: 14px;
   transition: border-color 0.2s;
+  background: var(--color-bg-input);
+  color: var(--color-text-primary);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #000000;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-input-focus);
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
 }
 
 .form-group textarea {
@@ -176,13 +180,13 @@
 .dimensions-input input {
   flex: 1;
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-primary);
   border-radius: 4px;
   text-align: center;
 }
 
 .dimensions-input span {
-  color: #666;
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
@@ -194,26 +198,26 @@
 }
 
 .upload-btn {
-  background: #f5f5f5;
-  border: 2px dashed #ddd;
+  background: var(--color-bg-tertiary);
+  border: 2px dashed var(--color-border-primary);
   border-radius: 8px;
   padding: 12px 24px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  color: #666;
+  color: var(--color-text-secondary);
   transition: all 0.2s;
 }
 
 .upload-btn:hover {
-  background: #f0f0f0;
-  border-color: #000000;
-  color: #000000;
+  background: var(--color-bg-secondary);
+  border-color: var(--color-input-focus);
+  color: var(--color-text-primary);
 }
 
 .upload-info {
   font-size: 14px;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .media-preview {
@@ -227,7 +231,7 @@
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  background: #f5f5f5;
+  background: var(--color-bg-tertiary);
 }
 
 .media-item img,
@@ -242,8 +246,8 @@
   position: absolute;
   top: 4px;
   right: 4px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
+  background: var(--color-overlay-light);
+  color: var(--color-text-light);
   border: none;
   border-radius: 50%;
   width: 24px;
@@ -257,35 +261,35 @@
 }
 
 .remove-media:hover {
-  background: rgba(0, 0, 0, 0.9);
+  background: var(--color-overlay-card);
 }
 
 .error {
-  border-color: #f44336 !important;
+  border-color: var(--color-error) !important;
 }
 
 .error-text {
-  color: #f44336;
+  color: var(--color-error);
   font-size: 12px;
   margin-top: 4px;
   display: block;
 }
 
 .error-message {
-  background: #ffebee;
-  color: #c62828;
+  background: var(--color-error-bg);
+  color: var(--color-error-text);
   padding: 12px;
   border-radius: 6px;
   margin-bottom: 16px;
-  border-left: 4px solid #f44336;
+  border-left: 4px solid var(--color-error);
 }
 
 .form-actions {
   display: flex;
   justify-content: space-between;
   padding: 24px;
-  border-top: 1px solid #e0e0e0;
-  background: #f8f9fa;
+  border-top: 1px solid var(--color-border-primary);
+  background: var(--color-bg-secondary);
 }
 
 .primary-btn,
@@ -300,31 +304,30 @@
 }
 
 .primary-btn {
-  background: #000000;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
 }
 
 .primary-btn:hover:not(:disabled) {
-  background: #333333;
+  background: var(--color-btn-primary-hover);
 }
 
 .primary-btn:disabled {
-  background: #ccc;
+  background: var(--color-disabled);
   cursor: not-allowed;
 }
 
 .secondary-btn {
-  background: white;
-  color: #666;
-  border: 1px solid #ddd;
+  background: var(--color-btn-secondary);
+  color: var(--color-btn-text-secondary);
+  border: 1px solid var(--color-border-primary);
 }
 
 .secondary-btn:hover {
-  background: #f5f5f5;
-  border-color: #bbb;
+  background: var(--color-btn-secondary-hover);
+  border-color: var(--color-border-light);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .modal-content {
     margin: 10px;

@@ -1,19 +1,20 @@
-/* BackendServerDown.css */
+@import '../styles/colors.css';
+
 .error-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   padding: 20px;
 }
 
 .error-container {
   text-align: center;
-  background: white;
+  background: var(--color-bg-primary);
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 10px var(--color-shadow-light);
   max-width: 600px;
   width: 100%;
 }
@@ -29,7 +30,7 @@
   font-size: 48px;
   font-weight: 300;
   margin-bottom: 10px;
-  color: #000;
+  color: var(--color-text-primary);
   letter-spacing: 2px;
 }
 
@@ -37,16 +38,15 @@
   font-size: 24px;
   font-weight: 400;
   margin-bottom: 15px;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .error-message {
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 25px;
   line-height: 1.6;
 }
 
-/* Service Status */
 .service-status {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -60,10 +60,10 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: #f8f8f8;
+  background: var(--color-bg-secondary);
   border-radius: 6px;
   font-size: 14px;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .status-dot {
@@ -73,16 +73,15 @@
 }
 
 .status-dot.online {
-  background: #4CAF50;
-  box-shadow: 0 0 6px #4CAF50;
+  background: var(--color-success);
+  box-shadow: 0 0 6px var(--color-success);
 }
 
 .status-dot.offline {
-  background: #ff4444;
-  box-shadow: 0 0 6px #ff4444;
+  background: var(--color-error);
+  box-shadow: 0 0 6px var(--color-error);
 }
 
-/* Error Details */
 .error-details {
   margin-bottom: 25px;
   text-align: left;
@@ -92,11 +91,11 @@
   cursor: pointer;
   margin-bottom: 10px;
   font-weight: 500;
-  color: #333;
+  color: var(--color-text-dark);
 }
 
 .details-content {
-  background: #f5f5f5;
+  background: var(--color-bg-tertiary);
   padding: 15px;
   border-radius: 4px;
   overflow-x: auto;
@@ -110,7 +109,7 @@
 .detail-section h4 {
   font-size: 14px;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-dark);
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -128,27 +127,27 @@
   justify-content: space-between;
   align-items: center;
   padding: 6px 10px;
-  background: white;
+  background: var(--color-bg-primary);
   border-radius: 4px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-border-medium);
 }
 
 .detail-label {
   font-size: 11px;
-  color: #666;
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
 .detail-value {
   font-size: 11px;
-  color: #333;
+  color: var(--color-text-dark);
   font-weight: 600;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
 }
 
 .suggestions-list {
   font-size: 12px;
-  color: #333;
+  color: var(--color-text-dark);
   padding-left: 20px;
   margin: 0;
 }
@@ -159,8 +158,8 @@
 }
 
 .debug-code {
-  background: #1f2937;
-  color: #9c9c9c;
+  background: var(--color-gray-900);
+  color: var(--color-gray-500);
   padding: 12px;
   border-radius: 4px;
   font-size: 11px;
@@ -170,15 +169,14 @@
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
 }
 
-/* Support Section */
 .support-section {
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--color-border-medium);
   padding-top: 20px;
   margin-bottom: 20px;
 }
 
 .support-section p {
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 14px;
   margin-bottom: 15px;
 }
@@ -190,7 +188,7 @@
 }
 
 .support-link {
-  color: #3b82f6;
+  color: var(--color-link);
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -198,16 +196,15 @@
 }
 
 .support-link:hover {
-  color: #1d4ed8;
+  color: var(--color-link-hover);
   text-decoration: underline;
 }
 
-/* Recovery Estimate */
 .recovery-estimate {
-  background: linear-gradient(135deg, #fef3c7, #fef3c7);
+  background: linear-gradient(135deg, var(--color-warning-bg-light), var(--color-warning-bg-light));
   border-radius: 6px;
   padding: 12px;
-  border: 1px solid #f59e0b;
+  border: 1px solid var(--color-warning);
 }
 
 .estimate-content {
@@ -224,18 +221,17 @@
 .estimate-label {
   display: block;
   font-size: 11px;
-  color: #92400e;
+  color: var(--color-warning-text);
   font-weight: 500;
 }
 
 .estimate-time {
   display: block;
   font-size: 13px;
-  color: #92400e;
+  color: var(--color-warning-text);
   font-weight: 700;
 }
 
-/* Action Buttons */
 .error-actions {
   display: flex;
   gap: 15px;
@@ -246,9 +242,9 @@
 
 .btn-primary, .btn-secondary {
   padding: 12px 24px;
-  border: 1px solid #000;
-  background: #000;
-  color: white;
+  border: 1px solid var(--color-btn-primary);
+  background: var(--color-btn-primary);
+  color: var(--color-btn-text-primary);
   cursor: pointer;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -257,19 +253,18 @@
 }
 
 .btn-secondary {
-  background: white;
-  color: #000;
+  background: var(--color-btn-secondary);
+  color: var(--color-btn-text-secondary);
 }
 
 .btn-primary:hover {
-  background: #333;
+  background: var(--color-btn-primary-hover);
 }
 
 .btn-secondary:hover {
-  background: #f8f8f8;
+  background: var(--color-btn-secondary-hover);
 }
 
-/* Server Animation */
 .server-animation {
   position: relative;
   width: 100%;
@@ -281,9 +276,9 @@
   width: 120px;
   height: 80px;
   margin: 0 auto;
-  background: #f0f0f0;
+  background: var(--color-gray-100);
   border-radius: 4px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--color-border-gray);
 }
 
 .server-unit {
@@ -297,13 +292,13 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ff4444;
+  background: var(--color-error);
   transition: all 0.3s ease;
 }
 
 .server-light.active {
-  background: #4CAF50;
-  box-shadow: 0 0 10px #4CAF50;
+  background: var(--color-success);
+  box-shadow: 0 0 10px var(--color-success);
 }
 
 .repair-tool {
@@ -325,11 +320,10 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  background: #ffeb3b;
+  background: var(--color-warning-light);
   border-radius: 50%;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .error-container {
     padding: 30px 20px;
