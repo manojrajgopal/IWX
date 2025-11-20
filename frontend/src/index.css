@@ -54,8 +54,13 @@ button {
   transition: border-color 0.25s, background-color 0.25s;
 }
 
+button:focus,
+button:active {
+  outline: none !important;
+  border: none !important;
+}
+
 button:hover {
-  border-color: var(--color-link);
   background-color: var(--color-button-hover);
 }
 

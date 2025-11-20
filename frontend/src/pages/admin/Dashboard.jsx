@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { adminAPI } from '../../api/adminAPI';
+import { notificationAPI } from '../../api/notificationAPI';
 import websocketService from '../../services/websocket';
 import './Dashboard.css';
 import { ChangePassword } from '../../components/Profile/SecurityComponents'; // Adjust path as needed
@@ -27,6 +28,14 @@ const AdminDashboard = () => {
   const [isAddProductOpen, setIsAddProductOpen] = useState(false);
   const [websocketConnected, setWebsocketConnected] = useState(false);
   const websocketConnectedRef = useRef(false);
+  const [notifications, setNotifications] = useState([]);
+  const [notificationCount, setNotificationCount] = useState(0);
+  const [showNotificationDropdown, setShowNotificationDropdown] = useState(false);
+  const [loadingNotifications, setLoadingNotifications] = useState(false);
+  const [showWebsocketDropdown, setShowWebsocketDropdown] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
   const [orderStatusFilter, setOrderStatusFilter] = useState('');
   const [paymentStatusFilter, setPaymentStatusFilter] = useState('');
   const [dateRangeFilter, setDateRangeFilter] = useState({ from: '', to: '' });
@@ -122,6 +131,165 @@ const AdminDashboard = () => {
   const handleLogout = () => {
    dispatch(logout());
    };
+
+  const handleNotificationClick = () => {
+    setShowNotificationDropdown(!showNotificationDropdown);
+  };
+
+  const handleWebsocketClick = () => {
+    setShowWebsocketDropdown(!showWebsocketDropdown);
+  };
+
+  const handleUserClick = () => {
+    setShowUserDropdown(!showUserDropdown);
+  };
+
+  // Search functionality
+  const searchIndex = [
+    // Dashboard
+    { id: 'dashboard', name: 'Dashboard Overview', path: 'Dashboard', section: 'dashboard', type: 'section' },
+    { id: 'total-sales', name: 'Total Sales', path: 'Dashboard > Metrics', section: 'dashboard', type: 'metric' },
+    { id: 'total-orders', name: 'Total Orders', path: 'Dashboard > Metrics', section: 'dashboard', type: 'metric' },
+    { id: 'total-customers', name: 'Total Customers', path: 'Dashboard > Metrics', section: 'dashboard', type: 'metric' },
+    { id: 'conversion-rate', name: 'Conversion Rate', path: 'Dashboard > Metrics', section: 'dashboard', type: 'metric' },
+    { id: 'sales-chart', name: 'Sales Overview Chart', path: 'Dashboard > Charts', section: 'dashboard', type: 'chart' },
+    { id: 'revenue-chart', name: 'Revenue vs Orders Chart', path: 'Dashboard > Charts', section: 'dashboard', type: 'chart' },
+    { id: 'recent-orders', name: 'Recent Orders', path: 'Dashboard > Activity', section: 'dashboard', type: 'activity' },
+    { id: 'top-products', name: 'Top Products', path: 'Dashboard > Activity', section: 'dashboard', type: 'activity' },
+
+    // Products
+    { id: 'products', name: 'Product Management', path: 'Products', section: 'products', type: 'section' },
+    { id: 'add-product', name: 'Add New Product', path: 'Products > Actions', section: 'products', type: 'action' },
+    { id: 'product-filters', name: 'Product Filters', path: 'Products > Filters', section: 'products', type: 'filter' },
+    { id: 'bulk-product-actions', name: 'Bulk Product Actions', path: 'Products > Actions', section: 'products', type: 'action' },
+
+    // Orders
+    { id: 'orders', name: 'Order Management', path: 'Orders', section: 'orders', type: 'section' },
+    { id: 'order-stats', name: 'Order Statistics', path: 'Orders > Stats', section: 'orders', type: 'stats' },
+    { id: 'order-filters', name: 'Order Filters', path: 'Orders > Filters', section: 'orders', type: 'filter' },
+    { id: 'new-order', name: 'Create New Order', path: 'Orders > Actions', section: 'orders', type: 'action' },
+    { id: 'bulk-order-actions', name: 'Bulk Order Actions', path: 'Orders > Actions', section: 'orders', type: 'action' },
+    { id: 'export-orders', name: 'Export Orders', path: 'Orders > Actions', section: 'orders', type: 'action' },
+
+    // Customers
+    { id: 'customers', name: 'Customer Management', path: 'Customers', section: 'customers', type: 'section' },
+    { id: 'add-customer', name: 'Add New Customer', path: 'Customers > Actions', section: 'customers', type: 'action' },
+    { id: 'customer-stats', name: 'Customer Statistics', path: 'Customers > Stats', section: 'customers', type: 'stats' },
+
+    // Analytics
+    { id: 'analytics', name: 'Advanced Analytics', path: 'Analytics', section: 'analytics', type: 'section' },
+    { id: 'user-engagement', name: 'User Engagement Chart', path: 'Analytics > Charts', section: 'analytics', type: 'chart' },
+    { id: 'conversion-funnel', name: 'Conversion Funnel', path: 'Analytics > Charts', section: 'analytics', type: 'chart' },
+
+    // Marketing
+    { id: 'marketing', name: 'Marketing Campaigns', path: 'Marketing', section: 'marketing', type: 'section' },
+    { id: 'new-campaign', name: 'New Campaign', path: 'Marketing > Actions', section: 'marketing', type: 'action' },
+    { id: 'campaign-performance', name: 'Campaign Performance', path: 'Marketing > Charts', section: 'marketing', type: 'chart' },
+    { id: 'roi', name: 'Return on Investment', path: 'Marketing > Stats', section: 'marketing', type: 'metric' },
+    { id: 'click-rate', name: 'Click Rate', path: 'Marketing > Stats', section: 'marketing', type: 'metric' },
+
+    // Inventory
+    { id: 'inventory', name: 'Inventory Management', path: 'Inventory', section: 'inventory', type: 'section' },
+    { id: 'stock-alerts', name: 'Stock Alerts', path: 'Inventory > Alerts', section: 'inventory', type: 'alert' },
+    { id: 'inventory-items', name: 'Inventory Items', path: 'Inventory > Items', section: 'inventory', type: 'item' },
+
+    // Users
+    { id: 'users', name: 'User Management', path: 'Users', section: 'users', type: 'section' },
+    { id: 'add-user', name: 'Add New User', path: 'Users > Actions', section: 'users', type: 'action' },
+
+    // Finance
+    { id: 'finance', name: 'Financial Overview', path: 'Finance', section: 'finance', type: 'section' },
+    { id: 'revenue-trend', name: 'Revenue Trend Chart', path: 'Finance > Charts', section: 'finance', type: 'chart' },
+    { id: 'expense-breakdown', name: 'Expense Breakdown', path: 'Finance > Charts', section: 'finance', type: 'chart' },
+    { id: 'download-report', name: 'Download Financial Report', path: 'Finance > Actions', section: 'finance', type: 'action' },
+
+    // Reports
+    { id: 'reports', name: 'Reports & Analytics', path: 'Reports', section: 'reports', type: 'section' },
+    { id: 'generate-report', name: 'Generate New Report', path: 'Reports > Actions', section: 'reports', type: 'action' },
+    { id: 'sales-report', name: 'Sales Report', path: 'Reports > Reports', section: 'reports', type: 'report' },
+    { id: 'customer-insights', name: 'Customer Insights', path: 'Reports > Reports', section: 'reports', type: 'report' },
+    { id: 'financial-summary', name: 'Financial Summary', path: 'Reports > Reports', section: 'reports', type: 'report' },
+    { id: 'inventory-report', name: 'Inventory Report', path: 'Reports > Reports', section: 'reports', type: 'report' },
+
+    // Notifications
+    { id: 'notifications', name: 'Notifications Center', path: 'Notifications', section: 'notifications', type: 'section' },
+    { id: 'mark-all-read', name: 'Mark All as Read', path: 'Notifications > Actions', section: 'notifications', type: 'action' },
+
+    // Security
+    { id: 'security', name: 'Security Center', path: 'Security', section: 'security', type: 'section' },
+    { id: 'run-security-scan', name: 'Run Security Scan', path: 'Security > Actions', section: 'security', type: 'action' },
+    { id: 'security-events', name: 'Security Events', path: 'Security > Events', section: 'security', type: 'event' },
+    { id: 'login-history', name: 'Login History', path: 'Security > History', section: 'security', type: 'history' },
+    { id: 'connected-devices', name: 'Connected Devices', path: 'Security > Devices', section: 'security', type: 'device' },
+
+    // Settings
+    { id: 'settings', name: 'System Settings', path: 'Settings', section: 'settings', type: 'section' },
+    { id: 'email-notifications', name: 'Email Notifications', path: 'Settings > Preferences', section: 'settings', type: 'setting' },
+    { id: 'sms-alerts', name: 'SMS Alerts', path: 'Settings > Preferences', section: 'settings', type: 'setting' },
+    { id: 'auto-backup', name: 'Auto Backup', path: 'Settings > Preferences', section: 'settings', type: 'setting' },
+    { id: 'two-factor-auth', name: 'Two-Factor Authentication', path: 'Settings > Security', section: 'settings', type: 'setting' },
+    { id: 'dark-mode', name: 'Dark Mode', path: 'Settings > Appearance', section: 'settings', type: 'setting' },
+    { id: 'change-password', name: 'Change Password', path: 'Settings > Security', section: 'settings', type: 'action' },
+
+    // Other sections
+    { id: 'integrations', name: 'API Integrations', path: 'Integrations', section: 'integrations', type: 'section' },
+    { id: 'backups', name: 'Data Backups', path: 'Backups', section: 'backups', type: 'section' },
+    { id: 'logs', name: 'System Logs', path: 'Logs', section: 'logs', type: 'section' },
+    { id: 'help', name: 'Help & Support', path: 'Help', section: 'help', type: 'section' }
+  ];
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    setSearchQuery(query);
+
+    if (query.length > 0) {
+      const results = searchIndex.filter(item =>
+        item.name.toLowerCase().includes(query) ||
+        item.path.toLowerCase().includes(query) ||
+        item.type.toLowerCase().includes(query)
+      ).slice(0, 8); // Limit to 8 results
+      setSearchResults(results);
+      setShowSearchDropdown(true);
+    } else {
+      setSearchResults([]);
+      setShowSearchDropdown(false);
+    }
+  };
+
+  const handleSearchResultClick = (result) => {
+    handleSectionChange(result.section);
+    setSearchQuery('');
+    setShowSearchDropdown(false);
+    setSearchResults([]);
+  };
+
+  const handleMarkAsRead = async (notificationId) => {
+    try {
+      await notificationAPI.markAsRead(notificationId);
+      setNotifications(prev =>
+        prev.map(notif =>
+          notif.id === notificationId
+            ? { ...notif, status: 'read', read_at: new Date().toISOString() }
+            : notif
+        )
+      );
+      setNotificationCount(prev => Math.max(0, prev - 1));
+    } catch (error) {
+      console.error('Failed to mark notification as read:', error);
+    }
+  };
+
+  const handleMarkAllAsRead = async () => {
+    try {
+      await notificationAPI.markAllAsRead();
+      setNotifications(prev =>
+        prev.map(notif => ({ ...notif, status: 'read', read_at: new Date().toISOString() }))
+      );
+      setNotificationCount(0);
+    } catch (error) {
+      console.error('Failed to mark all notifications as read:', error);
+    }
+  };
 
   const handleSectionChange = async (sectionId) => {
     setActiveSection(sectionId);
@@ -292,6 +460,7 @@ const AdminDashboard = () => {
     loadTopProductsData();
     loadRecentOrdersData();
     loadRevenueTrendData();
+    loadNotifications();
   }, [user]); // Load data only once on mount
 
   // Load products data when section changes to products
@@ -308,6 +477,36 @@ const AdminDashboard = () => {
       loadOrderStats();
     }
   }, [activeSection, orderFilters, selectedOrderSort, orderPage, orderSearchQuery]);
+
+  // Click outside handler for notification dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Close dropdowns when clicking on backdrop or outside
+      if (event.target.classList.contains('dropdown-backdrop')) {
+        setShowNotificationDropdown(false);
+        setShowWebsocketDropdown(false);
+        setShowUserDropdown(false);
+        setShowSearchDropdown(false);
+        return;
+      }
+
+      if (showNotificationDropdown && !event.target.closest('.admin-notifications')) {
+        setShowNotificationDropdown(false);
+      }
+      if (showWebsocketDropdown && !event.target.closest('.websocket-status')) {
+        setShowWebsocketDropdown(false);
+      }
+      if (showUserDropdown && !event.target.closest('.admin-profile')) {
+        setShowUserDropdown(false);
+      }
+      if (showSearchDropdown && !event.target.closest('.admin-search')) {
+        setShowSearchDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showNotificationDropdown, showWebsocketDropdown, showUserDropdown, showSearchDropdown]);
 
   // No polling - rely on WebSocket for real-time updates
   // If WebSocket fails, use the initial data loaded on mount
@@ -600,6 +799,21 @@ const AdminDashboard = () => {
       setRevenueTrend(data);
     } catch (error) {
       console.error('Failed to load revenue trend data:', error);
+    }
+  };
+
+  const loadNotifications = async () => {
+    try {
+      setLoadingNotifications(true);
+      const response = await notificationAPI.getNotifications(0, 10);
+      setNotifications(response.notifications || []);
+      setNotificationCount(response.unread_count || 0);
+    } catch (error) {
+      console.error('Failed to load notifications:', error);
+      setNotifications([]);
+      setNotificationCount(0);
+    } finally {
+      setLoadingNotifications(false);
     }
   };
 
@@ -1429,6 +1643,11 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard">
+      {/* Dropdown Backdrop Overlay */}
+      {(showNotificationDropdown || showWebsocketDropdown || showUserDropdown || showSearchDropdown) && (
+        <div className="dropdown-backdrop" />
+      )}
+
       {/* Header */}
       <header className="admin-header">
         <div className="header-left">
@@ -1446,23 +1665,219 @@ const AdminDashboard = () => {
           <div className="admin-search">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search admin features..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearchChange}
+              onFocus={() => {
+                if (searchResults.length > 0) {
+                  setShowSearchDropdown(true);
+                }
+              }}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
             />
             <button>🔍</button>
+            {showSearchDropdown && searchResults.length > 0 && (
+              <div className="search-dropdown">
+                <div className="search-results">
+                  {searchResults.map((result, index) => (
+                    <div
+                      key={result.id}
+                      className="search-result-item"
+                      onClick={() => handleSearchResultClick(result)}
+                    >
+                      <div className="search-result-content">
+                        <div className="search-result-name">{result.name}</div>
+                        <div className="search-result-path">{result.path}</div>
+                      </div>
+                      <div className="search-result-type">{result.type}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           <div className="admin-notifications">
-            <button className="notification-btn">🔔</button>
-            <span className="notification-count">3</span>
+            <button className="notification-btn" onClick={handleNotificationClick}>🔔</button>
+            {notificationCount > 0 && (
+              <span className="notification-count">{notificationCount > 99 ? '99+' : notificationCount}</span>
+            )}
+
+            {/* Notification Dropdown */}
+            <AnimatePresence>
+              {showNotificationDropdown && (
+                <motion.div
+                  className="notification-dropdown"
+                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="notification-header">
+                    <h4>Notifications</h4>
+                    {notificationCount > 0 && (
+                      <button
+                        className="mark-all-read-btn"
+                        onClick={handleMarkAllAsRead}
+                      >
+                        Mark all read
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="notification-list">
+                    {loadingNotifications ? (
+                      <div className="notification-loading">
+                        <div className="loading-spinner"></div>
+                        <p>Loading notifications...</p>
+                      </div>
+                    ) : notifications.length === 0 ? (
+                      <div className="no-notifications">
+                        <p>No notifications</p>
+                      </div>
+                    ) : (
+                      notifications.map((notification) => (
+                        <motion.div
+                          key={notification.id}
+                          className={`notification-item ${notification.status === 'read' ? 'read' : 'unread'}`}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3 }}
+                          onClick={() => notification.status !== 'read' && handleMarkAsRead(notification.id)}
+                        >
+                          <div className="notification-icon">
+                            {notification.type === 'order_update' && '📦'}
+                            {notification.type === 'payment_success' && '💳'}
+                            {notification.type === 'payment_failed' && '❌'}
+                            {notification.type === 'shipment_update' && '🚚'}
+                            {notification.type === 'promotion' && '🎯'}
+                            {notification.type === 'account_security' && '🔒'}
+                            {notification.type === 'product_restock' && '📈'}
+                            {notification.type === 'price_drop' && '💰'}
+                            {notification.type === 'review_reminder' && '⭐'}
+                            {notification.type === 'system' && '⚙️'}
+                          </div>
+                          <div className="notification-content">
+                            <div className="notification-title">{notification.title}</div>
+                            <div className="notification-message">{notification.message}</div>
+                            <div className="notification-time">
+                              {new Date(notification.created_at).toLocaleString()}
+                            </div>
+                          </div>
+                          {notification.status !== 'read' && (
+                            <div className="notification-unread-dot"></div>
+                          )}
+                        </motion.div>
+                      ))
+                    )}
+                  </div>
+
+                  {notifications.length > 0 && (
+                    <div className="notification-footer">
+                      <button className="view-all-notifications-btn">
+                        View All Notifications
+                      </button>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
           <div className="websocket-status">
-            <div className={`status-indicator ${websocketConnected ? 'connected' : 'disconnected'}`}>
+            <div
+              className={`status-indicator ${websocketConnected ? 'connected' : 'disconnected'}`}
+              onClick={handleWebsocketClick}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="status-dot"></div>
               <span>{websocketConnected ? 'Live' : 'Offline'}</span>
             </div>
+            {showWebsocketDropdown && (
+              <div className="websocket-dropdown">
+                <div className="websocket-header">
+                  <h4>Connection Status</h4>
+                  <button
+                    className="close-dropdown-btn"
+                    onClick={() => setShowWebsocketDropdown(false)}
+                  >
+                    ×
+                  </button>
+                </div>
+                <div className="websocket-content">
+                  <div className="connection-details">
+                    <div className="detail-item">
+                      <span className="detail-label">Status:</span>
+                      <span className={`detail-value ${websocketConnected ? 'connected' : 'disconnected'}`}>
+                        {websocketConnected ? 'Connected' : 'Disconnected'}
+                      </span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">WebSocket URL:</span>
+                      <span className="detail-value" title={(() => {
+                        const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+                        return backendUrl.replace(/^http/, 'ws') + '/ws/admin-dashboard';
+                      })()}>
+                        {(() => {
+                          const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+                          return backendUrl.replace(/^http/, 'ws') + '/ws/admin-dashboard';
+                        })()}
+                      </span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Last Connected:</span>
+                      <span className="detail-value">
+                        {websocketConnected ? 'Now' : 'Unknown'}
+                      </span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Connection Type:</span>
+                      <span className="detail-value">WebSocket</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Real-time Updates:</span>
+                      <span className={`detail-value ${websocketConnected ? 'enabled' : 'disabled'}`}>
+                        {websocketConnected ? 'Enabled' : 'Disabled'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="websocket-actions">
+                    <button
+                      className="primary-btn"
+                      onClick={() => {
+                        // Force reconnect
+                        websocketService.disconnectAdminDashboard();
+                        setTimeout(() => {
+                          const token = localStorage.getItem('token');
+                          if (token) {
+                            websocketService.connectAdminDashboard(
+                              (data) => handleWebSocketMessage(data),
+                              (error) => console.error('WebSocket error:', error),
+                              (event) => console.log('WebSocket disconnected:', event.code, event.reason)
+                            );
+                          }
+                        }, 1000);
+                      }}
+                    >
+                      {websocketConnected ? 'Reconnect' : 'Connect'}
+                    </button>
+                    <button
+                      className="secondary-btn"
+                      onClick={() => {
+                        // Disconnect WebSocket
+                        websocketService.disconnectAdminDashboard();
+                        setWebsocketConnected(false);
+                      }}
+                    >
+                      Disconnect
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-          <div className="admin-profile" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
+          <div className="admin-profile" onClick={handleUserClick} style={{ cursor: 'pointer' }}>
             <div className="profile-avatar">
               {user?.first_name && user?.last_name
                 ? `${user.first_name.charAt(0)}${user.last_name.charAt(0)}`.toUpperCase()
@@ -1473,6 +1888,73 @@ const AdminDashboard = () => {
                 ? `${capitalizeName(user.first_name)} ${capitalizeName(user.last_name)}`
                 : user?.email || 'Admin User'}
             </span>
+            {showUserDropdown && (
+              <div className="user-dropdown">
+                <div className="user-header">
+                  <div className="user-info">
+                    <div className="user-avatar-large">
+                      {user?.first_name && user?.last_name
+                        ? `${user.first_name.charAt(0)}${user.last_name.charAt(0)}`.toUpperCase()
+                        : user?.email?.charAt(0).toUpperCase() || 'A'}
+                    </div>
+                    <div className="user-details">
+                      <h4>
+                        {user?.first_name && user?.last_name
+                          ? `${capitalizeName(user.first_name)} ${capitalizeName(user.last_name)}`
+                          : user?.email || 'Admin User'}
+                      </h4>
+                      <p>{user?.email}</p>
+                      <span className={`user-role-badge role-${user?.role || 'admin'}`}>
+                        {user?.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'Admin'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="user-menu">
+                  <button
+                    className="user-menu-item"
+                    onClick={() => {
+                      navigate('/profile');
+                      setShowUserDropdown(false);
+                    }}
+                  >
+                    <span className="menu-icon">👤</span>
+                    <span>View Profile</span>
+                  </button>
+                  <button
+                    className="user-menu-item"
+                    onClick={() => {
+                      setIsChangePasswordOpen(true);
+                      setShowUserDropdown(false);
+                    }}
+                  >
+                    <span className="menu-icon">🔒</span>
+                    <span>Change Password</span>
+                  </button>
+                  <button
+                    className="user-menu-item"
+                    onClick={() => {
+                      handleSectionChange('settings');
+                      setShowUserDropdown(false);
+                    }}
+                  >
+                    <span className="menu-icon">⚙️</span>
+                    <span>Settings</span>
+                  </button>
+                  <div className="user-menu-divider"></div>
+                  <button
+                    className="user-menu-item logout-item"
+                    onClick={() => {
+                      handleLogout();
+                      setShowUserDropdown(false);
+                    }}
+                  >
+                    <span className="menu-icon">🚪</span>
+                    <span>Logout</span>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </header>
