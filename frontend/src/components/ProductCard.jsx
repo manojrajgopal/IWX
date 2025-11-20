@@ -54,11 +54,11 @@ const ProductCard = ({
           <div className="price-section">
             {product.sale_price ? (
               <>
-                <span className="current-price">${product.sale_price.toFixed(2)}</span>
-                <span className="original-price">${product.price.toFixed(2)}</span>
+                <span className="current-price">${parseFloat(product.sale_price || 0).toFixed(2)}</span>
+                <span className="original-price">${parseFloat(product.price || 0).toFixed(2)}</span>
               </>
             ) : (
-              <span className="current-price">${product.price ? product.price.toFixed(2) : 'N/A'}</span>
+              <span className="current-price">${product.price ? parseFloat(product.price).toFixed(2) : 'N/A'}</span>
             )}
           </div>
         </div>
