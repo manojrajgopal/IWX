@@ -428,7 +428,7 @@ section {
 
 /* Testimonials */
 .testimonials {
-  background: var(--color-bg-dark);
+  background: var(--color-white);
   color: var(--color-text-light);
   padding: 100px 0;
 }
