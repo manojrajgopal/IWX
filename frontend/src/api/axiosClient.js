@@ -75,8 +75,8 @@ axiosClient.interceptors.response.use(
           console.error(`HTTP ${status} error:`, data?.error?.message || 'Unknown error');
       }
     } else if (request) {
-      // Network error (connection failed)
-      console.error('Network error: Unable to connect to server. Please check your internet connection and server status.');
+      // Network error (connection failed) - don't log to console as it's handled by components
+      // console.error('Network error: Unable to connect to server. Please check your internet connection and server status.');
     } else {
       // Request setup error
       console.error('Request setup error:', error.message);

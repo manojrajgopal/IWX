@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { adminAPI } from '../../api/adminAPI';
 import { notificationAPI } from '../../api/notificationAPI';
+import virtualTryOnAPI from '../../api/virtualTryOnAPI';
 import websocketService from '../../services/websocket';
 import './Dashboard.css';
 import { ChangePassword } from '../../components/Profile/SecurityComponents'; // Adjust path as needed
@@ -319,6 +320,8 @@ const AdminDashboard = () => {
     role: 'customer',
     status: 'active'
   });
+  const [virtualTryOnStatus, setVirtualTryOnStatus] = useState('disconnected');
+  const [loadingVirtualTryOn, setLoadingVirtualTryOn] = useState(false);
   const [stats, setStats] = useState({
     totalSales: 0,
     totalOrders: 0,
@@ -463,6 +466,7 @@ const AdminDashboard = () => {
     loadRecentOrdersData();
     loadRevenueTrendData();
     loadNotifications();
+    checkVirtualTryOnStatus();
   }, [user]); // Load data only once on mount
 
   // Load products data when section changes to products
@@ -514,8 +518,17 @@ const AdminDashboard = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showNotificationDropdown, showWebsocketDropdown, showUserDropdown, showSearchDropdown, showSecurityDropdown]);
 
-  // No polling - rely on WebSocket for real-time updates
-  // If WebSocket fails, use the initial data loaded on mount
+  // Polling for Virtual Try-On status updates
+  useEffect(() => {
+    const pollVirtualTryOnStatus = () => {
+      checkVirtualTryOnStatus();
+    };
+
+    // Poll every 30 seconds
+    const interval = setInterval(pollVirtualTryOnStatus, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Connect to WebSocket for real-time updates
   useEffect(() => {
@@ -1446,6 +1459,21 @@ const AdminDashboard = () => {
       alert(`Failed to save user: ${error.response?.data?.detail || error.message}`);
     }
   };
+
+  const checkVirtualTryOnStatus = async () => {
+    try {
+      setLoadingVirtualTryOn(true);
+      const status = await virtualTryOnAPI.getStatus();
+      setVirtualTryOnStatus(status.status);
+    } catch (error) {
+      console.error('Failed to check Virtual Try-On status:', error);
+      // If backend server is not running, show disconnected instead of error
+      setVirtualTryOnStatus('disconnected');
+    } finally {
+      setLoadingVirtualTryOn(false);
+    }
+  };
+
 
   // Drag functionality
   const handleMouseDown = (e) => {
@@ -4774,6 +4802,24 @@ const AdminDashboard = () => {
                 <div className="integration-status inactive">Not Connected</div>
                 <button className="primary-btn">Connect</button>
             </div>
+            <div className={`integration-card ${virtualTryOnStatus === 'connected' ? 'active' : ''}`}>
+                <div className="integration-icon">👕</div>
+                <h4>Virtual Try On</h4>
+                <p>AI-powered virtual clothing try-on</p>
+                <div className={`integration-status ${virtualTryOnStatus === 'connected' ? 'active' : 'inactive'}`}>
+                    {virtualTryOnStatus === 'connected' ? 'Connected' : 'Disconnected'}
+                </div>
+                <div style={{marginTop: '10px'}}>
+                    <button
+                        className="secondary-btn"
+                        onClick={checkVirtualTryOnStatus}
+                        disabled={loadingVirtualTryOn}
+                        style={{fontSize: '12px', padding: '4px 8px'}}
+                    >
+                        {loadingVirtualTryOn ? 'Checking...' : 'Check Status'}
+                    </button>
+                </div>
+            </div>
             </div>
         </motion.section>
         )}
@@ -4971,7 +5017,7 @@ const AdminDashboard = () => {
             <div className="setting-card" style={{marginTop: '30px'}}>
             <h4>Quick Actions</h4>
             <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px', marginTop: '20px'}}>
-                <button className="primary-btn" style={{padding: '10px'}}>Reset Password</button>
+                <button className="primary-btn" style={{padding: '10px'}} onClick={() => setIsChangePasswordOpen(true)}>Reset Password</button>
                 <button className="primary-btn" style={{padding: '10px'}}>System Diagnostics</button>
                 <button className="primary-btn" style={{padding: '10px'}}>Export Data</button>
                 <button className="primary-btn" style={{padding: '10px'}}>Backup System</button>

@@ -2422,9 +2422,9 @@ input:checked + .toggle-slider:before {
   letter-spacing: 0.5px;
 }
 
-.status-active { background: var(--color-success-bg-light); color: var(--color-success); }
-.status-inactive { background: var(--color-bg-button); color: var(--color-text-secondary); }
-.status-suspended { background: var(--color-error-bg-light); color: var(--color-error); }
+.status-active { background: var(--color-success-bg-light); color: var(--color-success) !important; }
+.status-inactive { background: var(--color-bg-button); color: var(--color-text-secondary) !important; }
+.status-suspended { background: var(--color-error-bg-light); color: var(--color-error) !important; }
 
 .action-btn {
   padding: 6px 12px;

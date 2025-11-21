@@ -24,7 +24,7 @@ async def startup_event():
 async def root():
     return {"message": "Virtual Try-On API is running", "status": "healthy"}
 
-@app.get("/health")
+@app.get("/api/health")
 async def health_check():
     return {"status": "healthy", "service": "virtual-try-on-api"}
 

@@ -9,10 +9,33 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import Rating from '../components/Rating';
 import ProductCard from '../components/ProductCard';
 import Container from '../layouts/Container';
+import { useCart } from '../hooks/useCart';
+import { wishlistAPI } from '../api/wishlistAPI';
 import './ProductListing.css';
 
 const ProductListing = () => {
   const navigate = useNavigate();
+  const { cartItems, addToCart } = useCart();
+
+  // Check if product is in cart
+  const isInCart = (productId) => {
+    return cartItems.some(item => item.product_id === productId);
+  };
+
+  // Load wishlist items
+  const loadWishlist = async () => {
+    try {
+      const wishlist = await wishlistAPI.getWishlist();
+      setWishlistItems(wishlist.items || []);
+    } catch (error) {
+      console.error('Failed to load wishlist:', error);
+    }
+  };
+
+  // Check if product is in wishlist
+  const isInWishlist = (productId) => {
+    return wishlistItems.some(item => item.product_id === productId);
+  };
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState('recommended');
@@ -30,6 +53,9 @@ const ProductListing = () => {
   const [totalProducts, setTotalProducts] = useState(0);
   const [hasNext, setHasNext] = useState(false);
   const [hasPrev, setHasPrev] = useState(false);
+  const [showQuickViewModal, setShowQuickViewModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [wishlistItems, setWishlistItems] = useState([]);
   const filterRef = useRef(null);
 
   // Close dropdowns when clicking outside
@@ -48,6 +74,7 @@ const ProductListing = () => {
   // Load products from API
   useEffect(() => {
     loadProducts();
+    loadWishlist();
   }, [activeFilters, selectedSort, currentPage]);
 
   const loadProducts = async () => {
@@ -128,6 +155,54 @@ const ProductListing = () => {
   // Handle product click navigation
   const handleProductClick = (productId) => {
     navigate(`/productDetails/${productId}`);
+  };
+
+  // Handle quick view
+  const handleQuickView = (product) => {
+    setSelectedProduct(product);
+    setShowQuickViewModal(true);
+  };
+
+  // Handle add to cart
+  const handleAddToCart = async (e, product) => {
+    e.stopPropagation();
+    try {
+      await addToCart(product.id, 1);
+      // Could show a success message here
+    } catch (error) {
+      console.error('Failed to add to cart:', error);
+    }
+  };
+
+
+  // Handle go to cart
+  const handleGoToCart = (e) => {
+    e.stopPropagation();
+    navigate('/cart');
+  };
+
+  // Handle wishlist toggle
+  const handleWishlistToggle = async (e, product) => {
+    e.stopPropagation();
+    try {
+      if (isInWishlist(product.id)) {
+        // Remove from wishlist
+        const item = wishlistItems.find(item => item.product_id === product.id);
+        if (item) {
+          await wishlistAPI.removeFromWishlist(item.id);
+          setWishlistItems(prev => prev.filter(w => w.id !== item.id));
+        }
+      } else {
+        // Add to wishlist
+        await wishlistAPI.addToWishlist({
+          product_id: product.id,
+          quantity: 1
+        });
+        await loadWishlist(); // Refresh wishlist
+      }
+    } catch (error) {
+      console.error('Failed to toggle wishlist:', error);
+    }
   };
 
 
@@ -391,7 +466,12 @@ const ProductListing = () => {
                             e.target.src = '/placeholder.png';
                           }}
                         />
-                        <button className="wishlist-btn">♥</button>
+                        <button
+                          className={`wishlist-btn ${isInWishlist(product.id) ? 'active' : ''}`}
+                          onClick={(e) => handleWishlistToggle(e, product)}
+                        >
+                          {isInWishlist(product.id) ? '❤️' : '🤍'}
+                        </button>
 
                         {product.sale_price && (
                           <span className="sale-badge">SALE</span>
@@ -404,8 +484,20 @@ const ProductListing = () => {
                         )}
 
                         <div className="product-actions">
-                          <button className="quick-view">Quick View</button>
-                          <button className="add-to-bag">Add to Bag</button>
+                          <button className="quick-view" onClick={(e) => { e.stopPropagation(); handleQuickView(product); }}>Quick View</button>
+                          <button
+                            className="add-to-bag"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (isInCart(product.id)) {
+                                handleGoToCart(e);
+                              } else {
+                                handleAddToCart(e, product);
+                              }
+                            }}
+                          >
+                            {isInCart(product.id) ? 'Go to Bag' : 'Add to Bag'}
+                          </button>
                         </div>
                       </div>
 
@@ -521,6 +613,99 @@ const ProductListing = () => {
           </div>
         </div>
       </section>
+
+      {/* Quick View Modal */}
+      <AnimatePresence>
+        {showQuickViewModal && selectedProduct && (
+          <>
+            <motion.div
+              className="quick-view-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowQuickViewModal(false)}
+            />
+            <motion.div
+              className="quick-view-modal"
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 50 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="quick-view-content">
+                <button
+                  className="quick-view-close"
+                  onClick={() => setShowQuickViewModal(false)}
+                >
+                  ×
+                </button>
+
+                <div className="quick-view-image">
+                  <img
+                    src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[0] : '/placeholder.png'}
+                    alt={selectedProduct.name}
+                    onError={(e) => {
+                      e.target.src = '/placeholder.png';
+                    }}
+                  />
+                </div>
+
+                <div className="quick-view-details">
+                  <h2>{selectedProduct.name}</h2>
+
+                  <div className="quick-view-price">
+                    {selectedProduct.sale_price ? (
+                      <>
+                        <span className="sale-price">${selectedProduct.sale_price}</span>
+                        <span className="original-price">${selectedProduct.price}</span>
+                      </>
+                    ) : (
+                      <span>${selectedProduct.price}</span>
+                    )}
+                  </div>
+
+                  <div className="quick-view-rating">
+                    <Rating rating={selectedProduct.rating || 0} />
+                    <span>({selectedProduct.review_count || 0} reviews)</span>
+                  </div>
+
+                  <div className="quick-view-description">
+                    <p>{selectedProduct.description || 'No description available.'}</p>
+                  </div>
+
+                  <div className="quick-view-colors">
+                    <h4>Available Colors:</h4>
+                    <div className="color-options">
+                      {selectedProduct.colors && selectedProduct.colors.map((color, index) => (
+                        <span
+                          key={index}
+                          className="color-option"
+                          style={{ backgroundColor: color.toLowerCase() }}
+                          title={color}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="quick-view-actions">
+                    <button className="add-to-cart-btn">Add to Cart</button>
+                    <button
+                      className="view-details-btn"
+                      onClick={() => {
+                        navigate(`/productDetails/${selectedProduct.id}`);
+                        setShowQuickViewModal(false);
+                      }}
+                    >
+                      View Full Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

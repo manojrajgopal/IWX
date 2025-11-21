@@ -146,3 +146,45 @@ async def delete_virtual_try_on_image(image_id: str, current_user = Depends(get_
             status_code=500,
             detail="Failed to delete image"
         )
+
+@router.get("/status")
+async def get_virtual_try_on_status():
+    """
+    Check if the Virtual Try-On backend service is running and healthy
+    """
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            response = await client.get(f"{VIRTUAL_TRY_ON_BACKEND_URL}/../health")
+
+            if response.status_code == 200:
+                return {
+                    "status": "connected",
+                    "message": "Virtual Try-On service is running",
+                    "details": response.json()
+                }
+            else:
+                return {
+                    "status": "disconnected",
+                    "message": "Virtual Try-On service returned unexpected status",
+                    "details": {"status_code": response.status_code}
+                }
+
+    except httpx.TimeoutException:
+        return {
+            "status": "disconnected",
+            "message": "Virtual Try-On service timeout",
+            "details": {"error": "timeout"}
+        }
+    except httpx.RequestError:
+        return {
+            "status": "disconnected",
+            "message": "Virtual Try-On service unavailable",
+            "details": {"error": "connection_failed"}
+        }
+    except Exception as e:
+        logger.error(f"Error checking virtual try-on status: {str(e)}")
+        return {
+            "status": "disconnected",
+            "message": "Error checking service status",
+            "details": {"error": str(e)}
+        }

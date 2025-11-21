@@ -49,6 +49,16 @@ const virtualTryOnAPI = {
       throw error;
     }
   },
+
+  getStatus: async () => {
+    try {
+      const response = await axiosClient.get('/api/virtual-try-on/status');
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
 };
 
 export default virtualTryOnAPI;
